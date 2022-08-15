@@ -5,4 +5,4 @@
 <a href="/registration">Registration page</a>
 <br>
 <br>
-<a href="/userList">User list page</a>
+<a href="/user">User list page</a>

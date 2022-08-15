@@ -19,6 +19,7 @@
             <td>${user.login}</td>
             <td>${user.name}</td>
             <td>${user.surname}</td>
+            <td><a href="/user/${user.id}">edit</a></td>
         </tr>
     </#list>
     </tbody>

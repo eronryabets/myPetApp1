@@ -17,12 +17,5 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/userList")
-    public String userList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
-        return "userList";
-    }
-
-
 }
 
