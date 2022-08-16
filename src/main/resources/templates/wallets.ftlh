@@ -36,4 +36,32 @@
 <#--<input type="hidden" value="${user.id}" name="userId">-->
 
 <h3>Wallets List</h3>
+
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Wallet name</th>
+        <th>Balance</th>
+        <th>Currency</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <#list wallets as wallet>
+        <tr>
+            <td>${wallet.id}</td>
+            <td>${wallet.walletName}</td>
+            <td>${wallet.balance}</td>
+            <td>${wallet.currency}</td>
+            <td><a href="/profile/${user.id}/wallets/${wallet.id}">edit</a></td>
+        </tr>
+    </#list>
+    </tbody>
+</table>
+
+
+
+
+
 </body>

@@ -15,7 +15,7 @@
     User password :
     <input type="text" name="password" value="${user.password}">
 
-    <input type="hidden" value="${user.id}" name="userId">
+    <input type="hidden" name="userId" value="${user.id}">
 <#--    <input type="hidden" value="${_csrf.token}" name="_csrf">-->
     <br><br>
     <button type="submit">Save</button>

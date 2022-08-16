@@ -16,8 +16,9 @@ public class WalletController {
     private WalletRepository walletRepository;
 
     @GetMapping
-    public String userWallets(@PathVariable User user, Model model){
+    public String walletList(@PathVariable User user, Model model) {
         model.addAttribute("user",user);
+        model.addAttribute("wallets", walletRepository.findAll());
         return "wallets";
     }
 
@@ -33,6 +34,48 @@ public class WalletController {
         return "redirect:/profile/{user}/wallets";
     }
 
+    @GetMapping("{wallet}")
+    public String walletEditForm(
+            @PathVariable("user") User user,
+            @PathVariable("wallet") Wallet wallet,
+            Model model){
+        model.addAttribute("user",user);
+        model.addAttribute("wallet",wallet);
+        return "walletEdit";
+    }
+
+    @PostMapping("{wallet}")
+    public String walletSave(
+            @RequestParam("walletName") String walletName,
+            @RequestParam("balance") double balance,
+            @PathVariable("wallet") Wallet wallet
+    ){
+        wallet.setWalletName(walletName);
+        wallet.setBalance(balance);
+        walletRepository.save(wallet);
+        return "redirect:/profile/{user}/wallets/{wallet}";
+    }
+
+
+
 
 }
 
+/*
+@PostMapping("{wallet}")
+    public String walletSave(
+            @RequestParam("walletName") String walletName,
+            @RequestParam("balance") double balance,
+            @RequestParam("walletId") Wallet wallet
+//            @RequestParam("userId") User user
+//            @PathVariable User user,
+//            @PathVariable Wallet wallet
+
+    ){
+        wallet.setWalletName(walletName);
+        wallet.setBalance(balance);
+        walletRepository.save(wallet);
+        return "redirect:/profile/{user}/wallets/{wallet}";
+
+    }
+ */
