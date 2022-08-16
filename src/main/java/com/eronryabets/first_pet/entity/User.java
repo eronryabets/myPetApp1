@@ -1,6 +1,7 @@
 package com.eronryabets.first_pet.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="pet_user")
@@ -18,6 +19,11 @@ public class User {
     private String surname;
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Wallet> wallet;
 
     public User() {
     }
@@ -63,6 +69,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Wallet> getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(List<Wallet> wallet) {
+        this.wallet = wallet;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 
