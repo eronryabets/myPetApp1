@@ -21,7 +21,6 @@ public class UserController {
 
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model){
-        System.out.println(user);
         model.addAttribute("user",user);
         return "userEdit";
     }

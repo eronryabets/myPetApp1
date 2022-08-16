@@ -31,15 +31,3 @@ public class RegistrationController {
 
 }
 
-/*
-@PostMapping("/registration")
-    public String addUser(@RequestParam("login") String login,
-                          @RequestParam("name") String name,
-                          @RequestParam("surname") String surname,
-                          @RequestParam("password") String password,
-                          Model model){
-        User user = new User(login,name,surname,password);
-        userRepository.save(user);
-        return "redirect:/";
-    }
- */

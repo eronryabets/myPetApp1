@@ -6,3 +6,6 @@
 <br>
 <br>
 <a href="/user">User list page</a>
+<br>
+<br>
+<a href="/profile">My profile</a>

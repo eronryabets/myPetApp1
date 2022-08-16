@@ -1,16 +1,20 @@
 package com.eronryabets.first_pet.entity;
 
+
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Set;
+
 
 @Entity
 @Table(name="users_wallet")
 public class Wallet {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "wallet_id")
     private Long id;
+
+    @Column(name = "wallet_name")
+    private String walletName;
 
     @Column(name = "balance")
     private double balance;
@@ -31,15 +35,22 @@ public class Wallet {
     public Wallet() {
     }
 
-    public Wallet(double balance, CurrencyWallet currency) {
+    public Wallet(String walletName, double balance, CurrencyWallet currency, User user) {
+        this.walletName = walletName;
+        this.balance = balance;
+        this.currency = currency;
+        this.user = user;
+    }
+
+    public Wallet(String walletName, double balance, CurrencyWallet currency) {
+        this.walletName = walletName;
         this.balance = balance;
         this.currency = currency;
     }
 
-    public Wallet(double balance, CurrencyWallet currency, User user) {
+    public Wallet(String walletName, double balance) {
+        this.walletName = walletName;
         this.balance = balance;
-        this.currency = currency;
-        this.user = user;
     }
 
     public Long getId() {
@@ -70,11 +81,14 @@ public class Wallet {
     public void setUser(User user) {
         this.user = user;
     }
-}
 
-/*
-    @ElementCollection(targetClass = CurrencyWallet.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "currency", joinColumns = @JoinColumn(name = "wallet_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<CurrencyWallet> currency;
- */
+    public String getWalletName() {
+        return walletName;
+    }
+
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
+    }
+
+
+}

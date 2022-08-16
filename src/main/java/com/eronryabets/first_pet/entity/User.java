@@ -1,11 +1,15 @@
 package com.eronryabets.first_pet.entity;
 
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name="pet_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -23,7 +27,7 @@ public class User {
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<Wallet> wallet;
+    private List<Wallet> wallets;
 
     public User() {
     }
@@ -72,15 +76,31 @@ public class User {
     }
 
     public List<Wallet> getWallet() {
-        return wallet;
+        return wallets;
     }
 
     public void setWallet(List<Wallet> wallet) {
-        this.wallet = wallet;
+        this.wallets = wallet;
     }
 
-    public static void main(String[] args) {
+    public void addWalletToUser(Wallet newWallet){
+        if(wallets == null){
+            wallets = new ArrayList<>();
+        }
+        wallets.add(newWallet);
+        newWallet.setUser(this);
+    }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", wallets=" + wallets +
+                '}';
     }
 }
 
