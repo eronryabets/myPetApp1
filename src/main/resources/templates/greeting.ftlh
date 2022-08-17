@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+
+<@c.page>
 <h5>Hello, guest</h5>
 <h5>Greeting page</h5>
 
@@ -14,3 +17,4 @@
 <a href="/main"
    class="btn btn-light"> Main page
 </a>
+</@c.page>

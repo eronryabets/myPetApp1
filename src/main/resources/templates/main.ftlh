@@ -7,11 +7,9 @@
 </a>
 <br>
 <br>
-<#if isAdmin>
 <a href="/user"
    class="btn btn-light"> User list page
 </a>
-</#if>
 <br>
 <br>
 <a href="/profile"
