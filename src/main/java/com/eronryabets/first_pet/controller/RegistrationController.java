@@ -24,12 +24,12 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(@RequestParam("login") String login,
+    public String addUser(@RequestParam("username") String username,
                           @RequestParam("name") String name,
                           @RequestParam("surname") String surname,
                           @RequestParam("password") String password
                           ){
-        User user = new User(login,name,surname,password);
+        User user = new User(username,name,surname,password);
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);

@@ -31,6 +31,7 @@
         </td>
         <br>
         <button type="submit">Add</button>
+<#--        <input type="hidden" value="${user.id}" name="userId">-->
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
 </div>

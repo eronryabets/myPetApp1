@@ -4,7 +4,7 @@
 
 <form action="/user" method="post">
     User login :
-    <input type="text" name="login" value="${user.login}">
+    <input type="text" name="username" value="${user.username}">
 
     <br><br>
     User name :
@@ -17,6 +17,15 @@
     <br><br>
     User password :
     <input type="text" name="password" value="${user.password}">
+    <br><br>
+    Roles :
+    <#list roles as role>
+        <div>
+            <label><input type="checkbox" name="${role}"
+                        ${user.roles?seq_contains(role)?string
+                        ("checked", "")}>${role}</label>
+        </div>
+    </#list>
 
     <input type="hidden" name="userId" value="${user.id}">
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

@@ -19,12 +19,13 @@ public class Wallet {
     @Column(name = "balance")
     private double balance;
 
+
     @Column(name = "currency", nullable = false, unique = false)
     @Enumerated(EnumType.STRING)
     private CurrencyWallet currency;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST,
+    @ManyToOne(
+            cascade = {
             CascadeType.DETACH,
             CascadeType.REFRESH,
             CascadeType.MERGE},

@@ -5,6 +5,7 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,10 @@ public class WalletController {
     }
 
     @PostMapping
-    public String addWallet(@RequestParam("walletName") String walletName,
-                          @RequestParam("balance") int balance,
+    public String addWallet(
+                          //@AuthenticationPrincipal User user,
+                          @RequestParam("walletName") String walletName,
+                          @RequestParam("balance") double balance,
                           @RequestParam("walletCurrency") String walletCurrency,
                           @PathVariable User user
     ){
@@ -46,12 +49,14 @@ public class WalletController {
 
     @PostMapping("{wallet}")
     public String walletSave(
+            //@AuthenticationPrincipal User user,
             @RequestParam("walletName") String walletName,
             @RequestParam("balance") double balance,
             @PathVariable("wallet") Wallet wallet
     ){
         wallet.setWalletName(walletName);
         wallet.setBalance(balance);
+        //wallet.setUser(user);
         walletRepository.save(wallet);
         return "redirect:/profile/{user}/wallets/{wallet}";
     }

@@ -5,7 +5,7 @@
 <div>
     <form method="post">
         <div> Введите логин</div>
-        <input type="text" name="login" placeholder="login"/>
+        <input type="text" name="username" placeholder="username"/>
 
 
         <div> Введите имя</div>

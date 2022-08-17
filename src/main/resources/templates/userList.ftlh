@@ -6,7 +6,7 @@
     <thead>
     <tr>
         <th>id</th>
-        <th>Login</th>
+        <th>Username</th>
         <th>Name</th>
         <th>Surname</th>
         <th></th>
@@ -16,9 +16,10 @@
     <#list users as user>
         <tr>
             <td>${user.id}</td>
-            <td>${user.login}</td>
+            <td>${user.username}</td>
             <td>${user.name}</td>
             <td>${user.surname}</td>
+            <td><#list user.roles as role>${role}<#sep>, </#list></td>
             <td><a href="/user/${user.id}">edit</a></td>
         </tr>
     </#list>
