@@ -22,5 +22,10 @@
             <td><a href="/user/${user.id}">edit</a></td>
         </tr>
     </#list>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </tbody>
 </table>
+<br>
+<a href="/main"
+   class="btn btn-light"> Back
+</a>

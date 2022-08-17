@@ -31,6 +31,7 @@
         </td>
         <br>
         <button type="submit">Add</button>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
 </div>
 <#--<input type="hidden" value="${user.id}" name="userId">-->
@@ -54,7 +55,14 @@
             <td>${wallet.walletName}</td>
             <td>${wallet.balance}</td>
             <td>${wallet.currency}</td>
-            <td><a href="/profile/${user.id}/wallets/${wallet.id}">edit</a></td>
+
+            <td> <form action="/profile/${user.id}/wallets/${wallet.id}">
+                <input type="submit" value="Edit">
+            </form></td>
+
+            <td> <form action="/profile/${user.id}/wallets/">
+                <input type="submit" value="Delete">
+            </form></td>
         </tr>
     </#list>
     </tbody>

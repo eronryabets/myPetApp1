@@ -4,8 +4,12 @@
 
 <br>
 <br>
-<a href="/profile/${user.id}/editProfile">Edit Profile</a>
+<a href="/profile/${user.id}/profileEdit"
+   class="btn btn-light"> Edit Profile
+</a>
 <br>
 <br>
-<a href="/profile/${user.id}/wallets">Add wallet</a>
+<a href="/profile/${user.id}/wallets"
+   class="btn btn-light"> Wallets
+</a>
 

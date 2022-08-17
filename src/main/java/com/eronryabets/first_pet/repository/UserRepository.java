@@ -1,9 +1,9 @@
 package com.eronryabets.first_pet.repository;
 
 import com.eronryabets.first_pet.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findBySurname (String username);
 
 }

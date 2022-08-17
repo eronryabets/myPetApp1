@@ -5,18 +5,25 @@
 <form action="/user" method="post">
     User login :
     <input type="text" name="login" value="${user.login}">
+
     <br><br>
     User name :
     <input type="text" name="name" value="${user.name}">
+
     <br><br>
     User surname :
     <input type="text" name="surname" value="${user.surname}">
+
     <br><br>
     User password :
     <input type="text" name="password" value="${user.password}">
 
     <input type="hidden" name="userId" value="${user.id}">
-<#--    <input type="hidden" value="${_csrf.token}" name="_csrf">-->
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <br><br>
     <button type="submit">Save</button>
+    <br><br>
+    <a href="/user"
+       class="btn btn-light"> Back
+    </a>
 </form>

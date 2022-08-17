@@ -7,6 +7,7 @@
         <div> Введите логин</div>
         <input type="text" name="login" placeholder="login"/>
 
+
         <div> Введите имя</div>
         <input type="text" name="name" placeholder="name"/>
 
@@ -16,7 +17,7 @@
         <div> Введите пароль</div>
         <input type="text" name="password" placeholder="password"/>
 
-        <#--        <input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <br>
         <br>
         <button type="submit">Add user</button>

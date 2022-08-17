@@ -2,10 +2,21 @@
 <#--User List-->
 <br>
 <br>
-<a href="/registration">Registration page</a>
+<a href="/registration"
+   class="btn btn-light"> Registration page
+</a>
 <br>
 <br>
-<a href="/user">User list page</a>
+<a href="/user"
+   class="btn btn-light"> User list page
+</a>
 <br>
 <br>
-<a href="/profile">My profile</a>
+<a href="/profile"
+   class="btn btn-light"> My profile
+</a>
+<br><br>
+<form action="/logout" method="post">
+    <input type="submit" value="Sign Out"/>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+</form>

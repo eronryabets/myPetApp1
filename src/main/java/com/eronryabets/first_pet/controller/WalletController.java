@@ -56,26 +56,11 @@ public class WalletController {
         return "redirect:/profile/{user}/wallets/{wallet}";
     }
 
+    //@DeleteMapping()
+    //TODO
+
 
 
 
 }
 
-/*
-@PostMapping("{wallet}")
-    public String walletSave(
-            @RequestParam("walletName") String walletName,
-            @RequestParam("balance") double balance,
-            @RequestParam("walletId") Wallet wallet
-//            @RequestParam("userId") User user
-//            @PathVariable User user,
-//            @PathVariable Wallet wallet
-
-    ){
-        wallet.setWalletName(walletName);
-        wallet.setBalance(balance);
-        walletRepository.save(wallet);
-        return "redirect:/profile/{user}/wallets/{wallet}";
-
-    }
- */

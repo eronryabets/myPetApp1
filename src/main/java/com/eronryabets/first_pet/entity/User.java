@@ -4,6 +4,7 @@ package com.eronryabets.first_pet.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -23,11 +24,20 @@ public class User {
     private String surname;
     @Column(name = "password")
     private String password;
+    @Column(name = "active")
+    private boolean active;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "pet_users_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Wallet> wallets;
+
+
 
     public User() {
     }
@@ -89,6 +99,22 @@ public class User {
         }
         wallets.add(newWallet);
         newWallet.setUser(this);
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
