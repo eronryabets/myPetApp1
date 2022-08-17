@@ -22,6 +22,8 @@
             <td><#list user.roles as role>${role}<#sep>, </#list></td>
             <td><a href="/user/${user.id}">edit</a></td>
         </tr>
+        <#else >
+        No users
     </#list>
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </tbody>

@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<#import "parts/login.ftlh" as l>
+<@c.page>
 <h5>Hello, guest</h5>
 <#--User List-->
 <br>
@@ -16,7 +19,6 @@
    class="btn btn-light"> My profile
 </a>
 <br><br>
-<form action="/logout" method="post">
-    <input type="submit" value="Sign Out"/>
-    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-</form>
+    <@l.logout/>
+
+</@c.page>

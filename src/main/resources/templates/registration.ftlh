@@ -2,6 +2,8 @@
     <h5>Registration page</h5>
 </head>
 
+${message!}
+
 <div>
     <form method="post">
         <div> Введите логин</div>

@@ -5,6 +5,7 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +28,20 @@ public class RegistrationController {
     public String addUser(@RequestParam("username") String username,
                           @RequestParam("name") String name,
                           @RequestParam("surname") String surname,
-                          @RequestParam("password") String password
+                          @RequestParam("password") String password,
+                          Model model
                           ){
+        User userFromDb = userRepository.findByUsername(username);
+        if(userFromDb != null){
+            model.addAttribute("message","User exists!");
+            return "registration";
+        }
+
         User user = new User(username,name,surname,password);
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
