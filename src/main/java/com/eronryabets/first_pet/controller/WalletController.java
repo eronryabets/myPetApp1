@@ -5,7 +5,6 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

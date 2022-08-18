@@ -2,7 +2,6 @@ package com.eronryabets.first_pet.controller;
 
 import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
-import com.eronryabets.first_pet.repository.UserRepository;
 import com.eronryabets.first_pet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,15 +17,13 @@ import java.util.Map;
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
 
     @GetMapping
     public String userList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.findAll());
         return "userList";
     }
 

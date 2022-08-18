@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +21,23 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public boolean addUser(User user){
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+        if(userFromDb != null){
+            return false;
+        }
+
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        userRepository.save(user);
+
+        return true;
     }
 
     public void userSave(User user, String username, String name, String surname,
@@ -45,5 +60,16 @@ public class UserService implements UserDetailsService {
         }
         userRepository.save(user);
     }
+
+    public void profileSave(User user, String name, String surname, String password){
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
+
+
+
 
 }

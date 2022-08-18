@@ -3,21 +3,20 @@ package com.eronryabets.first_pet.controller;
 import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.UserRepository;
+import com.eronryabets.first_pet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping
     public String registration() {
@@ -25,22 +24,11 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(@RequestParam("username") String username,
-                          @RequestParam("name") String name,
-                          @RequestParam("surname") String surname,
-                          @RequestParam("password") String password,
-                          Model model
-                          ){
-        User userFromDb = userRepository.findByUsername(username);
-        if(userFromDb != null){
-            model.addAttribute("message","User exists!");
+    public String addUser(Model model, User user){
+        if (!userService.addUser(user)) {
+            model.addAttribute("message", "User exists!");
             return "registration";
         }
-
-        User user = new User(username,name,surname,password);
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepository.save(user);
         return "redirect:/login";
     }
 
