@@ -1,9 +1,8 @@
 package com.eronryabets.first_pet.controller;
 
-import com.eronryabets.first_pet.entity.CurrencyWallet;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
-import com.eronryabets.first_pet.repository.WalletRepository;
+import com.eronryabets.first_pet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,27 +11,27 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/profile/{user}/wallets")
 public class WalletController {
+
     @Autowired
-    private WalletRepository walletRepository;
+    WalletService walletService;
+
 
     @GetMapping
     public String walletList(@PathVariable User user, Model model) {
         model.addAttribute("user",user);
-        model.addAttribute("wallets", walletRepository.findAll());
+        model.addAttribute("wallets", walletService.findAll());
         return "wallets";
     }
 
     @PostMapping
     public String addWallet(
-                          //@AuthenticationPrincipal User user,
+                          @PathVariable User user,
                           @RequestParam("walletName") String walletName,
                           @RequestParam("balance") double balance,
-                          @RequestParam("walletCurrency") String walletCurrency,
-                          @PathVariable User user
+                          @RequestParam("walletCurrency") String walletCurrency
     ){
-        CurrencyWallet result = CurrencyWallet.valueOf(walletCurrency);
-        Wallet wallet = new Wallet(walletName,balance, result,user);
-        walletRepository.save(wallet);
+
+        walletService.addWallet(user, walletName, balance, walletCurrency);
         return "redirect:/profile/{user}/wallets";
     }
 
@@ -48,15 +47,12 @@ public class WalletController {
 
     @PostMapping("{wallet}")
     public String walletSave(
-            //@AuthenticationPrincipal User user,
+            @PathVariable("wallet") Wallet wallet,
             @RequestParam("walletName") String walletName,
-            @RequestParam("balance") double balance,
-            @PathVariable("wallet") Wallet wallet
+            @RequestParam("balance") double balance
     ){
-        wallet.setWalletName(walletName);
-        wallet.setBalance(balance);
-        //wallet.setUser(user);
-        walletRepository.save(wallet);
+
+        walletService.walletSave(wallet, walletName, balance);
         return "redirect:/profile/{user}/wallets/{wallet}";
     }
 
