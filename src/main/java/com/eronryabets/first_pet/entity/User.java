@@ -42,6 +42,10 @@ public class User implements UserDetails {
     private List<Wallet> wallets;
 
 
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
+
 
     public User() {
     }

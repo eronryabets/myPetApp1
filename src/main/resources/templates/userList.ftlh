@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
 <head>
     <h5>User list page</h5>
 </head>
@@ -20,7 +23,7 @@
             <td>${user.name}</td>
             <td>${user.surname}</td>
             <td><#list user.roles as role>${role}<#sep>, </#list></td>
-            <td><a href="/user/${user.id}">edit</a></td>
+            <td><a href="/user/${user.id}" class="btn btn-dark" >edit</a></td>
         </tr>
         <#else >
         No users
@@ -32,3 +35,5 @@
 <a href="/main"
    class="btn btn-light"> Back
 </a>
+
+</@c.page>

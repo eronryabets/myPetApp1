@@ -1,3 +1,7 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
+
 <head xmlns:form="http://www.w3.org/1999/html">
     <h5>Wallets! Hello ${user.name}</h5>
 </head>
@@ -69,8 +73,6 @@
     </tbody>
 </table>
 
-
-
-
-
 </body>
+
+</@c.page>

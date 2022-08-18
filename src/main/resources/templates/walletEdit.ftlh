@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
 <head>
     <h5>User list page! Hello ${user.name} now you edit wallet ${wallet.walletName}</h5>
 </head>
@@ -24,4 +27,6 @@
 <form method="get" action="/profile/${user.id}/wallets/" class="form-inline">
     <button type="submit" class="btn btn-primary ml-2">Back</button>
 </form>
+
+</@c.page>
 

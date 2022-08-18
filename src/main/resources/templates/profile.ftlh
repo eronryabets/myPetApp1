@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
 <head>
     <h5>User profile page! Hello ${user.name}</h5>
 </head>
@@ -13,3 +16,4 @@
    class="btn btn-light"> Wallets
 </a>
 
+</@c.page>

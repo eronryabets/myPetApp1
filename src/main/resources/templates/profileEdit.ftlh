@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
 </head>
 <h5>Profile editor! Hello ${user.name}</h5>
 </head>
@@ -28,3 +31,5 @@
 
 
 </form>
+
+</@c.page>

@@ -19,15 +19,15 @@
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="text" placeholder="Введите сообщение"/>
+                    <input type="text" class="form-control col-sm-4" name="text" placeholder="Введите сообщение"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="tag" placeholder="Тэг">
+                    <input type="text" class="form-control col-sm-4" name="tag" placeholder="Тэг">
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
                         <input type="file" name="file" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <label class="custom-file-label col-sm-4" for="customFile">Choose file</label>
                     </div>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>

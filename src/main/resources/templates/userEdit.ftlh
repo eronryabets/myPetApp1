@@ -1,3 +1,6 @@
+<#import "parts/common.ftlh" as c>
+<@c.page>
+
 <head>
     <h5>User list page! Hello ${user.name}</h5>
 </head>
@@ -36,3 +39,5 @@
        class="btn btn-light"> Back
     </a>
 </form>
+
+</@c.page>
