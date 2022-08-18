@@ -2,7 +2,7 @@ package com.eronryabets.first_pet.controller;
 
 import com.eronryabets.first_pet.entity.Message;
 import com.eronryabets.first_pet.entity.User;
-import com.eronryabets.first_pet.repository.MessageRepository;
+import com.eronryabets.first_pet.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,29 +14,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/messages")
 public class MessageController {
+
     @Autowired
-    private MessageRepository messageRepository;
+    private MessageService messageService;
 
     @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping
     public String messages(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Message> messages = messageRepository.findAll();
+        Iterable<Message> messages = messageService.findAll();
 
         if (filter != null && !filter.isEmpty()) {
-            messages = messageRepository.findByTag(filter);
+            messages = messageService.findByTag(filter);
         } else {
-            messages = messageRepository.findAll();
+            messages = messageService.findAll();
         }
-
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
 
@@ -44,33 +43,16 @@ public class MessageController {
     }
 
     @PostMapping
-    public String add(
+    public String addMessage(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
-            @RequestParam String tag, Map<String, Object> model,
+            @RequestParam String tag,
+            Map<String, Object> model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        Message message = new Message(text, tag, user);
 
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            message.setFilename(resultFilename);
-        }
-
-        messageRepository.save(message);
-
-        Iterable<Message> messages = messageRepository.findAll();
-
+        messageService.add(user, text, tag, model, file);
+        Iterable<Message> messages = messageService.findAll();
         model.put("messages", messages);
 
         return "redirect:/messages";
