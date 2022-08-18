@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.UUID;
 
 
@@ -31,8 +30,8 @@ public class MessageService {
         return messageRepository.findByTag(filter);
     }
 
-    public void add(User user, String text, String tag, Map<String,
-            Object> model, MultipartFile file) throws IOException {
+    public void add(User user, String text, String tag,
+                    MultipartFile file) throws IOException {
         Message message = new Message(text, tag, user);
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {

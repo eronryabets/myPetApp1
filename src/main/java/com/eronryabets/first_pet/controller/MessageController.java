@@ -51,7 +51,7 @@ public class MessageController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
 
-        messageService.add(user, text, tag, model, file);
+        messageService.add(user, text, tag, file);
         Iterable<Message> messages = messageService.findAll();
         model.put("messages", messages);
 
