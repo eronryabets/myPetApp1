@@ -1,6 +1,8 @@
 package com.eronryabets.first_pet.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="pet_message")
@@ -22,6 +24,12 @@ public class Message {
     @Column(name = "filename")
     private String filename;
 
+    @Column(name = "date")
+    private LocalDateTime date;
+
+    @Column(name = "string_date")
+    private String stringDate;
+
     public Message() {
     }
 
@@ -29,6 +37,9 @@ public class Message {
         this.author = user;
         this.text = text;
         this.tag = tag;
+        LocalDateTime timeNow = LocalDateTime.now();
+        this.date = timeNow;
+        this.stringDate = formatter(timeNow);
     }
 
 
@@ -75,4 +86,26 @@ public class Message {
     public void setFilename(String filename) {
         this.filename = filename;
     }
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getStringDate() {
+        return stringDate;
+    }
+
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
+    }
+
+    public static String formatter(LocalDateTime date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss");
+        String time = date.format(formatter);
+        return time;
+    }
+
 }

@@ -39,7 +39,7 @@
     </div>
 
     <div class="card-columns">
-        <#list messages?sortBy("id")?reverse as message>
+        <#list messages?sortBy("date")?reverse as message>
             <div class="card my-3">
                 <#if message.filename??>
                     <img src="/img/${message.filename}" class="card-img-top">
@@ -51,6 +51,7 @@
                 </div>
                 <div class="card-footer text-muted">
                     ${message.authorName}
+                    <i>${message.stringDate}</i>
                 </div>
             </div>
         <#else>
