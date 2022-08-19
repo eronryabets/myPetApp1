@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -57,5 +54,14 @@ public class MessageController {
 
         return "redirect:/messages";
     }
+
+    @RequestMapping(value = "/delete/{message}",
+            method={RequestMethod.DELETE, RequestMethod.GET})
+    public String userMessage(@PathVariable Message message){
+        messageService.deleteMessage(message);
+        return "redirect:/messages";
+    }
+
+
 
 }

@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 
@@ -48,7 +50,21 @@ public class MessageService {
         }
 
         messageRepository.save(message);
+    }
 
+    public void deleteMessage(Message message) {
+        if (message.getFilename() != null) {
+            String path = "F:\\Work\\TestProjects\\first_pet\\uploads\\";
+            path = path.concat(message.getFilename());
+            try {
+                //Files.delete(Paths.get(uploadPath +"/"+ message.getFilename()));
+                Files.delete(Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        messageRepository.deleteById(message.getId());
     }
 
 }
+

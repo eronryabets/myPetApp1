@@ -52,7 +52,9 @@
                 <div class="card-footer text-muted">
                     ${message.authorName}
                     <i>${message.stringDate}</i>
+                    <td><a href="/messages/delete/${message.id}" class="btn btn-danger btn-xs">delete</a></td>
                 </div>
+
             </div>
         <#else>
             No message
