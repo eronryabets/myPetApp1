@@ -1,5 +1,5 @@
+<#include "parts/security.ftlh">
 <#import "parts/common.ftlh" as c>
-
 <@c.page>
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -52,7 +52,9 @@
                 <div class="card-footer text-muted">
                     ${message.authorName}
                     <i>${message.stringDate}</i>
+                    <#if isAdmin>
                     <td><a href="/messages/delete/${message.id}" class="btn btn-danger btn-xs">delete</a></td>
+                    </#if>
                 </div>
 
             </div>
