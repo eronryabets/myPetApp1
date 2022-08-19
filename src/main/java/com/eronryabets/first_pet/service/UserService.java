@@ -68,6 +68,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void userDelete(User user){
+        userRepository.delete(user);
+    }
+
 
 
 

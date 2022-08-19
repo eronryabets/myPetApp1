@@ -47,8 +47,12 @@ public class UserController {
         return "redirect:/user";
     }
 
-    //@DeleteMapping
-    //TODO
+    @RequestMapping(value = "{user}/delete",
+            method={RequestMethod.DELETE, RequestMethod.GET})
+    public String userDelete(@PathVariable User user){
+        userService.userDelete(user);
+        return "redirect:/user";
+    }
 
 
 }
