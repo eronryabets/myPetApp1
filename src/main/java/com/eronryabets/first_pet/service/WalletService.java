@@ -30,4 +30,8 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
+    public void walletDelete(Wallet wallet){
+        walletRepository.delete(wallet);
+    }
+
 }

@@ -15,7 +15,6 @@ public class WalletController {
     @Autowired
     WalletService walletService;
 
-
     @GetMapping
     public String walletList(@PathVariable User user, Model model) {
         model.addAttribute("user",user);
@@ -35,7 +34,7 @@ public class WalletController {
         return "redirect:/profile/{user}/wallets";
     }
 
-    @GetMapping("{wallet}")
+    @GetMapping("{wallet}/edit")
     public String walletEditForm(
             @PathVariable("user") User user,
             @PathVariable("wallet") Wallet wallet,
@@ -45,7 +44,7 @@ public class WalletController {
         return "walletEdit";
     }
 
-    @PostMapping("{wallet}")
+    @PostMapping("{wallet}/edit")
     public String walletSave(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("walletName") String walletName,
@@ -53,11 +52,15 @@ public class WalletController {
     ){
 
         walletService.walletSave(wallet, walletName, balance);
-        return "redirect:/profile/{user}/wallets/{wallet}";
+        return "redirect:/profile/{user}/wallets/{wallet}/edit";
     }
 
-    //@DeleteMapping()
-    //TODO
+    @RequestMapping(value = "{wallet}/delete",
+            method={RequestMethod.DELETE, RequestMethod.GET})
+    public String walletDelete(@PathVariable("wallet") Wallet wallet){
+        walletService.walletDelete(wallet);
+        return "redirect:/profile/{user}/wallets";
+    }
 
 
 

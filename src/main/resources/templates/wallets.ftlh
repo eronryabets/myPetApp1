@@ -61,13 +61,9 @@
             <td>${wallet.balance}</td>
             <td>${wallet.currency}</td>
 
-            <td> <form action="/profile/${user.id}/wallets/${wallet.id}">
-                <input type="submit" value="Edit">
-            </form></td>
-
-            <td> <form action="/profile/${user.id}/wallets/">
-                <input type="submit" value="Delete">
-            </form></td>
+            <td><a href="/profile/${user.id}/wallets/${wallet.id}/edit" class="btn btn-dark" >edit</a></td>
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <td><a href="/profile/${user.id}/wallets/${wallet.id}/delete" class="btn btn-danger">delete</a></td>
         </tr>
     </#list>
     </tbody>

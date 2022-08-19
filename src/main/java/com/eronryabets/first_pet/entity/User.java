@@ -164,10 +164,3 @@ public class User implements UserDetails {
                 '}';
     }
 }
-
-/*
-login
-Имя
-Фамилия
-
- */

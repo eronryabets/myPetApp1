@@ -6,7 +6,7 @@
 </head>
 
 <h3>Wallet ${wallet.walletName}</h3>
-<form action="/profile/${user.id}/wallets/${wallet.id}" method="post">
+<form action="/profile/${user.id}/wallets/${wallet.id}/edit" method="post">
     Wallet name :
     <input type="text" name="walletName" value="${wallet.walletName}">
 

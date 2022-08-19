@@ -5,11 +5,11 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="users_wallet")
+@Table(name = "users_wallet")
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "wallet_id")
     private Long id;
 
@@ -26,10 +26,12 @@ public class Wallet {
 
     @ManyToOne(
             cascade = {
-            CascadeType.DETACH,
-            CascadeType.REFRESH,
-            CascadeType.MERGE},
-            fetch = FetchType.EAGER)
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH,
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST
+            },
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private User user;
 
