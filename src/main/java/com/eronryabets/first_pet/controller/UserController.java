@@ -65,8 +65,15 @@ public class UserController {
         return "profile";
     }
 
-    @PostMapping("profile")
-    public String updateProfile(
+    @GetMapping("profile/profileData")
+    public String getProfileData(Model model,
+                             @AuthenticationPrincipal User user){
+        model.addAttribute("user",user);
+        return "profileData";
+    }
+
+    @PostMapping("profile/profileData")
+    public String updateProfileData(
             @AuthenticationPrincipal User user,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
@@ -75,6 +82,7 @@ public class UserController {
         userService.profileSave(user, name, surname, password);
         return "redirect:/user/profile";
     }
+
 
 
 

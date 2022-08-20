@@ -1,29 +1,22 @@
 <#import "parts/common.ftlh" as c>
+<#import "login.ftlh" as l>
+
 <@c.page>
 
-<h5>${user.username}</h5>
-    ${message?ifExists}
-    <form action="/user/profile" method="post">
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Name :</label>
-            <div class="col-sm-3">
-                <input type="text" name="name" class="form-control" value="${user.name}" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Surname :</label>
-            <div class="col-sm-3">
-                <input type="text" name="surname" class="form-control" value="${user.surname}" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Password :</label>
-            <div class="col-sm-3">
-                <input type="password" name="password" class="form-control" placeholder="Password" />
-            </div>
-        </div>
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        <button class="btn btn-primary" type="submit">Save</button>
+    <head>
+        <h5>Profile page! Hello ${user.name}</h5>
+    </head>
 
-    </form>
+<#--    ссылка на изменение данных профиля-->
+    <br><br>
+    <a href="/user/profile/profileData"
+       class="btn btn-light"> Edit Profile
+    </a>
+
+<#--    ссылка на кошельки профилья -->
+    <br><br>
+    <a href="/profile/${user.id}/wallets"
+       class="btn btn-light"> Wallets
+    </a>
+
 </@c.page>
