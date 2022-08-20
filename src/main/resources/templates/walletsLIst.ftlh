@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
     <head>
-    <h5>User list page</h5>
+    <h5>Wallets list page</h5>
     </head>
     <table>
         <thead>

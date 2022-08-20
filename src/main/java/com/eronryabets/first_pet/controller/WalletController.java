@@ -66,7 +66,7 @@ public class WalletController {
             @RequestParam("walletCurrency") String walletCurrency
     ){
         walletService.addWallet(user, walletName, balance, walletCurrency);
-        return "redirect:/wallets";
+        return "redirect:/wallets/userWallets";
     }
 
 
