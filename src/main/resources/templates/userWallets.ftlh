@@ -55,8 +55,8 @@
                 <td>${wallet.balance}</td>
                 <td>${wallet.currency}</td>
 
-                <td><a href="/wallets/${wallet.id}" class="btn btn-dark" >edit</a></td>
-                <td><a href="/wallets/${wallet.id}/delete" class="btn btn-danger">delete</a></td>
+                <td><a href="/wallets/profile/${wallet.id}" class="btn btn-dark" >edit</a></td>
+                <td><a href="/wallets/profile/${wallet.id}/delete" class="btn btn-danger">delete</a></td>
 
             </tr>
         <#else >

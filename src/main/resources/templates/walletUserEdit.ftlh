@@ -2,13 +2,14 @@
 <@c.page>
 
 <head>
+    <h3>USER ACCESS</h3>
     <h5>Wallet name ${wallet.walletName} ; id ${wallet.id}</h5>
     <br>
     Wallet's owner ${wallet.user.username}; id  ${wallet.user.id}
     <br>
 </head>
 
-<form action="/wallets/${wallet.id}" method="post">
+<form action="/wallets/profile/${wallet.id}" method="post">
     <br><br>
     Wallet name :
     <input type="text" name="walletName" value="${wallet.walletName}">

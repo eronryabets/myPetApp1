@@ -16,6 +16,7 @@
     <body>
 
     <#include "navbar.ftlh">
+    <link rel="stylesheet" href="/static/background.css">
     <div class="container mt-5">
         <#nested >
     </div>
