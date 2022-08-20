@@ -2,7 +2,7 @@
 <#import "login.ftlh" as l>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Wallets</a>
+    <a class="navbar-brand" href="/">WalletsAPP</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,6 +36,10 @@
         </ul>
 
         <div class="navbar-text mr-3"><#if user??>${user.username}<#else>Please, login</#if></div>
-        <@l.logout />
+        <#if user??><@l.logout />
+        <#else>
+            <a href="/login" class="btn btn-dark" >Login</a>
+        </#if>
+
     </div>
 </nav>

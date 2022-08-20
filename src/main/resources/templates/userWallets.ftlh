@@ -28,8 +28,8 @@
                     <option value="UAH">UAH</option>
                 </select>
             </td>
-            <br>
-            <button type="submit">Add</button>
+            <br><br>
+            <button type="submit" class="btn btn-success">Add</button>
 <#--            <input type="hidden" value="${wallet.user}" name="user">-->
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         </form>
