@@ -72,8 +72,13 @@ public class UserService implements UserDetailsService {
         userRepository.delete(user);
     }
 
-
-
-
-
 }
+
+/*
+ public void profileSave(User user, String name, String surname, String password){
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+ */

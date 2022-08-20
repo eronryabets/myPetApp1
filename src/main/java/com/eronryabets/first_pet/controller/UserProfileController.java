@@ -17,7 +17,7 @@ public class UserProfileController {
     @GetMapping("{user}")
     public String userProfile(@PathVariable User user, Model model){
         model.addAttribute("user",user);
-        return "profile";
+        return "profileOLD";
     }
 
     @GetMapping("{user}/profileEdit")

@@ -6,6 +6,7 @@
 </head>
 
 <form action="/profile/${user.id}/profileEdit" method="post">
+<#--<form action="/user" method="post">-->
 
     User name :
     <input type="text" name="name" value="${user.name}">

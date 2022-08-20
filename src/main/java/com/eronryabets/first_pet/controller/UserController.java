@@ -5,6 +5,7 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +16,19 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "userList";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model){
         model.addAttribute("user",user);
@@ -34,6 +36,7 @@ public class UserController {
         return "userEdit";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userSave(
             @RequestParam("username") String username,
@@ -47,6 +50,7 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "{user}/delete",
             method={RequestMethod.DELETE, RequestMethod.GET})
     public String userDelete(@PathVariable User user){
@@ -54,5 +58,25 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @GetMapping("profile")
+    public String getProfile(Model model,
+                             @AuthenticationPrincipal User user){
+        model.addAttribute("user",user);
+        return "profile";
+    }
+
+    @PostMapping("profile")
+    public String updateProfile(
+            @AuthenticationPrincipal User user,
+            @RequestParam("name") String name,
+            @RequestParam("surname") String surname,
+            @RequestParam("password") String password
+    ){
+        userService.profileSave(user, name, surname, password);
+        return "redirect:/user/profile";
+    }
+
+
 
 }
+

@@ -1,19 +1,29 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
 
-<head>
-    <h5>User profile page! Hello ${user.name}</h5>
-</head>
+<h5>${user.username}</h5>
+    ${message?ifExists}
+    <form action="/user/profile" method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Name :</label>
+            <div class="col-sm-3">
+                <input type="text" name="name" class="form-control" value="${user.name}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Surname :</label>
+            <div class="col-sm-3">
+                <input type="text" name="surname" class="form-control" value="${user.surname}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Password :</label>
+            <div class="col-sm-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" />
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        <button class="btn btn-primary" type="submit">Save</button>
 
-<br>
-<br>
-<a href="/profile/${user.id}/profileEdit"
-   class="btn btn-light"> Edit Profile
-</a>
-<br>
-<br>
-<a href="/profile/${user.id}/wallets"
-   class="btn btn-light"> Wallets
-</a>
-
+    </form>
 </@c.page>
