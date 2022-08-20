@@ -2,11 +2,14 @@
 <@c.page>
 
 <head>
-    <h5>User list page! Hello ${user.name} now you edit wallet ${wallet.walletName}</h5>
+    <h5>Wallet name ${wallet.walletName} ; id ${wallet.id}</h5>
+    <br>
+    Wallet's owner ${wallet.user.username}; id  ${wallet.user.id}
+    <br>
 </head>
 
-<h3>Wallet ${wallet.walletName}</h3>
-<form action="/profile/${user.id}/wallets/${wallet.id}/edit" method="post">
+<form action="/wallets" method="post">
+    <br><br>
     Wallet name :
     <input type="text" name="walletName" value="${wallet.walletName}">
 
@@ -14,19 +17,19 @@
     Wallet balance :
     <input type="text" name="balance" value="${wallet.balance}">
 
-    <br><br>
-<#--    <input type="hidden"  name="walletId" value="${wallet.id}">-->
-<#--    <input type="hidden"  name="userId" value="${user.id}">-->
+<#--    <br><br>-->
+<#--    Wallet's owner :-->
+<#--    <input type="text" name="user_id" value="${wallet.user.id}">-->
 
-    <button type="submit">Save</button>
+    <br><br>
+    <input type="hidden" name="walletId" value="${wallet.id}">
+<#--    <input type="hidden" name="WalletsOwner" value="${wallet.user}">-->
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <button type="submit">Save</button>
     <br>
 
 </form>
 
-<form method="get" action="/profile/${user.id}/wallets/" class="form-inline">
-    <button type="submit" class="btn btn-primary ml-2">Back</button>
-</form>
 
 </@c.page>
 

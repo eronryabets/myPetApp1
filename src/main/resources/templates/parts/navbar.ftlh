@@ -16,11 +16,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="/messages">Messages</a>
             </li>
+
             <#if isAdmin>
+
             <li class="nav-item">
                 <a class="nav-link" href="/user">User List</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/wallets">Wallets List</a>
+            </li>
+
             </#if>
+
             <#if user??>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/profile">Profile</a>
