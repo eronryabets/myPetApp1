@@ -1,8 +1,42 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
     <head>
-        <h5>My wallets list</h5>
+        <h5>My wallets list!</h5>
     </head>
+
+    <div>
+        <form action="/wallets/userWallets" method="post">
+            <div> Введите имя кошелька</div>
+            <input type="text" name="walletName" placeholder="wallet name"/>
+
+            <div> Введите баланс</div>
+            <input type="text" name="balance" placeholder="balance"/>
+
+            <br>
+            <td class="tdLabel">
+                <label for="result" class="label">
+                    Выберите валюту:
+                </label>
+                <br>
+            </td>
+            <td>
+                <select name="walletCurrency" id="result">
+                    <option value="-1">Выберите валюту</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="PLN">PLN</option>
+                    <option value="UAH">UAH</option>
+                </select>
+            </td>
+            <br>
+            <button type="submit">Add</button>
+<#--            <input type="hidden" value="${wallet.user}" name="user">-->
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        </form>
+    </div>
+
+<br><br>
+
     <table>
         <thead>
         <tr>

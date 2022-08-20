@@ -29,7 +29,6 @@ public class Wallet {
                     CascadeType.DETACH,
                     CascadeType.REFRESH,
                     CascadeType.MERGE,
-                    CascadeType.PERSIST
             },
             fetch = FetchType.LAZY)
     @JoinColumn(name = "id")

@@ -58,6 +58,17 @@ public class WalletController {
         return "userWallets";
     }
 
+    @PostMapping("/userWallets")
+    public String addWallet(
+            @AuthenticationPrincipal User user,
+            @RequestParam("walletName") String walletName,
+            @RequestParam("balance") double balance,
+            @RequestParam("walletCurrency") String walletCurrency
+    ){
+        walletService.addWallet(user, walletName, balance, walletCurrency);
+        return "redirect:/wallets";
+    }
+
 
 
 }

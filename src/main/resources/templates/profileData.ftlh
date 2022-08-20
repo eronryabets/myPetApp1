@@ -3,7 +3,7 @@
 
 <h5>${user.username}</h5>
     ${message?ifExists}
-    <form action="/user/profileData" method="post">
+    <form action="/user/profile/profileData" method="post">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Name :</label>
             <div class="col-sm-3">
