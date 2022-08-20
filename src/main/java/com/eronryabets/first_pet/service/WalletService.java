@@ -18,6 +18,10 @@ public class WalletService {
         return walletRepository.findAll();
     }
 
+    public List<Wallet> findAllByUser(User user){
+        return  walletRepository.findAllByUser(user);
+    }
+
     public void addWallet(User user, String walletName, double balance, String walletCurrency){
         CurrencyWallet result = CurrencyWallet.valueOf(walletCurrency);
         Wallet wallet = new Wallet(walletName,balance, result,user);

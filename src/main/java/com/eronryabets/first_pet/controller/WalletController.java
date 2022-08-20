@@ -5,6 +5,7 @@ import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,13 @@ public class WalletController {
     public String walletDelete(@PathVariable("wallet") Wallet wallet){
         walletService.walletDelete(wallet);
         return "redirect:/wallets";
+    }
+
+    @GetMapping("/userWallets")
+    public String userWallets(Model model,
+                              @AuthenticationPrincipal User user) {
+        model.addAttribute("wallets", walletService.findAllByUser(user));
+        return "userWallets";
     }
 
 

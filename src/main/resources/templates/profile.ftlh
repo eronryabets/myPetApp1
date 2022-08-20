@@ -15,7 +15,7 @@
 
 <#--    ссылка на кошельки профилья -->
     <br><br>
-    <a href="/profile/${user.id}/wallets"
+    <a href="/wallets/userWallets"
        class="btn btn-light"> Wallets
     </a>
 
