@@ -8,15 +8,13 @@
 
         <h5>Wallet name ${wallet.walletName}</h5>
         <h5>Wallet balance  ${wallet.balance}</h5>
+        <h5>Wallet id  ${wallet.id}</h5>
         <br>
 
     </head>
 
-
-
-<#-- TEST START-->
     <div id="accordion">
-        <#--    1 FORM START -->
+
         <div class="card">
             <div class="card-header" id="heading1">
                 <h5 class="mb-0">
@@ -45,8 +43,7 @@
                 </div>
             </div>
         </div>
-        <#--    1 FORM END -->
-        <#--    2 FORM START -->
+
         <div class="card">
             <div class="card-header" id="heading2">
                 <h5 class="mb-0">
@@ -58,8 +55,6 @@
 
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
                 <div class="card-body">
-
-                    <#--    TEST CODE START -->
                     <form action="/wallets/profile/${wallet.id}" method="post">
                         <div class="form-group">
                             <label class="col-sm-3 col-form-label"> Please input amount: </label>
@@ -75,12 +70,10 @@
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         </div>
                     </form>
-                    <#--    TEST CODE END -->
-
                 </div>
             </div>
         </div>
-        <#--    2 FORM END -->
+
         <#--    4 FORM START -->
         <div class="card">
             <div class="card-header" id="heading4">
@@ -93,7 +86,31 @@
 
             <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
                 <div class="card-body">
-                    <#--    PUT YOUR CODE -->
+
+
+                    <form action="/wallets/profile/${wallet.id}/transfer" method="post">
+                        <div class="form-group">
+
+                            <label class="col-sm-3 col-form-label"> Please input amount: </label>
+                            <div class="col-sm-3">
+                                <input type="number" name="amount" class="form-control"
+                                       placeholder="amount"/>
+                            </div>
+
+                            <label class="col-sm-3 col-form-label"> Please input another wallet id: </label>
+                            <div class="col-sm-3">
+                                <input type="number" name="anotherWalletId" class="form-control"
+                                       placeholder="another wallet id"/>
+                                <button class="btn btn-success mt-1" type="submit">Confirm</button>
+                            </div>
+
+                            <input type="hidden" name="balance" value="${wallet.balance}">
+                            <input type="hidden" name="walletName" value="${wallet.walletName}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                        </div>
+                    </form>
+
+
                     TEST
                     TEST
                     TEST
@@ -149,6 +166,5 @@
     </div>
 
 
-<#-- TEST END-->
 </@c.page>
 

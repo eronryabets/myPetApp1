@@ -97,6 +97,17 @@ public class WalletController {
         return "redirect:/wallets/userWallets";
     }
 
+    @PostMapping("/profile/{wallet}/transfer")
+    public String walletUserCashTransfer(
+            @PathVariable("wallet") Wallet wallet,
+            @RequestParam("amount") double amount,
+            @RequestParam("anotherWalletId") int anotherWalletId
+    ){
+
+        walletService.walletUserCashTransfer(wallet, amount, anotherWalletId);
+        return "redirect:/wallets/profile/{wallet}";
+    }
+
 
 }
 

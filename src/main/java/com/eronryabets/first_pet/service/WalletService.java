@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WalletService {
@@ -38,6 +39,18 @@ public class WalletService {
         wallet.setWalletName(walletName);
         wallet.setBalance(balance+cashAdd);
         walletRepository.save(wallet);
+    }
+
+    public void walletUserCashTransfer(Wallet wallet,  double amount, int anotherWalletId){
+        Optional<Wallet> anotherWalletOptional = walletRepository.findById((long) anotherWalletId);
+        if(anotherWalletOptional.isPresent()){
+            Wallet anotherWallet = anotherWalletOptional.get();
+            wallet.setBalance(wallet.getBalance()-amount);
+            anotherWallet.setBalance(anotherWallet.getBalance()+amount);
+
+            walletRepository.save(wallet);
+            walletRepository.save(anotherWallet);
+        }
     }
 
 
