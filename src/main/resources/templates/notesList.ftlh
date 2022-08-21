@@ -1,0 +1,58 @@
+<#include "parts/security.ftlh">
+<#import "parts/common.ftlh" as c>
+<@c.page>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <form method="get" action="/notes" class="form-inline">
+                <input type="text" name="filter" class="form-control" value="${filter?ifExists}"
+                       placeholder="Search by tag">
+                <button type="submit" class="btn btn-primary ml-2">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Add new Message
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="form-group mt-3">
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control col-sm-4" name="text" placeholder="Введите сообщение"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control col-sm-4" name="tag" placeholder="Тэг">
+                </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-columns">
+        <#list notes?sortBy("date")?reverse as notes>
+            <div class="card my-3">
+                <div class="m-2">
+                    <span>${notes.text}</span>
+                    <br>#
+                    <i>${notes.tag}</i>
+                </div>
+                <div class="card-footer text-muted">
+                    ${notes.author.name}
+                    <i>${notes.stringDate}</i>
+                    <#if user??>
+                        <td><a href="/notes/delete/${notes.id}" class="btn btn-danger btn-xs">delete</a></td>
+                    </#if>
+                </div>
+
+            </div>
+        <#else>
+            No message
+        </#list>
+    </div>
+
+</@c.page>
+

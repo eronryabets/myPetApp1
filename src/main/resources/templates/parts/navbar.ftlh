@@ -32,6 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user/profile">Profile</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/notes">Notes</a>
+                </li>
             </#if>
         </ul>
 

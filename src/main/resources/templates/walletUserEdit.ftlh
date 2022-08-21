@@ -7,11 +7,15 @@
         <h3>USER ACCESS</h3>
 
         <h5>Wallet name ${wallet.walletName}</h5>
-        <h5>Wallet balance  ${wallet.balance}</h5>
         <h5>Wallet id  ${wallet.id}</h5>
+        <h5>Wallet balance  ${wallet.balance}</h5>
+
         <br>
 
+
     </head>
+
+
 
     <div id="accordion">
 
