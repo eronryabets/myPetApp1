@@ -7,7 +7,9 @@
 
     <head xmlns:container="http://www.w3.org/1999/xhtml">
 
-        <h5>Profile page! Hello ${user.name}</h5>
+<#--        <#if user.avatar??>-->
+<#--            <img class="rounded-img" src="/img/avatar/${user.avatar}" class="someClass "/>-->
+<#--        </#if>-->
     </head>
     <br><br>
 

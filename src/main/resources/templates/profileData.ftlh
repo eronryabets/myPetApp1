@@ -6,7 +6,9 @@
     ${message?ifExists}
 
     <br>
-    <img class="rounded-img" src="/img/avatar/Screenshot_821.png" class="someClass "/>
+    <#if user.avatar??>
+    <img class="rounded-img" src="/img/avatar/${user.avatar}" class="someClass "/>
+    </#if>
     <br>
 
     <form action="/user/profile/profileData" method="post" enctype="multipart/form-data">
