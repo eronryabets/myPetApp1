@@ -7,13 +7,14 @@
 
     <head xmlns:container="http://www.w3.org/1999/xhtml">
 
-<#--        <#if user.avatar??>-->
-<#--            <img class="rounded-img" src="/img/avatar/${user.avatar}" class="someClass "/>-->
-<#--        </#if>-->
+
     </head>
     <br><br>
+    <#if user.avatar??>
+        <img class="rounded-img" src="/img/avatar/${user.avatar}" class="someClass "/>
+    </#if>
 
-    <img class="rounded-img" src="/img/avatar/Screenshot_821.png" class="someClass "/>
+
 
 
 <#--    ссылка на изменение данных профиля-->
