@@ -6,8 +6,10 @@
 
         <h3>USER ACCESS</h3>
 
-        <h5>Wallet name ${wallet.walletName} ; id ${wallet.id}</h5>
+        <h5>Wallet name ${wallet.walletName}</h5>
+        <h5>Wallet balance  ${wallet.balance}</h5>
         <br>
+
     </head>
 
 
@@ -49,41 +51,36 @@
             <div class="card-header" id="heading2">
                 <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-                        Wallet replenishment
+                        Operations to withdraw or replenish money
                     </button>
                 </h5>
             </div>
 
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
                 <div class="card-body">
-                    <#--    PUT YOUR CODE -->
-                    TEST
-                    TEST
-                    TEST
+
+                    <#--    TEST CODE START -->
+                    <form action="/wallets/profile/${wallet.id}" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-form-label"> Please input amount: </label>
+
+                            <div class="col-sm-3">
+                                <input type="number" name="cashAdd" class="form-control"
+                                       placeholder="Wallet replenishment"/>
+                                <button class="btn btn-success mt-1" type="submit">Add</button>
+                            </div>
+
+                            <input type="hidden" name="balance" value="${wallet.balance}">
+                            <input type="hidden" name="walletName" value="${wallet.walletName}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                        </div>
+                    </form>
+                    <#--    TEST CODE END -->
+
                 </div>
             </div>
         </div>
         <#--    2 FORM END -->
-        <#--    3 FORM START -->
-        <div class="card">
-            <div class="card-header" id="heading3">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
-                        Cash withdrawal
-                    </button>
-                </h5>
-            </div>
-
-            <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
-                <div class="card-body">
-                    <#--    PUT YOUR CODE -->
-                    TEST
-                    TEST
-                    TEST
-                </div>
-            </div>
-        </div>
-        <#--    3 FORM END -->
         <#--    4 FORM START -->
         <div class="card">
             <div class="card-header" id="heading4">

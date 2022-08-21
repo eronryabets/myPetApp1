@@ -34,6 +34,14 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
+    public void walletSave(Wallet wallet, String walletName, double balance, double cashAdd){
+        wallet.setWalletName(walletName);
+        wallet.setBalance(balance+cashAdd);
+        walletRepository.save(wallet);
+    }
+
+
+
     public void walletDelete(Wallet wallet){
         walletRepository.delete(wallet);
     }

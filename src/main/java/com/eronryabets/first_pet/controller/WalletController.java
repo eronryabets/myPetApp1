@@ -82,10 +82,11 @@ public class WalletController {
     public String walletUserSave(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("walletName") String walletName,
-            @RequestParam("balance") double balance
+            @RequestParam("balance") double balance,
+            @RequestParam("cashAdd") double cashAdd
     ){
 
-        walletService.walletSave(wallet, walletName, balance);
+        walletService.walletSave(wallet, walletName, balance, cashAdd);
         return "redirect:/wallets/profile/{wallet}";
     }
 
@@ -97,6 +98,6 @@ public class WalletController {
     }
 
 
-
 }
+
 
