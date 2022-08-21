@@ -86,12 +86,13 @@ public class UserService implements UserDetailsService {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + avatar.getOriginalFilename();
             avatar.transferTo(new File(uploadAvatarPath + "/" + resultFilename));
+            System.out.println(uploadAvatarPath);
 
             if (!user.getAvatar().equals(avatar.getOriginalFilename())) {
                 String path = "F:\\Work\\TestProjects\\first_pet\\uploads\\avatar\\";
                 path = path.concat(user.getAvatar());
                 try {
-                    //Files.delete(Paths.get(uploadPath +"/"+ message.getFilename()));
+                    //Files.delete(Paths.get(uploadAvatarPath +"/"+ user.getAvatar()));
                     Files.delete(Paths.get(path));
                 } catch (IOException e) {
                     e.printStackTrace();
