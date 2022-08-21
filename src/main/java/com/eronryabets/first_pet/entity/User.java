@@ -30,6 +30,8 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "active")
     private boolean active;
+    @Column(name = "avatar")
+    private String avatar;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "pet_users_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -79,6 +81,14 @@ public class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override

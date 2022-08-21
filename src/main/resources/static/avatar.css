@@ -1,0 +1,9 @@
+
+.rounded-img {
+    width: 199px;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    padding: 0.6em;
+    margin-bottom: 1em;
+}
+

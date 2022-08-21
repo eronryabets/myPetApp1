@@ -4,13 +4,16 @@ import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -20,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${uploadAvatar.path}")
+    private String uploadAvatarPath;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
@@ -77,9 +83,10 @@ public class UserController {
             @AuthenticationPrincipal User user,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
-            @RequestParam("password") String password
-    ){
-        userService.profileSave(user, name, surname, password);
+            @RequestParam("password") String password,
+            @RequestParam("avatar") MultipartFile avatar
+    ) throws IOException {
+        userService.profileSave(user, name, surname, password, avatar);
         return "redirect:/user/profile";
     }
 

@@ -4,11 +4,15 @@ import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,6 +21,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Value("${uploadAvatar.path}")
+    private String uploadAvatarPath;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -61,10 +68,25 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public void profileSave(User user, String name, String surname, String password){
+    public void profileSave(User user, String name, String surname, String password,
+                            MultipartFile avatar) throws IOException {
         user.setName(name);
         user.setSurname(surname);
         user.setPassword(password);
+
+        if (avatar != null && !avatar.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadAvatarPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + avatar.getOriginalFilename();
+            avatar.transferTo(new File(uploadAvatarPath + "/" + resultFilename));
+            user.setAvatar(resultFilename);
+        }
+
         userRepository.save(user);
     }
 
