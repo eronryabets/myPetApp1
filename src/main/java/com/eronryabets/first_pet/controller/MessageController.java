@@ -57,7 +57,7 @@ public class MessageController {
 
     @RequestMapping(value = "/delete/{message}",
             method={RequestMethod.DELETE, RequestMethod.GET})
-    public String userMessage(@PathVariable Message message){
+    public String userMessageDelete(@PathVariable Message message){
         messageService.deleteMessage(message);
         return "redirect:/messages";
     }

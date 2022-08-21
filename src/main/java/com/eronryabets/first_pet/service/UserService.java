@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,9 +36,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
-        if(userFromDb != null){
+        if (userFromDb != null) {
             return false;
         }
 
@@ -84,13 +86,26 @@ public class UserService implements UserDetailsService {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + avatar.getOriginalFilename();
             avatar.transferTo(new File(uploadAvatarPath + "/" + resultFilename));
+
+            if (!user.getAvatar().equals(avatar.getOriginalFilename())) {
+                String path = "F:\\Work\\TestProjects\\first_pet\\uploads\\avatar\\";
+                path = path.concat(user.getAvatar());
+                try {
+                    //Files.delete(Paths.get(uploadPath +"/"+ message.getFilename()));
+                    Files.delete(Paths.get(path));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
             user.setAvatar(resultFilename);
         }
 
         userRepository.save(user);
     }
 
-    public void userDelete(User user){
+    public void userDelete(User user) {
         userRepository.delete(user);
     }
 
