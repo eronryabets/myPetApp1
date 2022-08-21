@@ -55,7 +55,7 @@
 
             <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
                 <div class="card-body">
-                    <form action="/wallets/profile/${wallet.id}" method="post">
+                    <form action="/wallets/profile/${wallet.id}/cashAdd" method="post">
                         <div class="form-group">
                             <label class="col-sm-3 col-form-label"> Please input amount: </label>
 

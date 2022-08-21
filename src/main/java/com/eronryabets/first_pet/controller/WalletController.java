@@ -78,7 +78,18 @@ public class WalletController {
         return "walletUserEdit";
     }
 
-    @PostMapping("/profile/{wallet}")
+    @PostMapping(value ="/profile/{wallet}")
+    public String walletUserSave(
+            @PathVariable("wallet") Wallet wallet,
+            @RequestParam("walletName") String walletName,
+            @RequestParam("balance") double balance
+    ){
+
+        walletService.walletSave(wallet, walletName, balance);
+        return "redirect:/wallets/profile/{wallet}";
+    }
+
+    @PostMapping(value = "/profile/{wallet}/cashAdd")
     public String walletUserSave(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("walletName") String walletName,
@@ -89,6 +100,7 @@ public class WalletController {
         walletService.walletSave(wallet, walletName, balance, cashAdd);
         return "redirect:/wallets/profile/{wallet}";
     }
+
 
     @RequestMapping(value = "/profile/{wallet}/delete",
             method={RequestMethod.DELETE, RequestMethod.GET})
