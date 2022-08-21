@@ -1,14 +1,9 @@
 <#import "parts/common.ftlh" as c>
 <#import "login.ftlh" as l>
-<link rel="stylesheet" href="/static/avatar.css">
 
 
 <@c.page>
 
-    <head xmlns:container="http://www.w3.org/1999/xhtml">
-
-
-    </head>
     <br><br>
     <#if user.avatar??>
         <img class="rounded-img" src="/img/avatar/${user.avatar}" class="someClass "/>

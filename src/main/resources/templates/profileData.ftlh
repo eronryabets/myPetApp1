@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
-<link rel="stylesheet" href="/static/avatar.css">
+
 <@c.page>
 
 <h5>${user.username}</h5>

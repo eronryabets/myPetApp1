@@ -16,7 +16,9 @@
     <body>
 
     <#include "navbar.ftlh">
+    <link rel="stylesheet" href="/static/avatar.css">
     <link rel="stylesheet" href="/static/background.css">
+    <link rel="stylesheet" href="/static/avatarPreview.css">
     <div class="container mt-5">
         <#nested >
     </div>

@@ -1,7 +1,7 @@
 <#include "security.ftlh">
 <#import "login.ftlh" as l>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">WalletsAPP</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,10 @@
                 </li>
             </#if>
         </ul>
+
+<#--        <#if user?? && user.avatar??>-->
+<#--            <img class="avatarPreview-img" src="/img/avatar/${user.avatar}" class="someClass "/>-->
+<#--        </#if>-->
 
         <div class="navbar-text mr-3"><#if user??>${user.username}<#else>Please, login</#if></div>
         <#if user??><@l.logout />
