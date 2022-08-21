@@ -86,7 +86,6 @@ public class UserService implements UserDetailsService {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + avatar.getOriginalFilename();
             avatar.transferTo(new File(uploadAvatarPath + "/" + resultFilename));
-            System.out.println(uploadAvatarPath);
 
             if (!user.getAvatar().equals(avatar.getOriginalFilename())) {
                 String path = "F:\\Work\\TestProjects\\first_pet\\uploads\\avatar\\";

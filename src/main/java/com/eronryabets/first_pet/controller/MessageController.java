@@ -4,7 +4,6 @@ import com.eronryabets.first_pet.entity.Message;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +19,6 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
-
-    @Value("${upload.path}")
-    private String uploadPath;
 
     @GetMapping
     public String messages(@RequestParam(required = false, defaultValue = "") String filter, Model model) {

@@ -4,7 +4,6 @@ import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,9 +22,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Value("${uploadAvatar.path}")
-    private String uploadAvatarPath;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
