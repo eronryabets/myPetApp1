@@ -113,11 +113,6 @@
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         </div>
                     </form>
-
-
-                    TEST
-                    TEST
-                    TEST
                 </div>
             </div>
         </div>
@@ -134,7 +129,7 @@
 
             <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
                 <div class="card-body">
-                    <#--    PUT YOUR CODE -->
+                    <#--    PUT YOUR CODE TODO -->
                     TEST
                     TEST
                     TEST
@@ -165,7 +160,6 @@
                 </div>
             </div>
         </div>
-        <#--    6 FORM END -->
 
     </div>
 

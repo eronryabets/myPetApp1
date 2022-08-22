@@ -20,6 +20,10 @@ public class NotesService {
         return notesRepository.findAll();
     }
 
+    public Iterable<Notes> findByAuthor(User user){
+        return notesRepository.findByAuthor(user);
+    }
+
     public Iterable<Notes> findByTag(String filter){
         return notesRepository.findByTag(filter);
     }

@@ -19,16 +19,17 @@ public class NotesController {
     private NotesService notesService;
 
     @GetMapping
-    public String messages(@RequestParam(required = false, defaultValue = "")
-                               @AuthenticationPrincipal User user,
-                                       String filter, Model model) {
-        model.addAttribute("user",user);
-        Iterable<Notes> notes = notesService.findAll();
+    public String notes(
+            @RequestParam(required = false, defaultValue = "") String filter,
+            @AuthenticationPrincipal User user,
+            Model model) {
+        model.addAttribute("user", user);
+        Iterable<Notes> notes = notesService.findByAuthor(user);
 
         if (filter != null && !filter.isEmpty()) {
             notes = notesService.findByTag(filter);
         } else {
-            notes = notesService.findAll();
+            notes = notesService.findByAuthor(user);
         }
         model.addAttribute("notes", notes);
         model.addAttribute("filter", filter);
@@ -37,12 +38,12 @@ public class NotesController {
     }
 
     @PostMapping
-    public String addMessage(
+    public String addNotes(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag,
             Map<String, Object> model
-    ){
+    ) {
 
         notesService.add(user, text, tag);
         Iterable<Notes> notes = notesService.findAll();
@@ -52,8 +53,8 @@ public class NotesController {
     }
 
     @RequestMapping(value = "/delete/{notes}",
-            method={RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteNotes(@PathVariable Notes notes){
+            method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteNotes(@PathVariable Notes notes) {
         notesService.deleteNotes(notes);
         return "redirect:/notes";
     }
