@@ -7,8 +7,8 @@
         <h3>USER ACCESS</h3>
 
         <h5>Wallet name ${wallet.walletName}</h5>
-        <h5>Wallet id  ${wallet.id}</h5>
-        <h5>Wallet balance  ${wallet.balance}</h5>
+        <h5>Wallet id ${wallet.id}</h5>
+        <h5>Wallet balance ${wallet.balance}</h5>
 
         <br>
 
@@ -22,7 +22,8 @@
         <div class="card">
             <div class="card-header" id="heading1">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true"
+                            aria-controls="collapse1">
                         Renaming the wallet
                     </button>
                 </h5>
@@ -51,7 +52,8 @@
         <div class="card">
             <div class="card-header" id="heading2">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true"
+                            aria-controls="collapse2">
                         Operations to withdraw or replenish money
                     </button>
                 </h5>
@@ -82,7 +84,8 @@
         <div class="card">
             <div class="card-header" id="heading4">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true"
+                            aria-controls="collapse4">
                         Transferring cash to another wallet
                     </button>
                 </h5>
@@ -117,37 +120,69 @@
             </div>
         </div>
         <#--    4 FORM END -->
-        <#--    5 FORM START -->
-        <div class="card">
-            <div class="card-header" id="heading5">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
-                        Interest income
-                    </button>
-                </h5>
-            </div>
 
-            <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
-                <div class="card-body">
-                    <#--    PUT YOUR CODE TODO -->
-                    TEST
-                    TEST
-                    TEST
+        <#--    5 FORM START -->
+        <#assign type = "${wallet.type}" >
+        <#if type == "DEBIT">
+
+            <div class="card">
+                <div class="card-header" id="heading5">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse5"
+                                aria-expanded="true" aria-controls="collapse5">
+                            Debit wallet : Interest income
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
+                    <div class="card-body">
+                        <#--    PUT YOUR CODE TODO -->
+
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </#if>
         <#--    5 FORM END -->
+
         <#--    6 FORM START -->
+        <#assign type = "${wallet.type}" >
+        <#if type == "CREDIT">
+
+            <div class="card">
+                <div class="card-header" id="heading6">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6"
+                                aria-expanded="true" aria-controls="collapse6">
+                            Credit wallet : Interest rate
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
+                    <div class="card-body">
+                        <#--    PUT YOUR CODE TODO -->
+
+
+                    </div>
+                </div>
+            </div>
+        </#if>
+        <#--    6 FORM END -->
+
+        <#--    7 FORM START -->
         <div class="card">
-            <div class="card-header" id="heading6">
+            <div class="card-header" id="heading7">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse7" aria-expanded="false"
+                            aria-controls="collapse7">
                         Delete this wallet - ${wallet.walletName}
                     </button>
                 </h5>
             </div>
 
-            <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordion">
+            <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
                 <div class="card-body">
                     <@m.page>
                     Are you sure? You want to delete the wallet?
@@ -156,12 +191,15 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a href="/wallets/profile/${wallet.id}/delete" class="btn btn-danger">Delete</a>
                 </div>
-                    </@m.page>
-                </div>
+                </@m.page>
             </div>
         </div>
+    </div>
 
     </div>
+
+    <br>
+    <a href="/wallets/userWallets" class="btn btn-light"> Back</a>
 
 
 </@c.page>

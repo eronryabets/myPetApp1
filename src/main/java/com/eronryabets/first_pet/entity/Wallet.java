@@ -2,9 +2,6 @@ package com.eronryabets.first_pet.entity;
 
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Set;
-
 
 @Entity
 @Table(name = "users_wallet")
@@ -61,6 +58,10 @@ public class Wallet {
     public Wallet(String walletName, double balance) {
         this.walletName = walletName;
         this.balance = balance;
+    }
+
+    public boolean isDebit(){
+        return type.equals(WalletType.DEBIT);
     }
 
     public Long getId() {
