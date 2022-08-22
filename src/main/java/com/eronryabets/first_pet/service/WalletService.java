@@ -3,6 +3,7 @@ package com.eronryabets.first_pet.service;
 import com.eronryabets.first_pet.entity.CurrencyWallet;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
+import com.eronryabets.first_pet.entity.WalletType;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,11 @@ public class WalletService {
         return  walletRepository.findAllByUser(user);
     }
 
-    public void addWallet(User user, String walletName, double balance, String walletCurrency){
-        CurrencyWallet result = CurrencyWallet.valueOf(walletCurrency);
-        Wallet wallet = new Wallet(walletName,balance, result,user);
+    public void addWallet(User user, String walletName, double balance,
+                          String walletCurrency, String walletType){
+        CurrencyWallet resultCurrency = CurrencyWallet.valueOf(walletCurrency);
+        WalletType resultType = WalletType.valueOf(walletType);
+        Wallet wallet = new Wallet(walletName,balance, resultCurrency,resultType,user);
         walletRepository.save(wallet);
     }
 

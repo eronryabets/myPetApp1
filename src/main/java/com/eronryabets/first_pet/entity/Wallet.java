@@ -2,6 +2,8 @@ package com.eronryabets.first_pet.entity;
 
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.Set;
 
 
 @Entity
@@ -34,13 +36,19 @@ public class Wallet {
     @JoinColumn(name = "id")
     private User user;
 
+
+    @Column(name = "type", nullable = false, unique = false)
+    @Enumerated(EnumType.STRING)
+    private WalletType type;
+
     public Wallet() {
     }
 
-    public Wallet(String walletName, double balance, CurrencyWallet currency, User user) {
+    public Wallet(String walletName, double balance, CurrencyWallet currency, WalletType type, User user) {
         this.walletName = walletName;
         this.balance = balance;
         this.currency = currency;
+        this.type = type;
         this.user = user;
     }
 
@@ -92,5 +100,11 @@ public class Wallet {
         this.walletName = walletName;
     }
 
+    public WalletType getType() {
+        return type;
+    }
 
+    public void setType(WalletType type) {
+        this.type = type;
+    }
 }
