@@ -38,6 +38,8 @@ public class Wallet {
     @Enumerated(EnumType.STRING)
     private WalletType type;
 
+
+
     public Wallet() {
     }
 

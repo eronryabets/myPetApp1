@@ -17,10 +17,11 @@ EDIT NOTES
 
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/notes" class="btn btn-dark">back</a>
+            <button type="submit" class="btn btn-success">Save</button>
         </div>
     </form>
-    <a href="/notes" class="badge badge-secondary">back</a>
+
 
 </@c.page>
 
