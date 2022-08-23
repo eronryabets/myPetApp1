@@ -171,7 +171,49 @@
             </div>
         </#if>
         <#--    6 FORM END -->
+        <#--    8 FORM START -->
+        <div class="card">
+            <div class="card-header" id="heading8">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse8"
+                            aria-expanded="true" aria-controls="collapse8">
+                        Financial statistics
+                    </button>
+                </h5>
+            </div>
 
+            <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
+                <div class="card-body">
+                    Last 5 operations :
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list finance?sortBy("date")?reverse as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <td>${finance.stringDate}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
+                    <#--    CODE END -->
+                </div>
+            </div>
+        </div>
+
+        <#--    8 FORM END -->
         <#--    7 FORM START -->
         <div class="card">
             <div class="card-header" id="heading7">
@@ -195,8 +237,9 @@
                 </@m.page>
             </div>
         </div>
-    </div>
 
+
+    </div>
     </div>
 
     <br>

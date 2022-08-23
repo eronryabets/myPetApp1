@@ -17,6 +17,7 @@ public class WalletController {
     @Autowired
     WalletService walletService;
 
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String walletList(Model model) {
@@ -76,6 +77,7 @@ public class WalletController {
             @PathVariable("wallet") Wallet wallet,
             Model model){
         model.addAttribute("wallet",wallet);
+        model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
         return "walletUserEdit";
     }
 

@@ -25,6 +25,14 @@ public class WalletService {
         return  walletRepository.findAllByUser(user);
     }
 
+    public Iterable<Finance> findAllFinance(){
+        return financeRepository.findAll();
+    }
+
+    public List<Finance> findFinanceByWallet(Wallet wallet){
+        return financeRepository.findByWallet(wallet);
+    }
+
     public void addWallet(User user, String walletName, double balance,
                           String walletCurrency, String walletType){
         CurrencyWallet resultCurrency = CurrencyWallet.valueOf(walletCurrency);
@@ -64,10 +72,9 @@ public class WalletService {
 
     }
 
-
-
     public void walletDelete(Wallet wallet){
         walletRepository.delete(wallet);
     }
+
 
 }
