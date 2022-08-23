@@ -131,11 +131,11 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
-
-        //NEW
-        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 3,31,0,0);
-        model.addAttribute("financeDate",walletService.findByDateBetween(date1,date2));
+        model.addAttribute("firstQuarter",walletService.firstQuarter());
+        model.addAttribute("secondQuarter",walletService.secondQuarter());
+        model.addAttribute("thirdQuarter",walletService.thirdQuarter());
+        model.addAttribute("fourthQuarter",walletService.fourthQuarter());
+        model.addAttribute("allYear",walletService.allYear());
         return "financeDetails";
     }
 

@@ -95,5 +95,36 @@ public class WalletService {
         return lastFiveOperations;
     }
 
+    public List<Finance> firstQuarter(){
+        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 3,31,0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+
+    public List<Finance> secondQuarter(){
+        LocalDateTime date1 =LocalDateTime.of(2022, 4,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 6,30,0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+
+    public List<Finance> thirdQuarter(){
+        LocalDateTime date1 =LocalDateTime.of(2022, 7,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 9,30,0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+
+    public List<Finance> fourthQuarter(){
+        LocalDateTime date1 =LocalDateTime.of(2022, 10,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 12,31,0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+
+    public List<Finance> allYear(){
+        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 12,31,0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+
+
 
 }
