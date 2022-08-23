@@ -1,9 +1,7 @@
 package com.eronryabets.first_pet.service;
 
-import com.eronryabets.first_pet.entity.CurrencyWallet;
-import com.eronryabets.first_pet.entity.User;
-import com.eronryabets.first_pet.entity.Wallet;
-import com.eronryabets.first_pet.entity.WalletType;
+import com.eronryabets.first_pet.entity.*;
+import com.eronryabets.first_pet.repository.FinanceRepository;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,9 @@ import java.util.Optional;
 public class WalletService {
     @Autowired
     private WalletRepository walletRepository;
+
+    @Autowired
+    private FinanceRepository financeRepository;
 
     public List<Wallet> findAll(){
         return walletRepository.findAll();
@@ -41,7 +42,13 @@ public class WalletService {
     public void walletSave(Wallet wallet, String walletName, double balance, double cashAdd){
         wallet.setWalletName(walletName);
         wallet.setBalance(balance+cashAdd);
+        if(cashAdd > 0){
+            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.INCOME));
+        }else {
+            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.SPENDING));
+        }
         walletRepository.save(wallet);
+
     }
 
     public void walletUserCashTransfer(Wallet wallet,  double amount, int anotherWalletId){
