@@ -123,6 +123,15 @@ public class WalletController {
         return "redirect:/wallets/profile/{wallet}";
     }
 
+    @GetMapping("/profile/{wallet}/financeDetails")
+    public String financeDetails(@PathVariable("wallet") Wallet wallet,
+                                 Model model){
+        model.addAttribute("wallet",wallet);
+        model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
+        return "financeDetails";
+    }
+
+
 
 }
 

@@ -50,9 +50,9 @@ public class WalletService {
         wallet.setWalletName(walletName);
         wallet.setBalance(balance+cashAdd);
         if(cashAdd > 0){
-            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.INCOME));
+            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.INCOME, wallet.getBalance()));
         }else {
-            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.SPENDING));
+            financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.SPENDING,wallet.getBalance()));
         }
         walletRepository.save(wallet);
 
@@ -66,7 +66,9 @@ public class WalletService {
             anotherWallet.setBalance(anotherWallet.getBalance()+amount);
 
             walletRepository.save(wallet);
+            financeRepository.save(new Finance(wallet,-amount,WalletOperation.SPENDING,wallet.getBalance()));
             walletRepository.save(anotherWallet);
+            financeRepository.save(new Finance(anotherWallet,amount,WalletOperation.INCOME, anotherWallet.getBalance()));
         }
 
     }

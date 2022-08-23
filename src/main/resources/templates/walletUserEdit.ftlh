@@ -192,6 +192,7 @@
                             <th scope="col">Finance Date</th>
                             <th scope="col">Amount money</th>
                             <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -201,7 +202,7 @@
                                 <td>${finance.stringDate}</td>
                                 <td>${finance.amountMoney}</td>
                                 <td>${finance.operation}</td>
-
+                                <td>${finance.balance}</td>
                             </tr>
                         <#else >
                             No finance operations
@@ -209,6 +210,7 @@
                         </tbody>
                     </table>
                     <#--    CODE END -->
+                    <a href="/wallets/profile/${wallet.id}/financeDetails" class="btn btn-info btn-xs">More statistics</a>
                 </div>
             </div>
         </div>

@@ -28,13 +28,17 @@ public class Finance {
     @Enumerated(EnumType.STRING)
     private WalletOperation operation;
 
+    @Column(name = "balance")
+    private double balance;
+
     public Finance() {
     }
 
-    public Finance(Wallet wallet, double amountMoney, WalletOperation operation) {
+    public Finance(Wallet wallet, double amountMoney, WalletOperation operation, double balance) {
         this.wallet = wallet;
         this.amountMoney = amountMoney;
         this.operation = operation;
+        this.balance = balance;
         LocalDateTime timeNow = LocalDateTime.now();
         this.date = timeNow;
         this.stringDate = formatter(timeNow);
@@ -82,6 +86,14 @@ public class Finance {
 
     public Integer getId() {
         return id;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public static String formatter(LocalDateTime date){
