@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
 @Controller
 @RequestMapping("/wallets")
 public class WalletController {
@@ -128,6 +131,11 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
+
+        //NEW
+        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(2022, 3,31,0,0);
+        model.addAttribute("financeDate",walletService.findByDateBetween(date1,date2));
         return "financeDetails";
     }
 

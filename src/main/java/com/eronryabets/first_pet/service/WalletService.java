@@ -6,6 +6,7 @@ import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -20,6 +21,7 @@ public class WalletService {
         return walletRepository.findAll();
     }
 
+
     public List<Wallet> findAllByUser(User user){
         return  walletRepository.findAllByUser(user);
     }
@@ -30,6 +32,10 @@ public class WalletService {
 
     public List<Finance> findFinanceByWallet(Wallet wallet){
         return financeRepository.findByWallet(wallet);
+    }
+
+    public List<Finance> findByDateBetween(LocalDateTime startDate, LocalDateTime endDate){
+        return financeRepository.findByDateBetween(startDate,endDate);
     }
 
     public void addWallet(User user, String walletName, double balance,
