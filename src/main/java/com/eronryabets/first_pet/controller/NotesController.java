@@ -59,5 +59,21 @@ public class NotesController {
         return "redirect:/notes";
     }
 
+    @GetMapping("/edit/{notes}")
+    public String notesEdit(@PathVariable Notes notes) {
+        return "notesEdit";
+    }
+
+    @PostMapping("/edit/{notes}")
+    public String notesSave(
+            @AuthenticationPrincipal User user,
+            @PathVariable Notes notes,
+            @RequestParam String text,
+            @RequestParam String tag
+    ) {
+        notesService.add(user, text, tag);
+        return "redirect:/notes";
+    }
+
 
 }
