@@ -77,7 +77,7 @@ public class WalletController {
             @PathVariable("wallet") Wallet wallet,
             Model model){
         model.addAttribute("wallet",wallet);
-        model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
+        model.addAttribute("finance",walletService.findLastFiveFinance(wallet));
         return "walletUserEdit";
     }
 

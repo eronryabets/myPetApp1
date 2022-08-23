@@ -6,8 +6,7 @@ import com.eronryabets.first_pet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class WalletService {
@@ -74,6 +73,18 @@ public class WalletService {
 
     public void walletDelete(Wallet wallet){
         walletRepository.delete(wallet);
+    }
+
+    public List<Finance> findLastFiveFinance(Wallet wallet){
+        List<Finance> financeAll = financeRepository.findByWallet(wallet);
+        List<Finance> lastFiveOperations = new ArrayList<>();
+        ListIterator<Finance> listIterator = financeAll.listIterator(financeAll.size());
+        int count = 0;
+        while (listIterator.hasPrevious() && count < 5){
+            count++;
+            lastFiveOperations.add(listIterator.previous());
+        }
+        return lastFiveOperations;
     }
 
 
