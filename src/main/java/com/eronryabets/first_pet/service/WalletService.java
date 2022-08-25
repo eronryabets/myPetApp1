@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.time.*;
 import java.util.*;
 
@@ -24,7 +22,6 @@ public class WalletService {
     @Autowired
     private FinanceRepository financeRepository;
 
-    int currentMonth = MyDate.getCurrentMonth();
     int currentYear = MyDate.getCurrentYear();
 
     public List<Wallet> findAll(){
@@ -148,6 +145,25 @@ public class WalletService {
         LocalDateTime date2 =LocalDateTime.of(currentYear, 12,maxDayInMonth(currentYear,6),0,0);
         return financeRepository.findByWalletAndDateBetween(wallet,date1,date2);
     }
+
+    public ArrayList<Double> minMaxLastWeek(Wallet wallet){
+        List<Finance> tempList = findFinanceByWalletLastWeek(wallet);
+        double max = 0;
+        double min = 0;
+        for(Finance f : tempList){
+            if(f.getAmountMoney() > 0){
+                max += f.getAmountMoney();
+            } else {
+                min -= f.getAmountMoney();
+            }
+        }
+        ArrayList<Double> minMax = new ArrayList<>();
+        minMax.add(max);
+        minMax.add(min);
+        return minMax;
+    }
+
+
 
 
 

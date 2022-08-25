@@ -3,10 +3,11 @@ package com.eronryabets.first_pet.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Entity
 @Table(name="wallet_finance")
-public class Finance {
+public class Finance implements Comparable<Finance> {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -103,4 +104,11 @@ public class Finance {
         String time = date.format(formatter);
         return time;
     }
+
+    @Override
+    public int compareTo(Finance otherFinance){
+        return Double.compare(this.amountMoney, otherFinance.amountMoney);
+    }
+
+
 }

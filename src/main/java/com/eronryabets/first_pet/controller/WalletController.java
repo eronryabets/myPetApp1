@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.Month;
 
 @Controller
 @RequestMapping("/wallets")
@@ -132,16 +129,26 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
-
         model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
+        model.addAttribute("incomeLastWeek",walletService.minMaxLastWeek(wallet).get(0));
+        model.addAttribute("spendingLastWeek",walletService.minMaxLastWeek(wallet).get(1));
+
         model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
+
         model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
+
         model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
+
         model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
+
         model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+
         model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+
         model.addAttribute("secondQuarter",walletService.secondQuarter(wallet));
+
         model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet));
+
         model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet));
 
 

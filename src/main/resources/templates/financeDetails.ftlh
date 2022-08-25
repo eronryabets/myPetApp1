@@ -41,8 +41,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-                    Доходы :
-                    Расходы :
+                    Доходы : ${incomeLastWeek}
+                    Расходы : ${spendingLastWeek}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -69,7 +69,6 @@
                         </tbody>
                     </table>
                     <#--      END CODE         -->
-
                 </div>
             </div>
         </div>
