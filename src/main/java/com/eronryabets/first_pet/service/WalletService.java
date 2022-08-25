@@ -3,11 +3,16 @@ package com.eronryabets.first_pet.service;
 import com.eronryabets.first_pet.entity.*;
 import com.eronryabets.first_pet.repository.FinanceRepository;
 import com.eronryabets.first_pet.repository.WalletRepository;
+import com.eronryabets.first_pet.utility.MyDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static com.eronryabets.first_pet.utility.MyDate.maxDayInMonth;
 
 @Service
 public class WalletService {
@@ -16,6 +21,9 @@ public class WalletService {
 
     @Autowired
     private FinanceRepository financeRepository;
+
+    int currentMonth = MyDate.getCurrentMonth();
+    int currentYear = MyDate.getCurrentYear();
 
     public List<Wallet> findAll(){
         return walletRepository.findAll();
@@ -95,35 +103,79 @@ public class WalletService {
         return lastFiveOperations;
     }
 
-    public List<Finance> firstQuarter(){
-        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 3,31,0,0);
-        return financeRepository.findByDateBetween(date1,date2);
-    }
+
+//    public List<Finance> firstQuarter(){
+//        LocalDateTime date1 =LocalDateTime.of(currentYear, 1,1,0,0,0);
+//        LocalDateTime date2 =LocalDateTime.of(currentYear, 3, maxDayInMonth(currentYear,3),0,0);
+//        return financeRepository.findByDateBetween(date1,date2);
+//    }
 
     public List<Finance> secondQuarter(){
-        LocalDateTime date1 =LocalDateTime.of(2022, 4,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 6,30,0,0);
+        LocalDateTime date1 =LocalDateTime.of(currentYear, 4,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(currentYear, 6, maxDayInMonth(currentYear,6),0,0);
         return financeRepository.findByDateBetween(date1,date2);
     }
 
     public List<Finance> thirdQuarter(){
-        LocalDateTime date1 =LocalDateTime.of(2022, 7,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 9,30,0,0);
+        LocalDateTime date1 =LocalDateTime.of(currentYear, 7,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(currentYear, 9, maxDayInMonth(currentYear,9),0,0);
         return financeRepository.findByDateBetween(date1,date2);
     }
 
     public List<Finance> fourthQuarter(){
-        LocalDateTime date1 =LocalDateTime.of(2022, 10,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 12,31,0,0);
+        LocalDateTime date1 =LocalDateTime.of(currentYear, 10,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(currentYear, 12, maxDayInMonth(currentYear,12),0,0);
+        return financeRepository.findByDateBetween(date1,date2);
+    }
+//==========================================
+    public List<Finance> findFinanceByWalletLastWeek(Wallet wallet){
+        return financeRepository.findFinanceByWalletLastWeek(wallet.getId());
+    }
+
+    public List<Finance> findFinanceByWalletCurrentWeek(Wallet wallet){
+        return financeRepository.findFinanceByWalletCurrentWeek(wallet.getId());
+    }
+
+    public List<Finance> findFinanceByWalletLastMonth(Wallet wallet){
+        return financeRepository.findFinanceByWalletLastMonth(wallet.getId());
+    }
+
+    public List<Finance> findFinanceByWalletCurrentMonth(Wallet wallet){
+        return financeRepository.findFinanceByWalletCurrentMonth(wallet.getId());
+    }
+
+    public List<Finance> findFinanceByWalletCurrentYear(Wallet wallet){
+        return financeRepository.findFinanceByWalletCurrentYear(wallet.getId());
+    }
+
+    //TEST
+//    public List<Finance> firstQuarter(Wallet wallet) {
+//        Date date1 = null;
+//        try {
+//            date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2022-01-01");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Date date2 = null;
+//        try {
+//            date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-31");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return financeRepository.findFinanceByWalletDateBetween(wallet.getId(),date1,date2);
+//    }
+
+    //====================================
+    public List<Finance> lastMonth(){
+        LocalDateTime date1 =LocalDateTime.of(currentYear, currentMonth,1,0,0,0);
+        LocalDateTime date2 =LocalDateTime.of(currentYear, currentMonth,maxDayInMonth(currentYear,12),0,0);
         return financeRepository.findByDateBetween(date1,date2);
     }
 
-    public List<Finance> allYear(){
-        LocalDateTime date1 =LocalDateTime.of(2022, 1,1,0,0,0);
-        LocalDateTime date2 =LocalDateTime.of(2022, 12,31,0,0);
-        return financeRepository.findByDateBetween(date1,date2);
-    }
+
+
+
+
 
 
 

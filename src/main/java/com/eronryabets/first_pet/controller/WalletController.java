@@ -131,11 +131,34 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
-        model.addAttribute("firstQuarter",walletService.firstQuarter());
-        model.addAttribute("secondQuarter",walletService.secondQuarter());
-        model.addAttribute("thirdQuarter",walletService.thirdQuarter());
-        model.addAttribute("fourthQuarter",walletService.fourthQuarter());
-        model.addAttribute("allYear",walletService.allYear());
+        //
+        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
+
+        model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
+
+        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
+
+        model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
+
+        model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
+
+//        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+
+
+
+
+
+//        model.addAttribute("firstQuarter",walletService.firstQuarter());
+//        model.addAttribute("secondQuarter",walletService.secondQuarter());
+//        model.addAttribute("thirdQuarter",walletService.thirdQuarter());
+//        model.addAttribute("fourthQuarter",walletService.fourthQuarter());
+//        model.addAttribute("allYear",walletService.findFinanceByWalletCurrentYear(wallet)); //+
+////        model.addAttribute("currentWeek",walletService.currentWeek());
+//        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet)); //+
+//        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));//+
+        //======================================
+
+
         return "financeDetails";
     }
 

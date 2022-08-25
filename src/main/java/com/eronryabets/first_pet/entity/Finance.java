@@ -96,6 +96,8 @@ public class Finance {
         this.balance = balance;
     }
 
+
+
     public static String formatter(LocalDateTime date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss");
         String time = date.format(formatter);
