@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -131,32 +132,18 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
-        //
+
         model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
-
         model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
-
         model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
-
         model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
-
         model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
+        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+        model.addAttribute("secondQuarter",walletService.secondQuarter(wallet));
+        model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet));
+        model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet));
 
-//        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
-
-
-
-
-
-//        model.addAttribute("firstQuarter",walletService.firstQuarter());
-//        model.addAttribute("secondQuarter",walletService.secondQuarter());
-//        model.addAttribute("thirdQuarter",walletService.thirdQuarter());
-//        model.addAttribute("fourthQuarter",walletService.fourthQuarter());
-//        model.addAttribute("allYear",walletService.findFinanceByWalletCurrentYear(wallet)); //+
-////        model.addAttribute("currentWeek",walletService.currentWeek());
-//        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet)); //+
-//        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));//+
-        //======================================
 
 
         return "financeDetails";

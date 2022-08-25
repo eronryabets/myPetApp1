@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface FinanceRepository extends CrudRepository<Finance, Integer> {
@@ -40,14 +40,30 @@ public interface FinanceRepository extends CrudRepository<Finance, Integer> {
             "AND YEAR( date) = YEAR(CURRENT_DATE())")
     List<Finance> findFinanceByWalletCurrentYear(@Param("walletId") long walletId);
 
-//    @Query("FROM Finance WHERE wallet.id =:walletId " +
-//            "AND date BETWEEN ='2022-01-01' " +
-//            "AND ='2022-03-31'")
-//    List<Finance> findFinanceByWalletDateBetween(@Param("walletId") long walletId,
-//                                                 @Param("startDate") Date startDate,
-//                                                 @Param("endDate")Date endDate);
-
+    List<Finance> findByWalletAndDateBetween(Wallet wallet,LocalDateTime startDate, LocalDateTime endDate);
 
 
 
 }
+
+/*
+  @Query("FROM Finance WHERE wallet.id =:walletId " +
+            "AND date >= date('=:startDate')" +
+            "AND date < date('=:endDate')")
+    List<Finance> findFinanceByWalletDateBetween(@Param("walletId") long walletId,
+                                                 @Param("startDate") Date startDate,
+                                                 @Param("endDate")Date endDate);
+=============================================================================
+@Query("FROM Finance WHERE wallet.id =:walletId " +
+            "AND date >= date('2022-01-01')" +
+            "AND date < date('2022-03-31')")
+    List<Finance> findFinanceByWalletDateBetween(@Param("walletId") long walletId);
+    ========================================================================
+
+     @Query("FROM Finance WHERE wallet.id =:walletId " +
+            "AND date >= date('2022-01-21 00:00:00.000000')" +
+            "AND date < date('2022-03-31 00:00:00.000000')")
+    List<Finance> findFinanceByWalletDateBetween(@Param("walletId") long walletId);
+
+
+ */

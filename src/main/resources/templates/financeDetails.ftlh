@@ -41,6 +41,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы :
+                    Расходы :
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -219,31 +221,31 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-<#--                    <table class="table table-sm">-->
-<#--                        <thead>-->
-<#--                        <tr>-->
-<#--                            <th scope="col">ID</th>-->
-<#--                            <th scope="col">Finance Date</th>-->
-<#--                            <th scope="col">Amount money</th>-->
-<#--                            <th scope="col">Operation</th>-->
-<#--                            <th scope="col">Balance</th>-->
-<#--                        </tr>-->
-<#--                        </thead>-->
-<#--                        <tbody>-->
-<#--                        <#list firstQuarter?sortBy("date")?reverse as finance>-->
-<#--                            <tr>-->
-<#--                                <td>${finance.id}</td>-->
-<#--                                &lt;#&ndash;                <td>${finance.stringDate}</td>&ndash;&gt;-->
-<#--                                <td>${finance.date}</td>-->
-<#--                                <td>${finance.amountMoney}</td>-->
-<#--                                <td>${finance.operation}</td>-->
-<#--                                <td>${finance.balance}</td>-->
-<#--                            </tr>-->
-<#--                        <#else >-->
-<#--                            No finance operations-->
-<#--                        </#list>-->
-<#--                        </tbody>-->
-<#--                    </table>-->
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list firstQuarter?sortBy("date") as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <#--                <td>${finance.stringDate}</td>-->
+                                <td>${finance.date}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+                                <td>${finance.balance}</td>
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
                     <#--      END CODE         -->
 
                 </div>
@@ -264,7 +266,31 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list secondQuarter?sortBy("date") as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <#--                <td>${finance.stringDate}</td>-->
+                                <td>${finance.date}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+                                <td>${finance.balance}</td>
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
                     <#--      END CODE         -->
 
                 </div>
@@ -285,7 +311,31 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list thirdQuarter?sortBy("date") as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <#--                <td>${finance.stringDate}</td>-->
+                                <td>${finance.date}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+                                <td>${finance.balance}</td>
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
                     <#--      END CODE         -->
 
                 </div>
@@ -306,7 +356,31 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list fourthQuarter?sortBy("date") as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <#--                <td>${finance.stringDate}</td>-->
+                                <td>${finance.date}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+                                <td>${finance.balance}</td>
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
                     <#--      END CODE         -->
 
                 </div>
