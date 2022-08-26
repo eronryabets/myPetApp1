@@ -87,6 +87,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeCurrentWeek}
+                    Расходы : ${spendingCurrentWeek}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -132,6 +134,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+<#--                    Доходы : ${incomeLastMonth}-->
+<#--                    Расходы : ${spendingLastMonth}-->
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -176,6 +180,8 @@
             <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
                 <div class="card-body">
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeCurrentMonth}
+                    Расходы : ${spendingCurrentMonth}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -220,6 +226,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeFirstQuarter}
+                    Расходы : ${spendingFirstQuarter}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -265,6 +273,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeSecondQuarter}
+                    Расходы : ${spendingSecondQuarter}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -310,6 +320,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeThirdQuarter}
+                    Расходы : ${spendingThirdQuarter}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -355,6 +367,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeFourthQuarter}
+                    Расходы : ${spendingFourthQuarter}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -400,6 +414,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
+                    Доходы : ${incomeCurrentYear}
+                    Расходы : ${spendingCurrentYear}
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -431,6 +447,53 @@
             </div>
         </div>
         <#--    TEHTH FORM END -->
+
+
+        <#--    TEST FORM START -->
+        <div class="card">
+            <div class="card-header" id="heading11">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+                        queryTEST :
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#accordion">
+                <div class="card-body">
+
+                    <#--    PUT YOUR CODE -->
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Finance Date</th>
+                            <th scope="col">Amount money</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list queryTEST?sortBy("date")?reverse as finance>
+                            <tr>
+                                <td>${finance.id}</td>
+                                <#--                <td>${finance.stringDate}</td>-->
+                                <td>${finance.date}</td>
+                                <td>${finance.amountMoney}</td>
+                                <td>${finance.operation}</td>
+                                <td>${finance.balance}</td>
+                            </tr>
+                        <#else >
+                            No finance operations
+                        </#list>
+                        </tbody>
+                    </table>
+                    <#--      END CODE         -->
+
+                </div>
+            </div>
+        </div>
+        <#--    TEST FORM END -->
 
     </div>
 

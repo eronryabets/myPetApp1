@@ -42,4 +42,9 @@ public interface FinanceRepository extends CrudRepository<Finance, Integer> {
 
     List<Finance> findByWalletAndDateBetween(Wallet wallet,LocalDateTime startDate, LocalDateTime endDate);
 
+    @Query("FROM Finance WHERE wallet.id =:walletId " +
+            "AND date > :startDate")
+    List<Finance> findFinanceTEST(@Param("walletId") long walletId,
+                                          @Param("startDate") LocalDateTime startDate);
+
 }

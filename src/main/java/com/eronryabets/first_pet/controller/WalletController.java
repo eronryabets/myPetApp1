@@ -129,29 +129,65 @@ public class WalletController {
                                  Model model){
         model.addAttribute("wallet",wallet);
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
+
         model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
-        model.addAttribute("incomeLastWeek",walletService.minMaxLastWeek(wallet).get(0));
-        model.addAttribute("spendingLastWeek",walletService.minMaxLastWeek(wallet).get(1));
+        model.addAttribute("incomeLastWeek",walletService.minMaxValue(walletService.
+                findFinanceByWalletLastWeek(wallet)).get(0));
+        model.addAttribute("spendingLastWeek",walletService.minMaxValue(walletService.
+                findFinanceByWalletLastWeek(wallet)).get(1));
 
         model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
+        model.addAttribute("incomeCurrentWeek",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentWeek(wallet)).get(0));
+        model.addAttribute("spendingCurrentWeek",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentWeek(wallet)).get(1));
 
         model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
+        model.addAttribute("incomeLastMonth",walletService.minMaxValue(walletService.
+                findFinanceByWalletLastMonth(wallet)).get(0));
+        model.addAttribute("spendingLastMonthMonth",walletService.minMaxValue(walletService.
+                findFinanceByWalletLastMonth(wallet)).get(1));
 
         model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
+        model.addAttribute("incomeCurrentMonth",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentMonth(wallet)).get(0));
+        model.addAttribute("spendingCurrentMonth",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentMonth(wallet)).get(1));
 
         model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
+        model.addAttribute("incomeCurrentYear",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentYear(wallet)).get(0));
+        model.addAttribute("spendingCurrentYear",walletService.minMaxValue(walletService.
+                findFinanceByWalletCurrentYear(wallet)).get(1));
 
         model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
+        model.addAttribute("incomeFirstQuarter",walletService.minMaxValue(walletService.
+                firstQuarter(wallet)).get(0));
+        model.addAttribute("spendingFirstQuarter",walletService.minMaxValue(walletService.
+                firstQuarter(wallet)).get(1));
 
-        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
 
         model.addAttribute("secondQuarter",walletService.secondQuarter(wallet));
+        model.addAttribute("incomeSecondQuarter",walletService.minMaxValue(walletService.
+                secondQuarter(wallet)).get(0));
+        model.addAttribute("spendingSecondQuarter",walletService.minMaxValue(walletService.
+                secondQuarter(wallet)).get(1));
 
         model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet));
+        model.addAttribute("incomeThirdQuarter",walletService.minMaxValue(walletService.
+                thirdQuarter(wallet)).get(0));
+        model.addAttribute("spendingThirdQuarter",walletService.minMaxValue(walletService.
+                thirdQuarter(wallet)).get(1));
+
 
         model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet));
+        model.addAttribute("incomeFourthQuarter",walletService.minMaxValue(walletService.
+                fourthQuarter(wallet)).get(0));
+        model.addAttribute("spendingFourthQuarter",walletService.minMaxValue(walletService.
+                fourthQuarter(wallet)).get(1));
 
-
+        //TEST
+        model.addAttribute("queryTEST",walletService.queryTEST(wallet));
 
         return "financeDetails";
     }
