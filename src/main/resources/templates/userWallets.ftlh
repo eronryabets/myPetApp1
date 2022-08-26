@@ -62,7 +62,7 @@
 
     <br><br>
 
-    <table>
+    <table class="table table-sm">
         <thead>
         <tr>
             <th>id</th>
@@ -74,7 +74,7 @@
         </tr>
         </thead>
         <tbody>
-        <#list wallets as wallet>
+        <#list wallets?sortBy("type")?reverse as wallet>
             <tr>
                 <td>${wallet.id}</td>
                 <td>${wallet.walletName}</td>
@@ -83,7 +83,15 @@
                 <td>${wallet.type}</td>
 
                 <td><a href="/wallets/profile/${wallet.id}" class="btn btn-dark">Management</a></td>
+                <td><a href="/wallets/profile/${wallet.id}/financeSelectDate" class="btn btn-info">Finance stat</a></td>
                 <#--                <td><a href="/wallets/profile/${wallet.id}/delete" class="btn btn-danger">delete</a></td>-->
+                <#assign type = "${wallet.type}" >
+                <#if type == "DEBIT">
+                    <td><a href="/wallets/profile/${wallet.id}/walletDebitStat" class="btn btn-success">Debit stat</a></td>
+                </#if>
+                <#if type == "CREDIT">
+                    <td><a href="/wallets/profile/${wallet.id}/walletCreditStat" class="btn btn-warning">Credit stat</a></td>
+                </#if>
             </tr>
         <#else >
             No wallets

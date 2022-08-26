@@ -33,8 +33,8 @@ public class WalletController {
     @GetMapping("{wallet}")
     public String walletEditForm(
             @PathVariable("wallet") Wallet wallet,
-            Model model){
-        model.addAttribute("wallet",wallet);
+            Model model) {
+        model.addAttribute("wallet", wallet);
         return "walletEdit";
     }
 
@@ -44,7 +44,7 @@ public class WalletController {
             @RequestParam("walletId") Wallet wallet,
             @RequestParam("walletName") String walletName,
             @RequestParam("balance") double balance
-    ){
+    ) {
 
         walletService.walletSave(wallet, walletName, balance);
         return "redirect:/wallets";
@@ -52,8 +52,8 @@ public class WalletController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "{wallet}/delete",
-            method={RequestMethod.DELETE, RequestMethod.GET})
-    public String walletDelete(@PathVariable("wallet") Wallet wallet){
+            method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String walletDelete(@PathVariable("wallet") Wallet wallet) {
         walletService.walletDelete(wallet);
         return "redirect:/wallets";
     }
@@ -72,7 +72,7 @@ public class WalletController {
             @RequestParam("balance") double balance,
             @RequestParam("walletCurrency") String walletCurrency,
             @RequestParam("walletType") String walletType
-    ){
+    ) {
         walletService.addWallet(user, walletName, balance, walletCurrency, walletType);
         return "redirect:/wallets/userWallets";
     }
@@ -80,18 +80,18 @@ public class WalletController {
     @GetMapping("/profile/{wallet}")
     public String walletUserEdit(
             @PathVariable("wallet") Wallet wallet,
-            Model model){
-        model.addAttribute("wallet",wallet)
-        .addAttribute("finance",walletService.findLastFiveFinance(wallet));
+            Model model) {
+        model.addAttribute("wallet", wallet)
+                .addAttribute("finance", walletService.findLastFiveFinance(wallet));
         return "walletUserEdit";
     }
 
-    @PostMapping(value ="/profile/{wallet}")
+    @PostMapping(value = "/profile/{wallet}")
     public String walletUserSave(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("walletName") String walletName,
             @RequestParam("balance") double balance
-    ){
+    ) {
 
         walletService.walletSave(wallet, walletName, balance);
         return "redirect:/wallets/profile/{wallet}";
@@ -103,7 +103,7 @@ public class WalletController {
             @RequestParam("walletName") String walletName,
             @RequestParam("balance") double balance,
             @RequestParam("cashAdd") double cashAdd
-    ){
+    ) {
 
         walletService.walletSave(wallet, walletName, balance, cashAdd);
         return "redirect:/wallets/profile/{wallet}";
@@ -111,8 +111,8 @@ public class WalletController {
 
 
     @RequestMapping(value = "/profile/{wallet}/delete",
-            method={RequestMethod.DELETE, RequestMethod.GET})
-    public String walletUserDelete(@PathVariable("wallet") Wallet wallet){
+            method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String walletUserDelete(@PathVariable("wallet") Wallet wallet) {
         walletService.walletDelete(wallet);
         return "redirect:/wallets/userWallets";
     }
@@ -122,7 +122,7 @@ public class WalletController {
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("amount") double amount,
             @RequestParam("anotherWalletId") int anotherWalletId
-    ){
+    ) {
 
         walletService.walletUserCashTransfer(wallet, amount, anotherWalletId);
         return "redirect:/wallets/profile/{wallet}";
@@ -130,68 +130,68 @@ public class WalletController {
 
     @GetMapping("/profile/{wallet}/financeDetails")
     public String financeDetails(@PathVariable("wallet") Wallet wallet,
-                                 Model model){
-        model.addAttribute("wallet",wallet)
-        .addAttribute("finance",walletService.findFinanceByWallet(wallet));
+                                 Model model) {
+        model.addAttribute("wallet", wallet)
+                .addAttribute("finance", walletService.findFinanceByWallet(wallet));
 
-        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet))
-        .addAttribute("incomeLastWeek",walletService.incomeSpendingValues(walletService
-                .findFinanceByWalletLastWeek(wallet)).get(0))
-        .addAttribute("spendingLastWeek",walletService.incomeSpendingValues(walletService
-                .findFinanceByWalletLastWeek(wallet)).get(1));
+        model.addAttribute("lastWeek", walletService.findFinanceByWalletLastWeek(wallet))
+                .addAttribute("incomeLastWeek", walletService.incomeSpendingValues(walletService
+                        .findFinanceByWalletLastWeek(wallet)).get(0))
+                .addAttribute("spendingLastWeek", walletService.incomeSpendingValues(walletService
+                        .findFinanceByWalletLastWeek(wallet)).get(1));
 
-        model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet))
-        .addAttribute("incomeCurrentWeek",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentWeek(wallet)).get(0))
-        .addAttribute("spendingCurrentWeek",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentWeek(wallet)).get(1));
+        model.addAttribute("currentWeek", walletService.findFinanceByWalletCurrentWeek(wallet))
+                .addAttribute("incomeCurrentWeek", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentWeek(wallet)).get(0))
+                .addAttribute("spendingCurrentWeek", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentWeek(wallet)).get(1));
 
-        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet))
-        .addAttribute("incomeLastMonth",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletLastMonth(wallet)).get(0))
-        .addAttribute("spendingLastMonthMonth",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletLastMonth(wallet)).get(1));
+        model.addAttribute("lastMonth", walletService.findFinanceByWalletLastMonth(wallet))
+                .addAttribute("incomeLastMonth", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletLastMonth(wallet)).get(0))
+                .addAttribute("spendingLastMonthMonth", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletLastMonth(wallet)).get(1));
 
-        model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet))
-        .addAttribute("incomeCurrentMonth",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentMonth(wallet)).get(0))
-        .addAttribute("spendingCurrentMonth",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentMonth(wallet)).get(1));
+        model.addAttribute("currentMonth", walletService.findFinanceByWalletCurrentMonth(wallet))
+                .addAttribute("incomeCurrentMonth", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentMonth(wallet)).get(0))
+                .addAttribute("spendingCurrentMonth", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentMonth(wallet)).get(1));
 
-        model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet))
-        .addAttribute("incomeCurrentYear",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentYear(wallet)).get(0))
-      .addAttribute("spendingCurrentYear",walletService
-                .incomeSpendingValues(walletService.findFinanceByWalletCurrentYear(wallet)).get(1));
+        model.addAttribute("currentYear", walletService.findFinanceByWalletCurrentYear(wallet))
+                .addAttribute("incomeCurrentYear", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentYear(wallet)).get(0))
+                .addAttribute("spendingCurrentYear", walletService
+                        .incomeSpendingValues(walletService.findFinanceByWalletCurrentYear(wallet)).get(1));
 
-        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet))
-        .addAttribute("incomeFirstQuarter",walletService
-                .incomeSpendingValues(walletService.firstQuarter(wallet)).get(0))
-        .addAttribute("spendingFirstQuarter",walletService
-                .incomeSpendingValues(walletService.firstQuarter(wallet)).get(1));
-
-
-        model.addAttribute("secondQuarter",walletService.secondQuarter(wallet))
-        .addAttribute("incomeSecondQuarter",walletService
-                .incomeSpendingValues(walletService.secondQuarter(wallet)).get(0))
-        .addAttribute("spendingSecondQuarter",walletService
-                .incomeSpendingValues(walletService.secondQuarter(wallet)).get(1));
-
-        model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet))
-        .addAttribute("incomeThirdQuarter",walletService
-                .incomeSpendingValues(walletService.thirdQuarter(wallet)).get(0))
-        .addAttribute("spendingThirdQuarter",walletService
-                .incomeSpendingValues(walletService.thirdQuarter(wallet)).get(1));
+        model.addAttribute("firstQuarter", walletService.firstQuarter(wallet))
+                .addAttribute("incomeFirstQuarter", walletService
+                        .incomeSpendingValues(walletService.firstQuarter(wallet)).get(0))
+                .addAttribute("spendingFirstQuarter", walletService
+                        .incomeSpendingValues(walletService.firstQuarter(wallet)).get(1));
 
 
-        model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet))
-        .addAttribute("incomeFourthQuarter",walletService
-                .incomeSpendingValues(walletService.fourthQuarter(wallet)).get(0))
-        .addAttribute("spendingFourthQuarter",walletService
-                .incomeSpendingValues(walletService.fourthQuarter(wallet)).get(1));
+        model.addAttribute("secondQuarter", walletService.secondQuarter(wallet))
+                .addAttribute("incomeSecondQuarter", walletService
+                        .incomeSpendingValues(walletService.secondQuarter(wallet)).get(0))
+                .addAttribute("spendingSecondQuarter", walletService
+                        .incomeSpendingValues(walletService.secondQuarter(wallet)).get(1));
+
+        model.addAttribute("thirdQuarter", walletService.thirdQuarter(wallet))
+                .addAttribute("incomeThirdQuarter", walletService
+                        .incomeSpendingValues(walletService.thirdQuarter(wallet)).get(0))
+                .addAttribute("spendingThirdQuarter", walletService
+                        .incomeSpendingValues(walletService.thirdQuarter(wallet)).get(1));
+
+
+        model.addAttribute("fourthQuarter", walletService.fourthQuarter(wallet))
+                .addAttribute("incomeFourthQuarter", walletService
+                        .incomeSpendingValues(walletService.fourthQuarter(wallet)).get(0))
+                .addAttribute("spendingFourthQuarter", walletService
+                        .incomeSpendingValues(walletService.fourthQuarter(wallet)).get(1));
 
         //TEST
-        model.addAttribute("queryTEST",walletService.queryTEST(wallet));
+        model.addAttribute("queryTEST", walletService.queryTEST(wallet));
 
         return "financeDetails";
     }
@@ -199,46 +199,124 @@ public class WalletController {
     @GetMapping("/profile/{wallet}/financeSelectDate")
     public String selectDate(@PathVariable("wallet") Wallet wallet,
                              Model model,
-                             @RequestParam(required = false,value = "financeList") List<Finance> financeList,
-                             @RequestParam(required = false,value = "startDate") String startDate,
-                             @RequestParam(required = false,value = "endDate") String endDate,
-                             @RequestParam(required = false,defaultValue = "0.0",value = "income") double income,
-                             @RequestParam(required = false, defaultValue = "0.0",value = "spending") double spending
+                             @RequestParam(required = false, value = "financeList") List<Finance> financeList,
+                             @RequestParam(required = false, value = "startDate") String startDate,
+                             @RequestParam(required = false, value = "endDate") String endDate,
+                             @RequestParam(required = false, defaultValue = "0.0", value = "income") double income,
+                             @RequestParam(required = false, defaultValue = "0.0", value = "spending") double spending
 
-                             ){
-        model.addAttribute("financeList",financeList)
-                .addAttribute("startDate",startDate)
-                .addAttribute("endDate",endDate)
-                .addAttribute("income",income)
-                .addAttribute("spending",spending);
+    ) {
+        model.addAttribute("financeList", financeList)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate)
+                .addAttribute("income", income)
+                .addAttribute("spending", spending);
 
         return "financeSelectDate";
     }
 
 
-    @RequestMapping (path = "/profile/{wallet}/financeSelectDate",method = RequestMethod.POST)
+    @RequestMapping(path = "/profile/{wallet}/financeSelectDate", method = RequestMethod.POST)
     public String selectDatePost(@PathVariable("wallet") Wallet wallet,
-                                 Model model,
                                  @RequestParam("startDate") String startDate,
                                  @RequestParam("endDate") String endDate,
                                  RedirectAttributes redirectAttributes
-                                 ){
-        List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet,startDate,endDate);
+    ) {
+        List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet, startDate, endDate);
 
         double income = walletService.incomeSpendingValues(walletService
-                .findByWalletAndDateBetween(wallet,startDate,endDate)).get(0);
+                .findByWalletAndDateBetween(wallet, startDate, endDate)).get(0);
         double spending = walletService.incomeSpendingValues(walletService
-                .findByWalletAndDateBetween(wallet,startDate,endDate)).get(1);
+                .findByWalletAndDateBetween(wallet, startDate, endDate)).get(1);
 
-        redirectAttributes.addAttribute("financeList",financeList)
-                .addAttribute("startDate",startDate)
-                .addAttribute("endDate",endDate)
-                .addAttribute("income",income)
-                .addAttribute("spending",spending);
+        redirectAttributes.addAttribute("financeList", financeList)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate)
+                .addAttribute("income", income)
+                .addAttribute("spending", spending);
 
         return "redirect:/wallets/profile/{wallet}/financeSelectDate";
     }
 
+
+    //DEBIT========================================================================
+    @GetMapping("/profile/{wallet}/walletDebitStat")
+    public String walletDebitState(@PathVariable("wallet") Wallet wallet,
+                                   Model model,
+                                   @RequestParam(required = false, defaultValue = "0.0",
+                                           value = "amountWithPercentage") double amountWithPercentage,
+                                   @RequestParam(required = false, defaultValue = "0.0",
+                                           value = "percentage") double percentage,
+                                   @RequestParam(required = false, defaultValue = "0.0",
+                                           value = "increaseAmount") double increaseAmount,
+                                   @RequestParam(required = false, value = "startDate") String startDate,
+                                   @RequestParam(required = false, value = "endDate") String endDate
+    ) {
+
+        model.addAttribute("amountWithPercentage", amountWithPercentage)
+                .addAttribute("percentage", percentage)
+                .addAttribute("increaseAmount", increaseAmount)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate);
+
+        return "walletDebitStat";
+    }
+
+    @RequestMapping(path = "/profile/{wallet}/walletDebitStat", method = RequestMethod.POST)
+    public String walletDebitStatePost(@PathVariable("wallet") Wallet wallet,
+                                       @RequestParam("startDate") String startDate,
+                                       @RequestParam("endDate") String endDate,
+                                       RedirectAttributes redirectAttributes
+    ) {
+
+        double amountWithPercentage = walletService.walletDebitState(wallet, startDate, endDate).get(0);
+        double percentage = walletService.walletDebitState(wallet, startDate, endDate).get(1);
+        double increaseAmount = walletService.walletDebitState(wallet, startDate, endDate).get(2);
+
+        redirectAttributes.addAttribute("amountWithPercentage", amountWithPercentage)
+                .addAttribute("percentage", percentage)
+                .addAttribute("increaseAmount", increaseAmount)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate);
+
+        return "redirect:/wallets/profile/{wallet}/walletDebitStat";
+    }
+
+    //CREDIT=========================================================================
+    @GetMapping("/profile/{wallet}/walletCreditStat")
+    public String walletCreditState(@PathVariable("wallet") Wallet wallet,
+                                    Model model,
+                                    @RequestParam(required = false, value = "financeList") List<Finance> financeList,
+                                    @RequestParam(required = false, value = "startDate") String startDate,
+                                    @RequestParam(required = false, value = "endDate") String endDate,
+                                    @RequestParam(required = false, defaultValue = "0.0", value = "income") double income,
+                                    @RequestParam(required = false, defaultValue = "0.0", value = "spending") double spending
+
+    ) {
+//        model.addAttribute("financeList",financeList)
+//                .addAttribute("startDate",startDate)
+//                .addAttribute("endDate",endDate)
+//                .addAttribute("income",income)
+//                .addAttribute("spending",spending);
+
+        return "walletCreditStat";
+    }
+
+    @RequestMapping(path = "/profile/{wallet}/walletCreditStat", method = RequestMethod.POST)
+    public String walletCreditStatePost(@PathVariable("wallet") Wallet wallet,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate,
+                                        RedirectAttributes redirectAttributes
+    ) {
+        //List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet,startDate,endDate);
+
+
+//        redirectAttributes.addAttribute("financeList",financeList)
+//                .addAttribute("startDate",startDate);
+
+
+        return "redirect:/wallets/profile/{wallet}/walletCreditStat";
+    }
 
 
 }

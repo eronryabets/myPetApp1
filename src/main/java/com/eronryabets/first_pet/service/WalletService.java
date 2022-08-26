@@ -153,13 +153,11 @@ public class WalletService {
     }
 
     public List<Finance> findByWalletAndDateBetween(Wallet wallet,String startDate, String endDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localStartDate = LocalDate.parse(startDate, formatter);
-        LocalDate localEndDate = LocalDate.parse(endDate, formatter);
-        LocalDateTime localDateTimeStart = localStartDate.atTime(0, 0, 0, 0);
-        LocalDateTime localDateTimeEnd = localEndDate.atTime(0, 0, 0, 0);
+        LocalDateTime localDateTimeStart = myDateFormatter(startDate);
+        LocalDateTime localDateTimeEnd = myDateFormatter(endDate);
         return financeRepository.findByWalletAndDateBetween(wallet,localDateTimeStart,localDateTimeEnd);
     }
+
 
     public ArrayList<Double> incomeSpendingValues(List<Finance> list){
         double income = 0;
@@ -171,10 +169,41 @@ public class WalletService {
                 spending -= f.getAmountMoney();
             }
         }
-        ArrayList<Double> minMax = new ArrayList<>();
-        minMax.add(income);
-        minMax.add(spending);
-        return minMax;
+        ArrayList<Double> result = new ArrayList<>();
+        result.add(income);
+        result.add(spending);
+        return result;
+    }
+
+    public ArrayList<Double> walletDebitState (Wallet wallet,String startDate, String endDate){
+        //10% /364 day = 0.0275% by day
+        LocalDateTime startLocalDateTime = myDateFormatter(startDate);
+        LocalDateTime endLocalDateTime = myDateFormatter(endDate);
+        Duration duration = Duration.between(startLocalDateTime, endLocalDateTime);
+
+        double amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                (duration.toDays()*0.0275))/100);
+        double percentage = duration.toDays()*0.0275;
+        double increaseAmount = ((wallet.getBalance() * (duration.toDays()*0.0275))/100);
+
+        ArrayList<Double> result = new ArrayList<>();
+        result.add(amountWithPercentage);
+        result.add(percentage);
+        result.add(increaseAmount);
+
+        return result;
+    }
+
+    public double walletCreditState (){
+        double result = 0;
+        return result;
+    }
+
+    public LocalDateTime myDateFormatter(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalDateTime localDateTime = localDate.atTime(0, 0, 0, 0);
+        return localDateTime;
     }
 
 
