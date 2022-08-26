@@ -161,19 +161,19 @@ public class WalletService {
         return financeRepository.findByWalletAndDateBetween(wallet,localDateTimeStart,localDateTimeEnd);
     }
 
-    public ArrayList<Double> minMaxValue ( List<Finance> list){
-        double max = 0;
-        double min = 0;
+    public ArrayList<Double> incomeSpendingValues(List<Finance> list){
+        double income = 0;
+        double spending = 0;
         for(Finance f : list){
             if(f.getAmountMoney() > 0){
-                max += f.getAmountMoney();
+                income += f.getAmountMoney();
             } else {
-                min -= f.getAmountMoney();
+                spending -= f.getAmountMoney();
             }
         }
         ArrayList<Double> minMax = new ArrayList<>();
-        minMax.add(max);
-        minMax.add(min);
+        minMax.add(income);
+        minMax.add(spending);
         return minMax;
     }
 
