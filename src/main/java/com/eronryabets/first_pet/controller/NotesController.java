@@ -31,8 +31,8 @@ public class NotesController {
         } else {
             notes = notesService.findByAuthor(user);
         }
-        model.addAttribute("notes", notes);
-        model.addAttribute("filter", filter);
+        model.addAttribute("notes", notes)
+        .addAttribute("filter", filter);
 
         return "notesList";
     }

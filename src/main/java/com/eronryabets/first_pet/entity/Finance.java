@@ -3,7 +3,6 @@ package com.eronryabets.first_pet.entity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 @Entity
 @Table(name="wallet_finance")

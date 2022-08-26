@@ -81,8 +81,8 @@ public class WalletController {
     public String walletUserEdit(
             @PathVariable("wallet") Wallet wallet,
             Model model){
-        model.addAttribute("wallet",wallet);
-        model.addAttribute("finance",walletService.findLastFiveFinance(wallet));
+        model.addAttribute("wallet",wallet)
+        .addAttribute("finance",walletService.findLastFiveFinance(wallet));
         return "walletUserEdit";
     }
 
@@ -131,63 +131,63 @@ public class WalletController {
     @GetMapping("/profile/{wallet}/financeDetails")
     public String financeDetails(@PathVariable("wallet") Wallet wallet,
                                  Model model){
-        model.addAttribute("wallet",wallet);
-        model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
+        model.addAttribute("wallet",wallet)
+        .addAttribute("finance",walletService.findFinanceByWallet(wallet));
 
-        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
-        model.addAttribute("incomeLastWeek",walletService.minMaxValue(walletService
-                .findFinanceByWalletLastWeek(wallet)).get(0));
-        model.addAttribute("spendingLastWeek",walletService.minMaxValue(walletService
+        model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet))
+        .addAttribute("incomeLastWeek",walletService.minMaxValue(walletService
+                .findFinanceByWalletLastWeek(wallet)).get(0))
+        .addAttribute("spendingLastWeek",walletService.minMaxValue(walletService
                 .findFinanceByWalletLastWeek(wallet)).get(1));
 
-        model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
-        model.addAttribute("incomeCurrentWeek",walletService
-                .minMaxValue(walletService.findFinanceByWalletCurrentWeek(wallet)).get(0));
-        model.addAttribute("spendingCurrentWeek",walletService
+        model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet))
+        .addAttribute("incomeCurrentWeek",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentWeek(wallet)).get(0))
+        .addAttribute("spendingCurrentWeek",walletService
                 .minMaxValue(walletService.findFinanceByWalletCurrentWeek(wallet)).get(1));
 
-        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
-        model.addAttribute("incomeLastMonth",walletService
-                .minMaxValue(walletService.findFinanceByWalletLastMonth(wallet)).get(0));
-        model.addAttribute("spendingLastMonthMonth",walletService
+        model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet))
+        .addAttribute("incomeLastMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletLastMonth(wallet)).get(0))
+        .addAttribute("spendingLastMonthMonth",walletService
                 .minMaxValue(walletService.findFinanceByWalletLastMonth(wallet)).get(1));
 
-        model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
-        model.addAttribute("incomeCurrentMonth",walletService
-                .minMaxValue(walletService.findFinanceByWalletCurrentMonth(wallet)).get(0));
-        model.addAttribute("spendingCurrentMonth",walletService
+        model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet))
+        .addAttribute("incomeCurrentMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentMonth(wallet)).get(0))
+        .addAttribute("spendingCurrentMonth",walletService
                 .minMaxValue(walletService.findFinanceByWalletCurrentMonth(wallet)).get(1));
 
-        model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
-        model.addAttribute("incomeCurrentYear",walletService
-                .minMaxValue(walletService.findFinanceByWalletCurrentYear(wallet)).get(0));
-        model.addAttribute("spendingCurrentYear",walletService
+        model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet))
+        .addAttribute("incomeCurrentYear",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentYear(wallet)).get(0))
+      .addAttribute("spendingCurrentYear",walletService
                 .minMaxValue(walletService.findFinanceByWalletCurrentYear(wallet)).get(1));
 
-        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
-        model.addAttribute("incomeFirstQuarter",walletService
-                .minMaxValue(walletService.firstQuarter(wallet)).get(0));
-        model.addAttribute("spendingFirstQuarter",walletService
+        model.addAttribute("firstQuarter",walletService.firstQuarter(wallet))
+        .addAttribute("incomeFirstQuarter",walletService
+                .minMaxValue(walletService.firstQuarter(wallet)).get(0))
+        .addAttribute("spendingFirstQuarter",walletService
                 .minMaxValue(walletService.firstQuarter(wallet)).get(1));
 
 
-        model.addAttribute("secondQuarter",walletService.secondQuarter(wallet));
-        model.addAttribute("incomeSecondQuarter",walletService
-                .minMaxValue(walletService.secondQuarter(wallet)).get(0));
-        model.addAttribute("spendingSecondQuarter",walletService
+        model.addAttribute("secondQuarter",walletService.secondQuarter(wallet))
+        .addAttribute("incomeSecondQuarter",walletService
+                .minMaxValue(walletService.secondQuarter(wallet)).get(0))
+        .addAttribute("spendingSecondQuarter",walletService
                 .minMaxValue(walletService.secondQuarter(wallet)).get(1));
 
-        model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet));
-        model.addAttribute("incomeThirdQuarter",walletService
-                .minMaxValue(walletService.thirdQuarter(wallet)).get(0));
-        model.addAttribute("spendingThirdQuarter",walletService
+        model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet))
+        .addAttribute("incomeThirdQuarter",walletService
+                .minMaxValue(walletService.thirdQuarter(wallet)).get(0))
+        .addAttribute("spendingThirdQuarter",walletService
                 .minMaxValue(walletService.thirdQuarter(wallet)).get(1));
 
 
-        model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet));
-        model.addAttribute("incomeFourthQuarter",walletService
-                .minMaxValue(walletService.fourthQuarter(wallet)).get(0));
-        model.addAttribute("spendingFourthQuarter",walletService
+        model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet))
+        .addAttribute("incomeFourthQuarter",walletService
+                .minMaxValue(walletService.fourthQuarter(wallet)).get(0))
+        .addAttribute("spendingFourthQuarter",walletService
                 .minMaxValue(walletService.fourthQuarter(wallet)).get(1));
 
         //TEST
