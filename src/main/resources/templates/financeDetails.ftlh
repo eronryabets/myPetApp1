@@ -20,7 +20,8 @@
                 <div class="card-body">
 
                     <#--    PUT YOUR CODE -->
-                    SEARCH
+                    <br>
+                    <a href="/wallets/profile/${wallet.id}/financeSelectDate" class="btn btn-info"> Select date period</a>
                     <#--      END CODE         -->
 
                 </div>

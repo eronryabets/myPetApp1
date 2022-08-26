@@ -35,6 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/notes">Notes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/wallets/userWallets">Wallets</a>
+                </li>
             </#if>
         </ul>
 

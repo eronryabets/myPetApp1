@@ -1,5 +1,6 @@
 package com.eronryabets.first_pet.controller;
 
+import com.eronryabets.first_pet.entity.Finance;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.service.WalletService;
@@ -9,6 +10,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 
 @Controller
@@ -131,65 +135,108 @@ public class WalletController {
         model.addAttribute("finance",walletService.findFinanceByWallet(wallet));
 
         model.addAttribute("lastWeek",walletService.findFinanceByWalletLastWeek(wallet));
-        model.addAttribute("incomeLastWeek",walletService.minMaxValue(walletService.
-                findFinanceByWalletLastWeek(wallet)).get(0));
-        model.addAttribute("spendingLastWeek",walletService.minMaxValue(walletService.
-                findFinanceByWalletLastWeek(wallet)).get(1));
+        model.addAttribute("incomeLastWeek",walletService.minMaxValue(walletService
+                .findFinanceByWalletLastWeek(wallet)).get(0));
+        model.addAttribute("spendingLastWeek",walletService.minMaxValue(walletService
+                .findFinanceByWalletLastWeek(wallet)).get(1));
 
         model.addAttribute("currentWeek",walletService.findFinanceByWalletCurrentWeek(wallet));
-        model.addAttribute("incomeCurrentWeek",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentWeek(wallet)).get(0));
-        model.addAttribute("spendingCurrentWeek",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentWeek(wallet)).get(1));
+        model.addAttribute("incomeCurrentWeek",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentWeek(wallet)).get(0));
+        model.addAttribute("spendingCurrentWeek",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentWeek(wallet)).get(1));
 
         model.addAttribute("lastMonth",walletService.findFinanceByWalletLastMonth(wallet));
-        model.addAttribute("incomeLastMonth",walletService.minMaxValue(walletService.
-                findFinanceByWalletLastMonth(wallet)).get(0));
-        model.addAttribute("spendingLastMonthMonth",walletService.minMaxValue(walletService.
-                findFinanceByWalletLastMonth(wallet)).get(1));
+        model.addAttribute("incomeLastMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletLastMonth(wallet)).get(0));
+        model.addAttribute("spendingLastMonthMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletLastMonth(wallet)).get(1));
 
         model.addAttribute("currentMonth",walletService.findFinanceByWalletCurrentMonth(wallet));
-        model.addAttribute("incomeCurrentMonth",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentMonth(wallet)).get(0));
-        model.addAttribute("spendingCurrentMonth",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentMonth(wallet)).get(1));
+        model.addAttribute("incomeCurrentMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentMonth(wallet)).get(0));
+        model.addAttribute("spendingCurrentMonth",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentMonth(wallet)).get(1));
 
         model.addAttribute("currentYear",walletService.findFinanceByWalletCurrentYear(wallet));
-        model.addAttribute("incomeCurrentYear",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentYear(wallet)).get(0));
-        model.addAttribute("spendingCurrentYear",walletService.minMaxValue(walletService.
-                findFinanceByWalletCurrentYear(wallet)).get(1));
+        model.addAttribute("incomeCurrentYear",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentYear(wallet)).get(0));
+        model.addAttribute("spendingCurrentYear",walletService
+                .minMaxValue(walletService.findFinanceByWalletCurrentYear(wallet)).get(1));
 
         model.addAttribute("firstQuarter",walletService.firstQuarter(wallet));
-        model.addAttribute("incomeFirstQuarter",walletService.minMaxValue(walletService.
-                firstQuarter(wallet)).get(0));
-        model.addAttribute("spendingFirstQuarter",walletService.minMaxValue(walletService.
-                firstQuarter(wallet)).get(1));
+        model.addAttribute("incomeFirstQuarter",walletService
+                .minMaxValue(walletService.firstQuarter(wallet)).get(0));
+        model.addAttribute("spendingFirstQuarter",walletService
+                .minMaxValue(walletService.firstQuarter(wallet)).get(1));
 
 
         model.addAttribute("secondQuarter",walletService.secondQuarter(wallet));
-        model.addAttribute("incomeSecondQuarter",walletService.minMaxValue(walletService.
-                secondQuarter(wallet)).get(0));
-        model.addAttribute("spendingSecondQuarter",walletService.minMaxValue(walletService.
-                secondQuarter(wallet)).get(1));
+        model.addAttribute("incomeSecondQuarter",walletService
+                .minMaxValue(walletService.secondQuarter(wallet)).get(0));
+        model.addAttribute("spendingSecondQuarter",walletService
+                .minMaxValue(walletService.secondQuarter(wallet)).get(1));
 
         model.addAttribute("thirdQuarter",walletService.thirdQuarter(wallet));
-        model.addAttribute("incomeThirdQuarter",walletService.minMaxValue(walletService.
-                thirdQuarter(wallet)).get(0));
-        model.addAttribute("spendingThirdQuarter",walletService.minMaxValue(walletService.
-                thirdQuarter(wallet)).get(1));
+        model.addAttribute("incomeThirdQuarter",walletService
+                .minMaxValue(walletService.thirdQuarter(wallet)).get(0));
+        model.addAttribute("spendingThirdQuarter",walletService
+                .minMaxValue(walletService.thirdQuarter(wallet)).get(1));
 
 
         model.addAttribute("fourthQuarter",walletService.fourthQuarter(wallet));
-        model.addAttribute("incomeFourthQuarter",walletService.minMaxValue(walletService.
-                fourthQuarter(wallet)).get(0));
-        model.addAttribute("spendingFourthQuarter",walletService.minMaxValue(walletService.
-                fourthQuarter(wallet)).get(1));
+        model.addAttribute("incomeFourthQuarter",walletService
+                .minMaxValue(walletService.fourthQuarter(wallet)).get(0));
+        model.addAttribute("spendingFourthQuarter",walletService
+                .minMaxValue(walletService.fourthQuarter(wallet)).get(1));
 
         //TEST
         model.addAttribute("queryTEST",walletService.queryTEST(wallet));
 
         return "financeDetails";
+    }
+
+    @GetMapping("/profile/{wallet}/financeSelectDate")
+    public String selectDate(@PathVariable("wallet") Wallet wallet,
+                             Model model,
+                             @RequestParam(required = false,value = "financeList") List<Finance> financeList,
+                             @RequestParam(required = false,value = "startDate") String startDate,
+                             @RequestParam(required = false,value = "endDate") String endDate,
+                             @RequestParam(required = false,defaultValue = "0.0",value = "income") double income,
+                             @RequestParam(required = false, defaultValue = "0.0",value = "spending") double spending
+
+                             ){
+        model.addAttribute("financeList",financeList)
+                .addAttribute("startDate",startDate)
+                .addAttribute("endDate",endDate)
+                .addAttribute("income",income)
+                .addAttribute("spending",spending);
+
+        return "financeSelectDate";
+    }
+
+
+    @RequestMapping (path = "/profile/{wallet}/financeSelectDate",method = RequestMethod.POST)
+    public String selectDatePost(@PathVariable("wallet") Wallet wallet,
+                                 Model model,
+                                 @RequestParam("startDate") String startDate,
+                                 @RequestParam("endDate") String endDate,
+                                 RedirectAttributes redirectAttributes
+                                 ){
+        List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet,startDate,endDate);
+
+        double income = walletService.minMaxValue(walletService
+                .findByWalletAndDateBetween(wallet,startDate,endDate)).get(0);
+        double spending = walletService.minMaxValue(walletService
+                .findByWalletAndDateBetween(wallet,startDate,endDate)).get(1);
+
+        redirectAttributes.addAttribute("financeList",financeList)
+                .addAttribute("startDate",startDate)
+                .addAttribute("endDate",endDate)
+                .addAttribute("income",income)
+                .addAttribute("spending",spending);
+
+        return "redirect:/wallets/profile/{wallet}/financeSelectDate";
     }
 
 

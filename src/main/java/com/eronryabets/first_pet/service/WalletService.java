@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -149,6 +150,15 @@ public class WalletService {
     public List<Finance> queryTEST(Wallet wallet) {
         LocalDateTime date = LocalDateTime.of(2022, 3,1,0,0);
         return financeRepository.findFinanceTEST(wallet.getId(),date);
+    }
+
+    public List<Finance> findByWalletAndDateBetween(Wallet wallet,String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localStartDate = LocalDate.parse(startDate, formatter);
+        LocalDate localEndDate = LocalDate.parse(endDate, formatter);
+        LocalDateTime localDateTimeStart = localStartDate.atTime(0, 0, 0, 0);
+        LocalDateTime localDateTimeEnd = localEndDate.atTime(0, 0, 0, 0);
+        return financeRepository.findByWalletAndDateBetween(wallet,localDateTimeStart,localDateTimeEnd);
     }
 
     public ArrayList<Double> minMaxValue ( List<Finance> list){
