@@ -1,14 +1,19 @@
 package com.eronryabets.first_pet.controller;
 
+import com.eronryabets.first_pet.entity.Message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Controller
 public class FileDownloadController {
@@ -52,4 +57,41 @@ public class FileDownloadController {
         }
     }
 
+    @PostMapping("/download")
+    public String addFile(@RequestParam("file") MultipartFile file
+    ) throws IOException {
+
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(folderPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            LocalDateTime ldt = LocalDateTime.now();
+            DateTimeFormatter d1 = DateTimeFormatter.ofPattern("y.MM.d-HH.mm.ss");
+            String time = String.valueOf(ldt.format(d1));
+            String resultFilename = time + "." + file.getOriginalFilename();
+            file.transferTo(new File(folderPath + "/" + resultFilename));
+        }
+
+        return "redirect:/download";
+    }
+
+    @RequestMapping(value = "/download/delete/{fileName}",
+            method={RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteFile(@PathVariable("fileName") String fileName){
+        if (fileName != null) {
+            String path = "F:\\Work\\TestProjects\\first_pet\\downloads\\";
+            path = path.concat(fileName);
+            try {
+                Files.delete(Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/download";
+    }
+
 }
+
+
