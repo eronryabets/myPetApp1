@@ -176,17 +176,30 @@ public class WalletService {
     }
 
     public ArrayList<Double> walletDebitState (Wallet wallet,String startDate, String endDate){
-        //10% /364 day = 0.0275% by day
         LocalDateTime startLocalDateTime = myDateFormatter(startDate);
         LocalDateTime endLocalDateTime = myDateFormatter(endDate);
         Duration duration = Duration.between(startLocalDateTime, endLocalDateTime);
-
-        double amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
-                (duration.toDays()*0.0275))/100);
-        double percentage = duration.toDays()*0.0275;
-        double increaseAmount = ((wallet.getBalance() * (duration.toDays()*0.0275))/100);
-
         ArrayList<Double> result = new ArrayList<>();
+        double amountWithPercentage = 0;
+        double percentage = 0;
+        double increaseAmount = 0;
+        if (wallet.getCurrency() == CurrencyWallet.UAH){
+            amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                    (duration.toDays()*0.0275))/100);
+            percentage = duration.toDays()*0.0275;
+            increaseAmount = ((wallet.getBalance() * (duration.toDays()*0.0275))/100);
+        } else if (wallet.getCurrency() == CurrencyWallet.PLN){
+            amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                    (duration.toDays()*0.0219))/100);
+            percentage = duration.toDays()*0.0219;
+            increaseAmount = ((wallet.getBalance() * (duration.toDays()*0.0219))/100);
+        } else {
+            amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                    (duration.toDays()*0.0137))/100);
+            percentage = duration.toDays()*0.0137;
+            increaseAmount = ((wallet.getBalance() * (duration.toDays()*0.0137))/100);
+        }
+
         result.add(amountWithPercentage);
         result.add(percentage);
         result.add(increaseAmount);
@@ -194,8 +207,37 @@ public class WalletService {
         return result;
     }
 
-    public double walletCreditState (){
-        double result = 0;
+    public ArrayList<Double> walletCreditState (Wallet wallet,String startDate, String endDate){
+        LocalDateTime startLocalDateTime = myDateFormatter(startDate);
+        LocalDateTime endLocalDateTime = myDateFormatter(endDate);
+        Duration duration = Duration.between(startLocalDateTime, endLocalDateTime);
+        ArrayList<Double> result = new ArrayList<>();
+        double amountWithPercentage = 0;
+        double percentage = 0;
+        double reductionAmount = 0;
+        if(wallet.getBalance() < 0){
+            if (wallet.getCurrency() == CurrencyWallet.UAH){
+                amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                        (duration.toDays()*0.0275))/100);
+                percentage = duration.toDays()*0.0275;
+                reductionAmount = ((wallet.getBalance() * (duration.toDays()*0.0275))/100);
+            } else if (wallet.getCurrency() == CurrencyWallet.PLN){
+                amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                        (duration.toDays()*0.0219))/100);
+                percentage = duration.toDays()*0.0219;
+                reductionAmount = ((wallet.getBalance() * (duration.toDays()*0.0219))/100);
+
+            } else {
+                amountWithPercentage = wallet.getBalance() + ((wallet.getBalance() *
+                        (duration.toDays()*0.0137))/100);
+                percentage = duration.toDays()*0.0137;
+                reductionAmount = ((wallet.getBalance() * (duration.toDays()*0.0137))/100);
+            }
+        }
+
+        result.add(amountWithPercentage);
+        result.add(percentage);
+        result.add(reductionAmount);
         return result;
     }
 

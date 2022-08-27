@@ -286,18 +286,21 @@ public class WalletController {
     @GetMapping("/profile/{wallet}/walletCreditStat")
     public String walletCreditState(@PathVariable("wallet") Wallet wallet,
                                     Model model,
-                                    @RequestParam(required = false, value = "financeList") List<Finance> financeList,
+                                    @RequestParam(required = false, defaultValue = "0.0",
+                                            value = "amountWithPercentage") double amountWithPercentage,
+                                    @RequestParam(required = false, defaultValue = "0.0",
+                                            value = "percentage") double percentage,
+                                    @RequestParam(required = false, defaultValue = "0.0",
+                                            value = "reductionAmount") double reductionAmount,
                                     @RequestParam(required = false, value = "startDate") String startDate,
-                                    @RequestParam(required = false, value = "endDate") String endDate,
-                                    @RequestParam(required = false, defaultValue = "0.0", value = "income") double income,
-                                    @RequestParam(required = false, defaultValue = "0.0", value = "spending") double spending
-
+                                    @RequestParam(required = false, value = "endDate") String endDate
     ) {
-//        model.addAttribute("financeList",financeList)
-//                .addAttribute("startDate",startDate)
-//                .addAttribute("endDate",endDate)
-//                .addAttribute("income",income)
-//                .addAttribute("spending",spending);
+
+        model.addAttribute("amountWithPercentage", amountWithPercentage)
+                .addAttribute("percentage", percentage)
+                .addAttribute("reductionAmount", reductionAmount)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate);
 
         return "walletCreditStat";
     }
@@ -308,12 +311,16 @@ public class WalletController {
                                         @RequestParam("endDate") String endDate,
                                         RedirectAttributes redirectAttributes
     ) {
-        //List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet,startDate,endDate);
 
+        double amountWithPercentage = walletService.walletCreditState(wallet, startDate, endDate).get(0);
+        double percentage = walletService.walletCreditState(wallet, startDate, endDate).get(1);
+        double reductionAmount = walletService.walletCreditState(wallet, startDate, endDate).get(2);
 
-//        redirectAttributes.addAttribute("financeList",financeList)
-//                .addAttribute("startDate",startDate);
-
+        redirectAttributes.addAttribute("amountWithPercentage", amountWithPercentage)
+                .addAttribute("percentage", percentage)
+                .addAttribute("reductionAmount", reductionAmount)
+                .addAttribute("startDate", startDate)
+                .addAttribute("endDate", endDate);
 
         return "redirect:/wallets/profile/{wallet}/walletCreditStat";
     }

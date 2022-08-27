@@ -4,7 +4,7 @@
     <br>
     Wallet ID : ${wallet.id};
     Name : ${wallet.walletName};
-    Balance : ${wallet.balance};
+    Balance : ${wallet.balance} ${wallet.currency}
 
     <form action="/wallets/profile/${wallet.id}/walletDebitStat" method="post">
         <div class="container">
@@ -28,15 +28,12 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
         <a href="/wallets/profile/${wallet.id}/financeDetails" class="btn btn-light"> Back</a>
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Calc</button>
         </div>
     </form>
 
     <div class="container mt-3">
 
-    FINANCE DETAILS :
-    Wallet ID : ${wallet.id};
-    Name : ${wallet.walletName};
     <br>
     <#if startDate?? && endDate?? && amountWithPercentage??>
         Date ${startDate!} - ${endDate!}

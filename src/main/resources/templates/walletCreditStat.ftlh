@@ -1,10 +1,10 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
-CREDIT STAT
+    CREDIT STAT
     <br>
     Wallet ID : ${wallet.id};
     Name : ${wallet.walletName};
-    Balance : ${wallet.balance};
+    Balance : ${wallet.balance} ${wallet.currency};
 
     <form action="/wallets/profile/${wallet.id}/walletCreditStat" method="post">
         <div class="container">
@@ -34,15 +34,25 @@ CREDIT STAT
 
     <div class="container mt-3">
 
-    FINANCE DETAILS :
-    Wallet ID : ${wallet.id};
-    Name : ${wallet.walletName};
     <br>
-    <#if startDate?? && endDate??>
+
+    <#if (wallet.balance > 0)>
+        YOU DON'T HAVE CREDIT DEBT
+    </#if>
+    <br>
+
+
+    <#if startDate?? && endDate?? && reductionAmount??>
         Date ${startDate!} - ${endDate!}
         <br>
-        Income : ${income!} ; Spending : ${spending!}
+        Debit percentage : ${percentage!}
+        <br>
+        Reduction amount : ${reductionAmount!}
+        <br>
+        Amount with percentage : ${amountWithPercentage!}
+        <br>
     </#if>
+
     <br> <br>
 
 
