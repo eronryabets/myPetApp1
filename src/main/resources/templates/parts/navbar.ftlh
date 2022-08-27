@@ -38,6 +38,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/wallets/userWallets">Wallets</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/download">Files</a>
+                </li>
             </#if>
         </ul>
 
