@@ -265,8 +265,6 @@ public class WalletService {
                 + "." + fileFormat;
 
         File file = new File(path +"\\"+ fileName);
-        System.out.println(file.getName());
-        System.out.println(file.getAbsolutePath());
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
             writer.write(

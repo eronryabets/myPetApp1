@@ -21,7 +21,22 @@
                 <input type="date" name="endDate" class="form-control"/>
             </div>
         </div>
-
+        <#--TEST   START     -->
+        <td class="tdLabel">
+            <label for="result" class="label">
+                Choose file format :
+            </label>
+        </td>
+        <td>
+            <select name="fileFormat" id="result">
+                <option value="-1">Choose file format</option>
+                <option value="TXT">TXT</option>
+                <option value="XML">XML</option>
+                <option value="HTML">HTML</option>
+            </select>
+        </td>
+        <br>
+        <#--TEST END-->
         <#--    SAVE -->
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
