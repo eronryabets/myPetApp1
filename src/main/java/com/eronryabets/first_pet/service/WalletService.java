@@ -254,13 +254,12 @@ public class WalletService {
     }
 
     public String myFileWriter(Wallet wallet, String startDate,String endDate, double income,
-                             double spending, List<Finance> financeList){
+                             double spending, List<Finance> financeList, String fileFormat){
         Path path = Paths.get("F:\\Work\\TestProjects\\first_pet\\financeReports\\");
 
         LocalDateTime ldt = LocalDateTime.now();
         DateTimeFormatter d1 = DateTimeFormatter.ofPattern("y.MM.d-HH.mm.ss");
         String time = String.valueOf(ldt.format(d1));
-        String fileFormat = "txt";
         String fileName = startDate + "-" + endDate + "." + wallet.getWalletName()
                 + "." + fileFormat;
 

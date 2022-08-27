@@ -220,6 +220,7 @@ public class WalletController {
     public String selectDatePost(@PathVariable("wallet") Wallet wallet,
                                  @RequestParam("startDate") String startDate,
                                  @RequestParam("endDate") String endDate,
+                                 @RequestParam("fileFormat") String fileFormat,
                                  RedirectAttributes redirectAttributes
     ) {
         List<Finance> financeList = walletService.findByWalletAndDateBetween(wallet, startDate, endDate);
@@ -229,8 +230,8 @@ public class WalletController {
         double spending = walletService.incomeSpendingValues(walletService
                 .findByWalletAndDateBetween(wallet, startDate, endDate)).get(1);
 
-        String fileName = walletService.myFileWriter(wallet,startDate,endDate,income,spending,financeList);
-        System.out.println("SERVICE = " + fileName);
+        String fileName = walletService.myFileWriter(wallet,startDate,endDate,income,
+                spending,financeList,fileFormat);
 
         redirectAttributes.addAttribute("financeList", financeList)
                 .addAttribute("startDate", startDate)
@@ -243,7 +244,6 @@ public class WalletController {
     }
 
 
-    //DEBIT========================================================================
     @GetMapping("/profile/{wallet}/walletDebitStat")
     public String walletDebitState(@PathVariable("wallet") Wallet wallet,
                                    Model model,
@@ -286,7 +286,6 @@ public class WalletController {
         return "redirect:/wallets/profile/{wallet}/walletDebitStat";
     }
 
-    //CREDIT=========================================================================
     @GetMapping("/profile/{wallet}/walletCreditStat")
     public String walletCreditState(@PathVariable("wallet") Wallet wallet,
                                     Model model,
