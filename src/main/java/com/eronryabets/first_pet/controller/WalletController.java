@@ -5,6 +5,7 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -21,7 +28,6 @@ public class WalletController {
 
     @Autowired
     WalletService walletService;
-
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
@@ -197,11 +203,12 @@ public class WalletController {
     }
 
     @GetMapping("/profile/{wallet}/financeSelectDate")
-    public String selectDate(@PathVariable("wallet") Wallet wallet,
+    public String selectDateGet(@PathVariable("wallet") Wallet wallet,
                              Model model,
                              @RequestParam(required = false, value = "financeList") List<Finance> financeList,
                              @RequestParam(required = false, value = "startDate") String startDate,
                              @RequestParam(required = false, value = "endDate") String endDate,
+                             @RequestParam(required = false, value = "fileName") String fileName,
                              @RequestParam(required = false, defaultValue = "0.0", value = "income") double income,
                              @RequestParam(required = false, defaultValue = "0.0", value = "spending") double spending
 
@@ -210,7 +217,8 @@ public class WalletController {
                 .addAttribute("startDate", startDate)
                 .addAttribute("endDate", endDate)
                 .addAttribute("income", income)
-                .addAttribute("spending", spending);
+                .addAttribute("spending", spending)
+                .addAttribute("fileName", fileName);
 
         return "financeSelectDate";
     }
@@ -229,17 +237,19 @@ public class WalletController {
         double spending = walletService.incomeSpendingValues(walletService
                 .findByWalletAndDateBetween(wallet, startDate, endDate)).get(1);
 
+        String fileName = walletService.myFileWriter(wallet,startDate,endDate,income,spending,financeList);
+        System.out.println("SERVICE = " + fileName);
+
         redirectAttributes.addAttribute("financeList", financeList)
                 .addAttribute("startDate", startDate)
                 .addAttribute("endDate", endDate)
                 .addAttribute("income", income)
-                .addAttribute("spending", spending);
+                .addAttribute("spending", spending)
+                .addAttribute("fileName", fileName);
 
         return "redirect:/wallets/profile/{wallet}/financeSelectDate";
     }
 
-
-    //DEBIT========================================================================
     @GetMapping("/profile/{wallet}/walletDebitStat")
     public String walletDebitState(@PathVariable("wallet") Wallet wallet,
                                    Model model,
@@ -282,7 +292,6 @@ public class WalletController {
         return "redirect:/wallets/profile/{wallet}/walletDebitStat";
     }
 
-    //CREDIT=========================================================================
     @GetMapping("/profile/{wallet}/walletCreditStat")
     public String walletCreditState(@PathVariable("wallet") Wallet wallet,
                                     Model model,
@@ -324,7 +333,6 @@ public class WalletController {
 
         return "redirect:/wallets/profile/{wallet}/walletCreditStat";
     }
-
 
 }
 

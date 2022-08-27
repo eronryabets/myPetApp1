@@ -109,5 +109,13 @@ public class Finance implements Comparable<Finance> {
         return Double.compare(this.amountMoney, otherFinance.amountMoney);
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "date: " + stringDate +
+                ", amount: " + amountMoney +
+                ", operation: " + operation +
+                ", balance: " + balance +
+                '.';
+    }
 }

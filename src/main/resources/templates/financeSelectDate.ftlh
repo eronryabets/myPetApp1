@@ -40,6 +40,10 @@
         Date ${startDate!} - ${endDate!}
         <br>
         Income : ${income!} ; Spending : ${spending!}
+        <br>
+        File : ${fileName}
+        <input type="hidden" name="fileName" value="${fileName!}"/>
+        <a href="/financeReports/${fileName}" class="badge badge-info">Download report</a>
     </#if>
     <br> <br>
 

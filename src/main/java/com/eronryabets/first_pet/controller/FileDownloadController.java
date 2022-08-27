@@ -1,6 +1,5 @@
 package com.eronryabets.first_pet.controller;
 
-import com.eronryabets.first_pet.entity.Message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +12,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 @Controller
 public class FileDownloadController {
     @Value("${download.path}")
     private String folderPath;
+
+    @Value("${financeReports.path}")
+    private String financeReports;
 
     @RequestMapping("/download")
     public String showFiles(Model model){
@@ -90,6 +91,35 @@ public class FileDownloadController {
             }
         }
         return "redirect:/download";
+    }
+
+    @RequestMapping("/financeReports/{fileName}")
+    @ResponseBody
+    public void downloadReport(@PathVariable("fileName") String fileName, HttpServletResponse response) {
+
+        if (fileName.contains(".doc")) response.setContentType("application/msword");
+        if (fileName.contains(".docx")) response.setContentType("application/msword");
+        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
+        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
+        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
+        if (fileName.contains(".zip")) response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+            FileInputStream fis = new FileInputStream(financeReports+fileName);
+            int len;
+            byte[] buf = new byte[1024];
+            while((len = fis.read(buf)) > 0) {
+                bos.write(buf,0,len);
+            }
+            bos.close();
+            response.flushBuffer();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+
+        }
     }
 
 }

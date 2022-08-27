@@ -7,7 +7,12 @@ import com.eronryabets.first_pet.utility.MyDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -246,6 +251,40 @@ public class WalletService {
         LocalDate localDate = LocalDate.parse(date, formatter);
         LocalDateTime localDateTime = localDate.atTime(0, 0, 0, 0);
         return localDateTime;
+    }
+
+    public String myFileWriter(Wallet wallet, String startDate,String endDate, double income,
+                             double spending, List<Finance> financeList){
+        Path path = Paths.get("F:\\Work\\TestProjects\\first_pet\\financeReports\\");
+
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter d1 = DateTimeFormatter.ofPattern("y.MM.d-HH.mm.ss");
+        String time = String.valueOf(ldt.format(d1));
+        String fileFormat = "txt";
+        String fileName = startDate + "-" + endDate + "." + wallet.getWalletName()
+                + "." + fileFormat;
+
+        File file = new File(path +"\\"+ fileName);
+        System.out.println(file.getName());
+        System.out.println(file.getAbsolutePath());
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+            writer.write(
+                    "Wallet name: " + wallet.getWalletName() + " (id:" + wallet.getId()  +") \n"
+                    + "From date " + startDate + " to date " + endDate + ";\n" +
+                    "Income : " + income +"; Spending : " + spending + "\n" +
+                    "Time reports create : " + time + "\n\n");
+
+            for(Finance f : financeList){
+                writer.write(String.valueOf(f));
+                writer.write("\n");
+            }
+            System.out.println("DONE!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getName();
     }
 
 

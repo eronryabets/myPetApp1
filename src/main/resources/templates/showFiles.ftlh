@@ -1,7 +1,6 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
 
-<#--    TEST START////-->
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
        aria-controls="collapseExample">
         Add new File
@@ -23,14 +22,6 @@
         </div>
     </div>
     <br><br>
-
-
-
-
-
-
-
-<#--    TEST END///-->
 
     <#list files?sortBy("file")?reverse as file>
         <tr>
