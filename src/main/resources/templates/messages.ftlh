@@ -19,7 +19,8 @@
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-4" name="text" placeholder="Введите сообщение"/>
+                    <input type="text" class="form-control col-sm-4" name="text" placeholder="Введите сообщение"
+                           required minlength="2"/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control col-sm-4" name="tag" placeholder="Тэг">

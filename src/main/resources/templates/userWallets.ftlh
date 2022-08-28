@@ -14,7 +14,8 @@
             <div>
                 <form action="/wallets/userWallets" method="post">
                     <div> Введите имя кошелька</div>
-                    <input type="text" name="walletName" placeholder="wallet name"/>
+                    <input type="text" name="walletName" placeholder="wallet name"
+                           required minlength="2"/>
 
                     <div> Введите баланс</div>
                     <input type="text" name="balance" placeholder="balance"/>

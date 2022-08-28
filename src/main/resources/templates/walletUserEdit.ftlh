@@ -37,7 +37,7 @@
                             <label class="col-sm-2 col-form-label"> Wallet Name : </label>
                             <div class="col-sm-3">
                                 <input type="text" name="walletName" class="form-control" value="${wallet.walletName}"
-                                       placeholder="${wallet.walletName}"/>
+                                       placeholder="${wallet.walletName}" required minlength="2"/>
                                 <button class="btn btn-success mt-1" type="submit">Save</button>
                             </div>
                             <input type="hidden" name="balance" value="${wallet.balance}">
