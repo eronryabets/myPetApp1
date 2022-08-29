@@ -41,11 +41,9 @@ public class LoggingAspect {
         if (!logsFolder.exists()) {
             logsFolder.mkdir();
         }
-        System.out.println(logsPath  + ld + ".txt");
         File log = new File(logsPath  + ld + "-logs.txt")  ;
         if(!log.exists()){
             log.createNewFile();
-            System.out.println("File created");
         }
         LocalDateTime ldt = LocalDateTime.now();
                 DateTimeFormatter d1 = DateTimeFormatter.ofPattern("y.MM.d-HH:mm:ss");

@@ -10,9 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 @Controller
 public class FileDownloadController {
@@ -135,6 +137,7 @@ public class FileDownloadController {
         return "logsAuth";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/user/logsAuth/{fileName}")
     @ResponseBody
     public void downloadLogs(@PathVariable("fileName") String fileName, HttpServletResponse response) {
@@ -164,6 +167,7 @@ public class FileDownloadController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/user/logsAuth/delete/{fileName}",
             method={RequestMethod.DELETE, RequestMethod.GET})
     public String deleteLogs(@PathVariable("fileName") String fileName){
@@ -177,6 +181,25 @@ public class FileDownloadController {
             }
         }
         return "redirect:/user/logsAuth";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/user/logsAuth/view/{fileName}")
+    public String logViewPage(@PathVariable("fileName") String fileName, Model model)
+            throws IOException {
+        String path = "F:\\Work\\TestProjects\\first_pet\\logs\\";
+        Path log = Paths.get(path + fileName);
+        ArrayList<String> logList = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(log)))){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                logList.add(line);
+            }
+        }
+        model.addAttribute("logs",logList)
+                .addAttribute("fileName", fileName);
+
+        return "logViewPage";
     }
 
 }

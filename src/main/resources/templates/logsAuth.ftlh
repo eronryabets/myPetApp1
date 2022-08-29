@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
 
- Strtistic
+ Logs auth :
 
     <br>
     <a href="/user"
@@ -13,6 +13,7 @@
         <tr>
             <td><a href="/user/logsAuth/${file.getName()}">${file.getName()}</a></td>
             <td>#{ ((file.length())/1024)?round } KB</td>
+            <a href="/user/logsAuth/view/${file.getName()}" class="badge badge-info">view</a>
             <a href="/user/logsAuth/delete/${file.getName()}" class="badge badge-danger">delete</a>
             <br>
 
