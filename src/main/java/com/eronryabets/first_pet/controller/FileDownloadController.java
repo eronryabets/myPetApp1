@@ -1,6 +1,7 @@
 package com.eronryabets.first_pet.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ public class FileDownloadController {
 
     @Value("${financeReports.path}")
     private String financeReports;
+
+    @Value("${logs.path}")
+    private String logsPath;
 
     @RequestMapping("/download")
     public String showFiles(Model model){
@@ -120,6 +124,59 @@ public class FileDownloadController {
             e.printStackTrace();
 
         }
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/user/logsAuth")
+    public String logsView(Model model){
+        File folder = new File(logsPath);
+        File[] listOfFiles = folder.listFiles();
+        model.addAttribute("files",listOfFiles);
+        return "logsAuth";
+    }
+
+    @RequestMapping("/user/logsAuth/{fileName}")
+    @ResponseBody
+    public void downloadLogs(@PathVariable("fileName") String fileName, HttpServletResponse response) {
+
+        if (fileName.contains(".doc")) response.setContentType("application/msword");
+        if (fileName.contains(".docx")) response.setContentType("application/msword");
+        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
+        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
+        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
+        if (fileName.contains(".zip")) response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+            FileInputStream fis = new FileInputStream(logsPath+fileName);
+            int len;
+            byte[] buf = new byte[1024];
+            while((len = fis.read(buf)) > 0) {
+                bos.write(buf,0,len);
+            }
+            bos.close();
+            response.flushBuffer();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @RequestMapping(value = "/user/logsAuth/delete/{fileName}",
+            method={RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteLogs(@PathVariable("fileName") String fileName){
+        if (fileName != null) {
+            String path = "F:\\Work\\TestProjects\\first_pet\\logs\\";
+            path = path.concat(fileName);
+            try {
+                Files.delete(Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/user/logsAuth";
     }
 
 }

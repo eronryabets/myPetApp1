@@ -15,6 +15,8 @@ public class MvcConfig implements WebMvcConfigurer {
     private String folderPath;
     @Value("${financeReports.path}")
     private String financeReports;
+    @Value("${logs.path}")
+    private String logsPath;
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
@@ -22,13 +24,13 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("file:" + uploadPath + "/");
         registry.addResourceHandler("/download/**")
                 .addResourceLocations("file:" + folderPath + "/");
-        registry.addResourceHandler("/financeReports/**")
-                .addResourceLocations("file:" + financeReports + "/");
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/user/logsAuth")
+                .addResourceLocations("file:" + logsPath + "/");
     }
 }

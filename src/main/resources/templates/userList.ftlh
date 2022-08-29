@@ -2,6 +2,7 @@
 <@c.page>
 <head>
     <h5>User list page</h5>
+    <a href="/user/logsAuth" class="badge badge-pill badge-info" >Logs auth</a>
 </head>
 <table>
     <thead>

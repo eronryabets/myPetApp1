@@ -32,7 +32,7 @@
 
         </tr>
     <#else >
-        No wallets
+        No files
     </#list>
 
 </@c.page>
