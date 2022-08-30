@@ -4,6 +4,10 @@ import com.eronryabets.first_pet.entity.Message;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +25,20 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping
-    public String messages(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Message> messages = messageService.findAll();
+    public String messages(@RequestParam(required = false, defaultValue = "") String filter,
+                           Model model,
+                           @PageableDefault(sort = {"date"},
+                                   direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Message> page = messageService.findAll(pageable);
 
         if (filter != null && !filter.isEmpty()) {
-            messages = messageService.findByTag(filter);
+            page = messageService.findByTag(filter,pageable);
         } else {
-            messages = messageService.findAll();
+            page = messageService.findAll(pageable);
         }
-        model.addAttribute("messages", messages);
+
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/messages");
         model.addAttribute("filter", filter);
 
         return "messages";

@@ -1,6 +1,9 @@
 <#include "parts/security.ftlh">
 <#import "parts/common.ftlh" as c>
+<#import "parts/pager.ftlh" as p>
 <@c.page>
+    <@p.pager url page />
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <form method="get" action="/messages" class="form-inline">
@@ -40,7 +43,8 @@
     </div>
 
     <div class="card-columns">
-        <#list messages?sortBy("date")?reverse as message>
+<#--        <#list messages?sortBy("date")?reverse as message>-->
+        <#list page.content as message>
             <div class="card my-3">
                 <#if message.filename??>
                     <img src="/img/${message.filename}" class="card-img-top">
@@ -63,4 +67,6 @@
             No message
         </#list>
     </div>
+    <@p.pager url page />
+
 </@c.page>

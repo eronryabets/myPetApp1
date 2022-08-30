@@ -5,6 +5,8 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,12 +26,16 @@ public class MessageService {
     @Value("${upload.path}")
     private String uploadPath;
 
+    public Page<Message> findAll(Pageable pageable){
+        return messageRepository.findAll(pageable);
+    }
+
     public Iterable<Message> findAll(){
         return messageRepository.findAll();
     }
 
-    public Iterable<Message> findByTag(String filter){
-        return messageRepository.findByTag(filter);
+    public Page<Message> findByTag(String filter, Pageable pageable){
+        return messageRepository.findByTag(filter,pageable);
     }
 
     public void add(User user, String text, String tag,
