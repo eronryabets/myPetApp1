@@ -25,6 +25,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/wallets">Wallets List</a>
             </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/actuatorLinks">Actuator</a>
+                </li>
 
             </#if>
 
