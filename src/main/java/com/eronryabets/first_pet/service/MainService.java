@@ -2,13 +2,16 @@ package com.eronryabets.first_pet.service;
 
 import com.eronryabets.first_pet.entity.ExchangeRates;
 import com.eronryabets.first_pet.utility.GetPOJOExchangeRates;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class MainService {
-    private final GetPOJOExchangeRates exchangeRates = new GetPOJOExchangeRates();
+
+    @Autowired
+    private GetPOJOExchangeRates exchangeRates;
 
     public ArrayList<ExchangeRates> getExchangeRatesList(){
         ArrayList<ExchangeRates> list = new ArrayList<>();
