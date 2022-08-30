@@ -32,14 +32,8 @@ public class GetPOJOExchangeRates {
 
         if (statusCode == HttpStatus.OK) {
             ExchangeRates[] list = response.getBody();
-            if (list != null) {
-                for (ExchangeRates e : list) {
-                    System.out.println("ExchangeRates: " +  e.getCurrencyCodeL() + " - "
-                            + e.getAmount());
-                }
-            }
             return list;
-        }
-        return null;
+
+        }else return null;
     }
 }
