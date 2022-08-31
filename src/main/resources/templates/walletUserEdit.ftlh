@@ -71,8 +71,6 @@
                                 <button class="btn btn-success mt-1" type="submit">Add</button>
                             </div>
 
-                            <input type="hidden" name="balance" value="${wallet.balance}">
-                            <input type="hidden" name="walletName" value="${wallet.walletName}">
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         </div>
                     </form>

@@ -60,14 +60,18 @@ public class WalletService {
     }
 
     public void walletSave(Wallet wallet, String walletName, double balance){
+        if(balance > 0){
+            financeRepository.save(new Finance(wallet,balance,WalletOperation.INCOME, wallet.getBalance()));
+        }else {
+            financeRepository.save(new Finance(wallet,balance,WalletOperation.SPENDING,wallet.getBalance()));
+        }
         wallet.setWalletName(walletName);
         wallet.setBalance(balance);
         walletRepository.save(wallet);
     }
 
-    public void walletSave(Wallet wallet, String walletName, double balance, double cashAdd){
-        wallet.setWalletName(walletName);
-        wallet.setBalance(balance+cashAdd);
+    public void walletUserSaveCashAdd(Wallet wallet,double cashAdd){
+        wallet.setBalance(wallet.getBalance() + cashAdd);
         if(cashAdd > 0){
             financeRepository.save(new Finance(wallet,cashAdd,WalletOperation.INCOME, wallet.getBalance()));
         }else {

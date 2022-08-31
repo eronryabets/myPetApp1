@@ -3,24 +3,25 @@
 
 <head>
     <h3>ADMIN ACCESS</h3>
-    <h7>Wallet name ${wallet.walletName} ; id ${wallet.id}</h7>
+    <h7>Wallet name ${wallet.walletName} ; id ${wallet.id};</h7>
     <br>
     Wallet's owner ${wallet.user.username}; id  ${wallet.user.id}
     <br>
+    <h3> balance : ${wallet.balance};</h3>
 </head>
 
 <form action="/wallets" method="post">
     <br><br>
     Wallet name :
-    <input type="text" name="walletName" value="${wallet.walletName}">
+    <input type="text" name="walletName" value="${wallet.walletName}"  required minlength="1">
 
     <br><br>
     Wallet balance :
-    <input type="text" name="balance" value="${wallet.balance}">
+    <input type="number" name="balance" value="${wallet.balance}" placeholder="${wallet.balance}" required minlength="1">
 
     <br><br>
     Wallet's owner :
-    <input type="text" name="user_id" value="${wallet.user.id}">
+    <input type="text" name="user_id" value="${wallet.user.id}" required minlength="1">
 
     <br><br>
     <input type="hidden" name="walletId" value="${wallet.id}">

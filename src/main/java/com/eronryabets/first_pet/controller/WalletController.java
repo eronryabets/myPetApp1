@@ -97,14 +97,12 @@ public class WalletController {
     }
 
     @PostMapping(value = "/profile/{wallet}/cashAdd")
-    public String walletUserSave(
+    public String walletUserSaveCashAdd(
             @PathVariable("wallet") Wallet wallet,
-            @RequestParam("walletName") String walletName,
-            @RequestParam("balance") double balance,
             @RequestParam("cashAdd") double cashAdd
     ) {
 
-        walletService.walletSave(wallet, walletName, balance, cashAdd);
+        walletService.walletUserSaveCashAdd(wallet, cashAdd);
         return "redirect:/wallets/profile/{wallet}";
     }
 
