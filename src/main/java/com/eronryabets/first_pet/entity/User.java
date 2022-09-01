@@ -33,6 +33,8 @@ public class User implements UserDetails {
     private boolean active;
     @Column(name = "avatar")
     private String avatar;
+    @Column(name = "email")
+    private String email;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "pet_users_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -58,6 +60,14 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.password = password;
+    }
+
+    public User(String username, String name, String surname, String password, String email) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
     }
 
     public void setUsername(String username) {
@@ -161,6 +171,14 @@ public class User implements UserDetails {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
