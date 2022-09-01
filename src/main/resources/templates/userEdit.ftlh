@@ -19,7 +19,7 @@
 
     <br><br>
     User password :
-    <input type="text" name="password" value="${user.password}">
+    <input type="text" name="password" placeholder="password">
     <br><br>
     Roles :
     <#list roles as role>

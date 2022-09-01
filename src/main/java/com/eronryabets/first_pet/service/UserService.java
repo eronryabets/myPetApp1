@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Value("${uploadAvatar.path}")
     private String uploadAvatarPath;
@@ -44,6 +48,7 @@ public class UserService implements UserDetailsService {
 
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
         return true;
@@ -55,7 +60,8 @@ public class UserService implements UserDetailsService {
         user.setUsername(username);
         user.setName(name);
         user.setSurname(surname);
-        user.setPassword(password);
+        //user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
@@ -74,7 +80,7 @@ public class UserService implements UserDetailsService {
                             MultipartFile avatar) throws IOException {
         user.setName(name);
         user.setSurname(surname);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (avatar != null && !avatar.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadAvatarPath);

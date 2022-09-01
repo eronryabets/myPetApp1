@@ -1,5 +1,5 @@
 insert into pet_user (id, username, name, surname, password, active)
-  values (1, 'admin','eron','ryabets', '12345678', true)
+  values (1, 'admin','eron','ryabets', '$2a$12$n4WhU3P6kieGQWCHlFZmweAfsMu2qTwqpW2EvwHcQKOwygM9fI.xy', true)
 
 GO
 insert into pet_users_role (user_id, roles)
