@@ -280,7 +280,6 @@ public class WalletService {
                 writer.write(String.valueOf(f));
                 writer.write("\n");
             }
-            System.out.println("DONE!");
 
         } catch (IOException e) {
             e.printStackTrace();
