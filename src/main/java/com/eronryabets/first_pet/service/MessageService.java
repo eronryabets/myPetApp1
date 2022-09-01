@@ -38,10 +38,9 @@ public class MessageService {
         return messageRepository.findByTag(filter,pageable);
     }
 
-    public void add(User user, String text, String tag,
+    public void addMessage(User user, Message message,
                     MultipartFile file) throws IOException {
-        Message message = new Message(text, tag, user);
-
+        message.setAuthor(user);
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 

@@ -3,7 +3,7 @@ create table hibernate_sequence (
     ) engine=InnoDB
 GO
 
-    insert into hibernate_sequence values ( 1 )
+    insert into hibernate_sequence values ( 20 )
 GO
 
     create table pet_message (

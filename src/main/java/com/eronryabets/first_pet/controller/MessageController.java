@@ -5,8 +5,8 @@ import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/messages")
@@ -32,7 +31,7 @@ public class MessageController {
         Page<Message> page = messageService.findAll(pageable);
 
         if (filter != null && !filter.isEmpty()) {
-            page = messageService.findByTag(filter,pageable);
+            page = messageService.findByTag(filter, pageable);
         } else {
             page = messageService.findAll(pageable);
         }
@@ -47,26 +46,24 @@ public class MessageController {
     @PostMapping
     public String addMessage(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            @RequestParam String tag,
-            Map<String, Object> model,
+            Message message,
+            Model model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
 
-        messageService.add(user, text, tag, file);
+        messageService.addMessage(user, message, file);
         Iterable<Message> messages = messageService.findAll();
-        model.put("messages", messages);
+        model.addAttribute("messages", messages);
 
         return "redirect:/messages";
     }
 
     @RequestMapping(value = "/delete/{message}",
-            method={RequestMethod.DELETE, RequestMethod.GET})
-    public String userMessageDelete(@PathVariable Message message){
+            method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String userMessageDelete(@PathVariable Message message) {
         messageService.deleteMessage(message);
         return "redirect:/messages";
     }
-
 
 
 }

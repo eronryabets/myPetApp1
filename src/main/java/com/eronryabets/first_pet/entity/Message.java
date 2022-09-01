@@ -31,6 +31,9 @@ public class Message {
     private String stringDate;
 
     public Message() {
+        LocalDateTime timeNow = LocalDateTime.now();
+        this.date = timeNow;
+        this.stringDate = formatter(timeNow);
     }
 
     public Message(String text, String tag, User user) {
