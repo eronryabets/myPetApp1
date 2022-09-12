@@ -24,35 +24,17 @@ public class FileDownloadService {
     @Value("${logs.path}")
     private String logsPath;
 
+    String pathDownloads = "F:\\Work\\TestProjects\\first_pet\\downloads\\";
+    String pathLogs = "F:\\Work\\TestProjects\\first_pet\\logs\\";
+
     public File[] showFiles(){
         File folder = new File(folderPath);
         return folder.listFiles();
     }
 
     public void show(String fileName, HttpServletResponse response){
-        if (fileName.contains(".doc")) response.setContentType("application/msword");
-        if (fileName.contains(".docx")) response.setContentType("application/msword");
-        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
-        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
-        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
-        if (fileName.contains(".zip")) response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-            FileInputStream fis = new FileInputStream(folderPath+fileName);
-            int len;
-            byte[] buf = new byte[1024];
-            while((len = fis.read(buf)) > 0) {
-                bos.write(buf,0,len);
-            }
-            bos.close();
-            response.flushBuffer();
-        }
-        catch(IOException e) {
-            e.printStackTrace();
 
-        }
+        this.downloadOrShowFiles(folderPath,fileName,response);
     }
 
     public void addFile(MultipartFile file) throws IOException {
@@ -71,41 +53,13 @@ public class FileDownloadService {
     }
 
     public void deleteFile(String fileName){
-        if (fileName != null) {
-            String path = "F:\\Work\\TestProjects\\first_pet\\downloads\\";
-            path = path.concat(fileName);
-            try {
-                Files.delete(Paths.get(path));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        this.deleteFilesOrLogs(fileName,pathDownloads);
     }
 
     public void downloadReport(String fileName, HttpServletResponse response){
-        if (fileName.contains(".doc")) response.setContentType("application/msword");
-        if (fileName.contains(".docx")) response.setContentType("application/msword");
-        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
-        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
-        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
-        if (fileName.contains(".zip")) response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-            FileInputStream fis = new FileInputStream(financeReports+fileName);
-            int len;
-            byte[] buf = new byte[1024];
-            while((len = fis.read(buf)) > 0) {
-                bos.write(buf,0,len);
-            }
-            bos.close();
-            response.flushBuffer();
-        }
-        catch(IOException e) {
-            e.printStackTrace();
 
-        }
+        this.downloadOrShowFiles(financeReports,fileName,response);
     }
 
     public File[] logsView(){
@@ -114,41 +68,13 @@ public class FileDownloadService {
     }
 
     public void downloadLogs(String fileName, HttpServletResponse response){
-        if (fileName.contains(".doc")) response.setContentType("application/msword");
-        if (fileName.contains(".docx")) response.setContentType("application/msword");
-        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
-        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
-        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
-        if (fileName.contains(".zip")) response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-            FileInputStream fis = new FileInputStream(logsPath+fileName);
-            int len;
-            byte[] buf = new byte[1024];
-            while((len = fis.read(buf)) > 0) {
-                bos.write(buf,0,len);
-            }
-            bos.close();
-            response.flushBuffer();
-        }
-        catch(IOException e) {
-            e.printStackTrace();
 
-        }
+        this.downloadOrShowFiles(logsPath,fileName,response);
     }
 
     public void deleteLogs(String fileName){
-        if (fileName != null) {
-            String path = "F:\\Work\\TestProjects\\first_pet\\logs\\";
-            path = path.concat(fileName);
-            try {
-                Files.delete(Paths.get(path));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        this.deleteFilesOrLogs(fileName,pathLogs);
     }
 
     public ArrayList<String> logViewPage(String fileName){
@@ -166,6 +92,43 @@ public class FileDownloadService {
             e.printStackTrace();
         }
         return logList;
+    }
+
+    public void downloadOrShowFiles(String path, String fileName, HttpServletResponse response){
+        if (fileName.contains(".doc")) response.setContentType("application/msword");
+        if (fileName.contains(".docx")) response.setContentType("application/msword");
+        if (fileName.contains(".xls")) response.setContentType("application/vnd.ms-excel");
+        if (fileName.contains(".ppt")) response.setContentType("application/ppt");
+        if (fileName.contains(".pdf")) response.setContentType("application/pdf");
+        if (fileName.contains(".zip")) response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=" +fileName);
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+            FileInputStream fis = new FileInputStream(path+fileName);
+            int len;
+            byte[] buf = new byte[1024];
+            while((len = fis.read(buf)) > 0) {
+                bos.write(buf,0,len);
+            }
+            bos.close();
+            response.flushBuffer();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void deleteFilesOrLogs(String fileName, String path){
+        if (fileName != null) {
+            path = path.concat(fileName);
+            try {
+                Files.delete(Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
