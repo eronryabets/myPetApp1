@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -18,7 +17,7 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -47,7 +46,7 @@ public class MainControllerTest {
         this.mockMvc.perform(get("/messages"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(6));
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(10));
     }
 
     @Test
@@ -56,8 +55,28 @@ public class MainControllerTest {
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(xpath("//*[@id='message-list']/div").nodeCount(2))
-                .andExpect(xpath("//*[@id='message-list']/div[@data-id='21']").exists())
-                .andExpect(xpath("//*[@id='message-list']/div[@data-id='22']").exists());
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='15']").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='16']").exists());
+    }
+
+    @Test
+    public void addMessageToListTest() throws Exception {
+        MockHttpServletRequestBuilder multipart = multipart("/messages")
+                .file("file", "123".getBytes())
+                .param("text", "fifth")
+                .param("tag", "new one")
+                .with(csrf());
+
+        this.mockMvc.perform(multipart)
+                .andExpect(authenticated()).andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/messages"));
+        mockMvc.perform(get("/messages"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(10))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']/div/span").string("fifth"))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']/div/i").string("new one"));
     }
 
 

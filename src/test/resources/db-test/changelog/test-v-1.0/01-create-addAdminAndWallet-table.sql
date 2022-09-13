@@ -110,7 +110,7 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'car', 'nice car 1', 21)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'car', 'nice car 1', 15)
 
 GO
     insert
@@ -118,7 +118,7 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'car', 'nice car 2', 22)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'car', 'nice car 2', 16)
 
 GO
     insert
@@ -126,7 +126,7 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 1', 23)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 1', 17)
 
 GO
     insert
@@ -134,7 +134,7 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 2', 24)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 2', 18)
 
 GO
     insert
@@ -142,7 +142,7 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 3', 25)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 3', 19)
 
 GO
     insert
@@ -150,4 +150,4 @@ GO
         pet_message
         (user_id, date, filename, string_date, tag, text, id)
     values
-        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 4', 26)
+        (1, '2022-12-01 10:54:05.653000', NULL , '2022-12-01 10:54:05', 'cat', 'nice cat 4', 20)
