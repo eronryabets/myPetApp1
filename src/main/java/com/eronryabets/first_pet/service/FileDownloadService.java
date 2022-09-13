@@ -78,8 +78,8 @@ public class FileDownloadService {
     }
 
     public ArrayList<String> logViewPage(String fileName){
-        String path = "F:\\Work\\TestProjects\\first_pet\\logs\\";
-        Path log = Paths.get(path + fileName);
+
+        Path log = Paths.get(pathLogs + fileName);
         ArrayList<String> logList = new ArrayList<>();
         try {
             try(BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(log)))){
