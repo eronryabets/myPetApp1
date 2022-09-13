@@ -50,5 +50,15 @@ public class MainControllerTest {
                 .andExpect(xpath("//*[@id='message-list']/div").nodeCount(6));
     }
 
+    @Test
+    public void filterMessageTest() throws Exception {
+        this.mockMvc.perform(get("/messages").param("filter", "car"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(2))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='21']").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='22']").exists());
+    }
+
 
 }
