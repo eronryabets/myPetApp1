@@ -2,15 +2,15 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"/>
         <title>Wallets</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/style.css"/>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
               integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-              crossorigin="anonymous">
+              crossorigin="anonymous"/>
         <!-- Turbolinks -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
         <!-- Optional JavaScript -->
@@ -32,9 +32,9 @@
     <body>
 
     <#include "navbar.ftlh">
-    <link rel="stylesheet" href="/static/avatar.css">
-    <link rel="stylesheet" href="/static/background.css">
-    <link rel="stylesheet" href="/static/avatarPreview.css">
+    <link rel="stylesheet" href="/static/avatar.css"/>
+    <link rel="stylesheet" href="/static/background.css"/>
+    <link rel="stylesheet" href="/static/avatarPreview.css"/>
     <div class="container mt-5">
         <#nested >
     </div>

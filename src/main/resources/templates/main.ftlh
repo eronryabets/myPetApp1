@@ -25,11 +25,11 @@
         </tbody>
     </table>
 
-    <br><br>
+    <br/><br/>
     <a href="/user/profile"
        class="btn btn-light"> My profile
     </a>
-    <br><br>
+    <br/><br/>
     <a href="/messages"
        class="btn btn-light"> Messages
     </a>
