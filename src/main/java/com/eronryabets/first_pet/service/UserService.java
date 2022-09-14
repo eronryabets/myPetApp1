@@ -61,8 +61,9 @@ public class UserService implements UserDetailsService {
         user.setUsername(username);
         user.setName(name);
         user.setSurname(surname);
-        //user.setPassword(password);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(!password.isEmpty()){
+            user.setPassword(passwordEncoder.encode(password));
+        }
 
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)

@@ -23,19 +23,22 @@
             <div class="form-group row">
                 <label class="col-sm-1 col-form-label">Name:</label>
                 <div class="col-sm-3">
-                    <input type="text" name="name" class="form-control" value="${user.name}"/>
+                    <input type="text" name="name" class="form-control" value="${user.name}"
+                           required minlength="2" maxlength="20"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-1 col-form-label">Surname:</label>
                 <div class="col-sm-3">
-                    <input type="text" name="surname" class="form-control" value="${user.surname}"/>
+                    <input type="text" name="surname" class="form-control" value="${user.surname}"
+                           required minlength="2" maxlength="20"/>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-1 col-form-label">Password:</label>
                 <div class="col-sm-3">
-                    <input type="password" name="password" class="form-control" placeholder="password"/>
+                    <input type="password" name="password" class="form-control" placeholder="password"
+                           required minlength="8" maxlength="20" />
                 </div>
             </div>
 

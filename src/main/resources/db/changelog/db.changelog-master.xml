@@ -19,11 +19,11 @@
         <tagDatabase tag="v.1.0"/>
     </changeSet>
 
-    <include file="v-2.0/db.changelog-v.1.0.xml" relativeToChangelogFile="true"/>
+<!--    <include file="v-2.0/db.changelog-v.1.0.xml" relativeToChangelogFile="true"/>-->
 
-    <changeSet id="11" author="eronryabets">
-        <tagDatabase tag="v.2.0"/>
-    </changeSet>
+<!--    <changeSet id="11" author="eronryabets">-->
+<!--        <tagDatabase tag="v.2.0"/>-->
+<!--    </changeSet>-->
 
 
 
