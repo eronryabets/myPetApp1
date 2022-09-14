@@ -18,18 +18,15 @@ import org.mockito.Mockito;
 
 import java.util.Collections;
 
+import static org.mockito.Mockito.mock;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
 
-    @Autowired
-    private UserService userService;
-
-    @MockBean
-    private UserRepository userRepository;
-
-    @MockBean
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository = mock(UserRepository.class);
+    private final PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+    private final UserService userService = new UserService(userRepository,passwordEncoder);
 
     @Test
     public void addUser() {
