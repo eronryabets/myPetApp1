@@ -1,7 +1,6 @@
 package com.eronryabets.first_pet.controller;
 
 import com.eronryabets.first_pet.service.FileDownloadService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +13,11 @@ import java.io.*;
 @Controller
 public class FileDownloadController {
 
-    @Autowired
-    private FileDownloadService fileDownloadService;
+    private final FileDownloadService fileDownloadService;
+
+    public FileDownloadController(FileDownloadService fileDownloadService) {
+        this.fileDownloadService = fileDownloadService;
+    }
 
     @RequestMapping("/download")
     public String showFiles(Model model){

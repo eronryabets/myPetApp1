@@ -1,6 +1,5 @@
 package com.eronryabets.first_pet;
 
-import com.eronryabets.first_pet.controller.MainController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithUserDetails(value = "admin")
 @TestPropertySource("/application-test.properties")
 
-public class MainControllerTest {
+public class MessagesControllerTest {
 
-    @Autowired
-    private MainController controller;
-
-    @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    public void setMockMvc(MockMvc mockMvc){
+        this.mockMvc = mockMvc;
+    }
+
 
     @Test
     public void mainPageTest() throws Exception {

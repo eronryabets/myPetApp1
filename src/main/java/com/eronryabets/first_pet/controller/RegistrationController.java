@@ -3,7 +3,6 @@ package com.eronryabets.first_pet.controller;
 
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String registration() {

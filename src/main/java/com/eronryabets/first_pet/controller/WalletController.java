@@ -4,7 +4,6 @@ import com.eronryabets.first_pet.entity.Finance;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
 import com.eronryabets.first_pet.service.WalletService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,8 +18,11 @@ import java.util.List;
 @RequestMapping("/wallets")
 public class WalletController {
 
-    @Autowired
-    WalletService walletService;
+    private final WalletService walletService;
+
+    public WalletController(WalletService walletService) {
+        this.walletService = walletService;
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping

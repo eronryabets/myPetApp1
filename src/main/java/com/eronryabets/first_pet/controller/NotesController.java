@@ -3,7 +3,6 @@ package com.eronryabets.first_pet.controller;
 import com.eronryabets.first_pet.entity.Notes;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.NotesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,11 @@ import java.util.Map;
 @RequestMapping("/notes")
 public class NotesController {
 
-    @Autowired
-    private NotesService notesService;
+    private final NotesService notesService;
+
+    public NotesController(NotesService notesService) {
+        this.notesService = notesService;
+    }
 
     @GetMapping
     public String notes(

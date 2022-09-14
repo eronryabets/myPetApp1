@@ -3,7 +3,6 @@ package com.eronryabets.first_pet.controller;
 import com.eronryabets.first_pet.entity.Message;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,8 +19,11 @@ import java.io.IOException;
 @RequestMapping("/messages")
 public class MessageController {
 
-    @Autowired
-    private MessageService messageService;
+    private final MessageService messageService;
+
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @GetMapping
     public String messages(@RequestParam(required = false, defaultValue = "") String filter,

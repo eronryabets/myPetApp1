@@ -7,8 +7,8 @@ import java.util.GregorianCalendar;
 import static java.util.Calendar.*;
 
 public class MyDate {
-    static final Calendar currentCalendar = Calendar.getInstance();
 
+    static final Calendar currentCalendar = Calendar.getInstance();
 
     public static int getCurrentYear(){
         return currentCalendar.get(Calendar.YEAR);

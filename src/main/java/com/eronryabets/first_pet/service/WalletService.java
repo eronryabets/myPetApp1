@@ -4,7 +4,6 @@ import com.eronryabets.first_pet.entity.*;
 import com.eronryabets.first_pet.repository.FinanceRepository;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import com.eronryabets.first_pet.utility.MyDate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -22,13 +21,17 @@ import static com.eronryabets.first_pet.utility.MyDate.maxDayInMonth;
 
 @Service
 public class WalletService {
-    @Autowired
-    private WalletRepository walletRepository;
 
-    @Autowired
-    private FinanceRepository financeRepository;
+
+    private final WalletRepository walletRepository;
+    private final FinanceRepository financeRepository;
 
     int currentYear = MyDate.getCurrentYear();
+
+    public WalletService(WalletRepository walletRepository, FinanceRepository financeRepository) {
+        this.walletRepository = walletRepository;
+        this.financeRepository = financeRepository;
+    }
 
     public List<Wallet> findAll(){
         return walletRepository.findAll();

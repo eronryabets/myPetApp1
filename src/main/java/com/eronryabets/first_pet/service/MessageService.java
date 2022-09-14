@@ -3,7 +3,6 @@ package com.eronryabets.first_pet.service;
 import com.eronryabets.first_pet.entity.Message;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,11 +19,14 @@ import java.util.UUID;
 @Service
 public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
-
     @Value("${upload.path}")
     private String uploadPath;
+
+    private final MessageRepository messageRepository;
+
+    public MessageService(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     public Page<Message> findAll(Pageable pageable){
         return messageRepository.findAll(pageable);

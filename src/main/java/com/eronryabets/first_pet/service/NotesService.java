@@ -3,18 +3,20 @@ package com.eronryabets.first_pet.service;
 import com.eronryabets.first_pet.entity.Notes;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.repository.NotesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotesService {
 
-    @Autowired
-    private NotesRepository notesRepository;
-
     @Value("${upload.path}")
     private String uploadPath;
+
+    private final NotesRepository notesRepository;
+
+    public NotesService(NotesRepository notesRepository) {
+        this.notesRepository = notesRepository;
+    }
 
     public Iterable<Notes> findAll(){
         return notesRepository.findAll();
