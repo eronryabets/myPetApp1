@@ -23,11 +23,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class LoginTest {
 
-    @Autowired
-    private MainController controller;
+    private MockMvc mockMvc;
 
     @Autowired
-    private MockMvc mockMvc;
+    public void setMockMvc(MockMvc mockMvc){
+        this.mockMvc = mockMvc;
+    }
 
     @Test
     public void contextLoads()throws Exception{
