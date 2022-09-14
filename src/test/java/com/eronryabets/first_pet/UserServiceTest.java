@@ -7,12 +7,7 @@ import com.eronryabets.first_pet.service.UserService;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
@@ -20,8 +15,6 @@ import java.util.Collections;
 
 import static org.mockito.Mockito.mock;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class UserServiceTest {
 
     private final UserRepository userRepository = mock(UserRepository.class);
