@@ -26,13 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class MessagesControllerTest {
 
-    private MockMvc mockMvc;
-
     @Autowired
-    public void setMockMvc(MockMvc mockMvc){
-        this.mockMvc = mockMvc;
-    }
-
+    private MockMvc mockMvc;
 
     @Test
     public void mainPageTest() throws Exception {
@@ -75,9 +70,9 @@ public class MessagesControllerTest {
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(xpath("//*[@id='message-list']/div").nodeCount(10))
-                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']").exists())
-                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']/div/span").string("fifth"))
-                .andExpect(xpath("//*[@id='message-list']/div[@data-id='33']/div/i").string("new one"));
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='37']").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='37']/div/span").string("fifth"))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='37']/div/i").string("new one"));
     }
 
 
