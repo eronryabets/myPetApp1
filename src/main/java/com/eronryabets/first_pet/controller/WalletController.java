@@ -81,9 +81,12 @@ public class WalletController {
     @GetMapping("/profile/{wallet}")
     public String walletUserEdit(
             @PathVariable("wallet") Wallet wallet,
-            Model model) {
+            @RequestParam(required = false, value = "message") String message,
+            Model model
+    ) {
         model.addAttribute("wallet", wallet)
                 .addAttribute("finance", walletService.findLastFiveFinance(wallet));
+        model.addAttribute("message",message);
         return "walletUserEdit";
     }
 
@@ -120,10 +123,15 @@ public class WalletController {
     public String walletUserCashTransfer(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("amount") double amount,
-            @RequestParam("anotherWalletId") int anotherWalletId
+            @RequestParam("anotherWalletId") int anotherWalletId,
+            RedirectAttributes redirectAttributes
     ) {
+        if(!walletService.walletUserCashTransfer(wallet, amount, anotherWalletId)){
+            redirectAttributes.addAttribute("message", "Wallet id "
+                    + anotherWalletId + " not exists!");
+            return "redirect:/wallets/profile/{wallet}";
+        }
 
-        walletService.walletUserCashTransfer(wallet, amount, anotherWalletId);
         return "redirect:/wallets/profile/{wallet}";
     }
 

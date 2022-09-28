@@ -84,18 +84,21 @@ public class WalletService {
 
     }
 
-    public void walletUserCashTransfer(Wallet wallet,  double amount, int anotherWalletId){
+    public boolean walletUserCashTransfer(Wallet wallet,  double amount, int anotherWalletId){
         Optional<Wallet> anotherWalletOptional = walletRepository.findById((long) anotherWalletId);
-        if(anotherWalletOptional.isPresent()){
-            Wallet anotherWallet = anotherWalletOptional.get();
-            wallet.setBalance(wallet.getBalance()-amount);
-            anotherWallet.setBalance(anotherWallet.getBalance()+amount);
-
-            walletRepository.save(wallet);
-            financeRepository.save(new Finance(wallet,-amount,WalletOperation.SPENDING,wallet.getBalance()));
-            walletRepository.save(anotherWallet);
-            financeRepository.save(new Finance(anotherWallet,amount,WalletOperation.INCOME, anotherWallet.getBalance()));
+        if(!anotherWalletOptional.isPresent()){
+            return false;
         }
+
+        Wallet anotherWallet = anotherWalletOptional.get();
+        wallet.setBalance(wallet.getBalance()-amount);
+        anotherWallet.setBalance(anotherWallet.getBalance()+amount);
+
+        walletRepository.save(wallet);
+        financeRepository.save(new Finance(wallet,-amount,WalletOperation.SPENDING,wallet.getBalance()));
+        walletRepository.save(anotherWallet);
+        financeRepository.save(new Finance(anotherWallet,amount,WalletOperation.INCOME, anotherWallet.getBalance()));
+        return true;
 
     }
 

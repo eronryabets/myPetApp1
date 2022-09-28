@@ -9,6 +9,7 @@
         <h5>Wallet ${wallet.type} name ${wallet.walletName}</h5>
         <h5>Wallet id ${wallet.id}</h5>
         <h5>Wallet balance ${wallet.balance}</h5>
+        <h5><p style="color:red">${message!}</p></h5>
 
         <br>
 
