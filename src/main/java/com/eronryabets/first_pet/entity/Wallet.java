@@ -1,6 +1,8 @@
 package com.eronryabets.first_pet.entity;
 
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
@@ -107,5 +109,13 @@ public class Wallet {
 
     public void setType(WalletType type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Wallet{" +
+                "id=" + id +
+                ", walletName='" + walletName + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.eronryabets.first_pet.entity;
 
 
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,13 @@ import java.util.Set;
 
 @Entity
 @Table(name="pet_user")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@ToString
 public class User implements UserDetails {
 
     @Id
@@ -20,17 +28,25 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-
     @Column(name = "username")
+    @NonNull
     private String username;
+
     @Column(name = "name")
+    @NonNull
     private String name;
+
     @Column(name = "surname")
+    @NonNull
     private String surname;
+
     @Column(name = "password")
+    @NonNull
     private String password;
+
     @Column(name = "active")
     private boolean active;
+
     @Column(name = "avatar")
     private String avatar;
 
@@ -50,56 +66,9 @@ public class User implements UserDetails {
     }
 
 
-    public User() {
-    }
-
-    public User(String username, String name, String surname, String password) {
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.password = password;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -127,19 +96,6 @@ public class User implements UserDetails {
         return isActive();
     }
 
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Wallet> getWallet() {
-        return wallets;
-    }
-
-    public void setWallet(List<Wallet> wallet) {
-        this.wallets = wallet;
-    }
-
     public void addWalletToUser(Wallet newWallet){
         if(wallets == null){
             wallets = new ArrayList<>();
@@ -148,31 +104,4 @@ public class User implements UserDetails {
         newWallet.setUser(this);
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                ", wallets=" + wallets +
-                '}';
-    }
 }

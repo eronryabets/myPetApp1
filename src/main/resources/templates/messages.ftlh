@@ -55,7 +55,7 @@
                     <i>${message.tag}</i>
                 </div>
                 <div class="card-footer text-muted">
-                    ${message.authorName}
+                    <#if (message.author.username)??>${message.author.username}<#else> none </#if>
                     <i>${message.stringDate}</i>
                     <#if isAdmin>
                     <td><a href="/messages/delete/${message.id}" class="btn btn-danger btn-xs">delete</a></td>
