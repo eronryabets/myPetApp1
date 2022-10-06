@@ -28,13 +28,7 @@ public class Message {
     @NonNull
     private String tag;
 
-    @ManyToOne(
-            cascade = {
-            CascadeType.DETACH,
-            CascadeType.REFRESH,
-            CascadeType.MERGE,
-    },
-            fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
 
