@@ -44,10 +44,11 @@ public class WalletController {
     public String walletSave(
             @RequestParam("walletId") Wallet wallet,
             @RequestParam("walletName") String walletName,
-            @RequestParam("balance") double balance
+            @RequestParam("balance") double balance,
+            @RequestParam("user_id") Long userId
     ) {
 
-        walletService.walletSave(wallet, walletName, balance);
+        walletService.walletAdminSave(wallet, walletName, balance, userId);
         return "redirect:/wallets";
     }
 

@@ -26,11 +26,20 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final NotesService notesService;
+    private final WalletService walletService;
+    private final MessageService messageService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                       NotesService notesService, WalletService walletService,
+                       MessageService messageService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.notesService = notesService;
+        this.walletService = walletService;
+        this.messageService = messageService;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -114,6 +123,9 @@ public class UserService implements UserDetailsService {
     }
 
     public void userDelete(User user) {
+        notesService.deleteNotesByUser(user);
+        messageService.deleteFieldAuthor(user);
+        walletService.deleteFieldUser(user);
         userRepository.delete(user);
     }
 

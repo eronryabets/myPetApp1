@@ -56,7 +56,11 @@ public class FinanceTest {
     @Test
     public void usTest(){
         User user = new User();
-        Message mes1 = new Message("text","tag",user);
+        Message mes1 = Message.builder()
+                .text("text")
+                .tag("tag")
+                .author(user)
+                .build();
         System.out.println(mes1);
         System.out.println(mes1.getAuthor().getUsername());
     }

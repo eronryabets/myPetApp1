@@ -21,7 +21,8 @@
                 <td>${wallet.walletName}</td>
                 <td>${wallet.balance}</td>
                 <td>${wallet.currency}</td>
-                <td>${wallet.user.username}</td>
+                <td><#if (wallet.user.username)??>${wallet.user.username}<#else> Didn't have owner</#if></td>
+
 
                 <td><a href="/wallets/${wallet.id}" class="btn btn-dark" >edit</a></td>
                 <td><a href="/wallets/${wallet.id}/delete" class="btn btn-danger">delete</a></td>

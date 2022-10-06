@@ -28,9 +28,14 @@ public class Message {
     @NonNull
     private String tag;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(
+            cascade = {
+            CascadeType.DETACH,
+            CascadeType.REFRESH,
+            CascadeType.MERGE,
+    },
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @NonNull
     private User author;
 
     @Column(name = "filename")

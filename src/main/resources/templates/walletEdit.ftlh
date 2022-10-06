@@ -5,7 +5,11 @@
     <h3>ADMIN ACCESS</h3>
     <h7>Wallet name ${wallet.walletName} ; id ${wallet.id};</h7>
     <br>
-    Wallet's owner ${wallet.user.username}; id  ${wallet.user.id}
+    Wallet's owner
+    <#if (wallet.user.username)??>${wallet.user.username}<#else> Didn't have owner</#if>
+    ; id
+    <#if (wallet.user.id)??>${wallet.user.id}<#else> none</#if>
+
     <br>
     <h3> balance : ${wallet.balance};</h3>
 </head>
@@ -21,7 +25,7 @@
 
     <br><br>
     Wallet's owner :
-    <input type="text" name="user_id" value="${wallet.user.id}" required minlength="1">
+    <input type="text" name="user_id" value="<#if (wallet.user.id)??>${wallet.user.id}<#else> 0</#if>" required minlength="1">
 
     <br><br>
     <input type="hidden" name="walletId" value="${wallet.id}">

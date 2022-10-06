@@ -57,7 +57,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Wallet> wallets;
 
 

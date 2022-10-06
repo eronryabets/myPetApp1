@@ -2,6 +2,7 @@ package com.eronryabets.first_pet.service;
 
 import com.eronryabets.first_pet.entity.*;
 import com.eronryabets.first_pet.repository.FinanceRepository;
+import com.eronryabets.first_pet.repository.UserRepository;
 import com.eronryabets.first_pet.repository.WalletRepository;
 import com.eronryabets.first_pet.utility.MyDate;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,15 @@ public class WalletService {
 
     private final WalletRepository walletRepository;
     private final FinanceRepository financeRepository;
+    private final UserRepository userRepository;
 
     int currentYear = MyDate.getCurrentYear();
 
-    public WalletService(WalletRepository walletRepository, FinanceRepository financeRepository) {
+    public WalletService(WalletRepository walletRepository, FinanceRepository financeRepository,
+                         UserRepository userRepository) {
         this.walletRepository = walletRepository;
         this.financeRepository = financeRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Wallet> findAll(){
@@ -58,7 +62,13 @@ public class WalletService {
                           String walletCurrency, String walletType){
         CurrencyWallet resultCurrency = CurrencyWallet.valueOf(walletCurrency);
         WalletType resultType = WalletType.valueOf(walletType);
-        Wallet wallet = new Wallet(walletName,balance, resultCurrency,resultType,user);
+        Wallet wallet = Wallet.builder()
+                .walletName(walletName)
+                .balance(balance)
+                .currency(resultCurrency)
+                .type(resultType)
+                .user(user)
+                .build();
         walletRepository.save(wallet);
     }
 
@@ -71,6 +81,26 @@ public class WalletService {
         wallet.setWalletName(walletName);
         wallet.setBalance(balance);
         walletRepository.save(wallet);
+    }
+
+    public void walletAdminSave(Wallet wallet, String walletName, double balance, Long userId){
+        if(balance > 0){
+            financeRepository.save(new Finance(wallet,balance,WalletOperation.INCOME, wallet.getBalance()));
+        }else {
+            financeRepository.save(new Finance(wallet,balance,WalletOperation.SPENDING,wallet.getBalance()));
+        }
+        wallet.setWalletName(walletName);
+        wallet.setBalance(balance);
+        wallet.setUser(userRepository.findById(userId).get());
+        walletRepository.save(wallet);
+    }
+
+    public void deleteFieldUser(User user){
+        walletRepository.findAllByUser(user).forEach(wallet -> {
+            wallet.setUser(null);
+            walletRepository.save(wallet);
+        });
+
     }
 
     public void walletUserSaveCashAdd(Wallet wallet,double cashAdd){
@@ -103,6 +133,7 @@ public class WalletService {
     }
 
     public void walletDelete(Wallet wallet){
+        financeRepository.findByWallet(wallet).forEach(financeRepository::delete);
         walletRepository.delete(wallet);
     }
 

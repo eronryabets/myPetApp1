@@ -73,5 +73,12 @@ public class MessageService {
         messageRepository.deleteById(message.getId());
     }
 
+    public void deleteFieldAuthor(User user){
+        messageRepository.findByAuthor(user).forEach(message -> {
+            message.setAuthor(null);
+            messageRepository.save(message);
+        });
+    }
+
 }
 

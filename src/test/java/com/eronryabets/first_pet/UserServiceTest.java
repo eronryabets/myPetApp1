@@ -2,8 +2,14 @@ package com.eronryabets.first_pet;
 
 import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
+import com.eronryabets.first_pet.repository.MessageRepository;
+import com.eronryabets.first_pet.repository.NotesRepository;
 import com.eronryabets.first_pet.repository.UserRepository;
+import com.eronryabets.first_pet.repository.WalletRepository;
+import com.eronryabets.first_pet.service.MessageService;
+import com.eronryabets.first_pet.service.NotesService;
 import com.eronryabets.first_pet.service.UserService;
+import com.eronryabets.first_pet.service.WalletService;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +25,11 @@ public class UserServiceTest {
 
     private final UserRepository userRepository = mock(UserRepository.class);
     private final PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
-    private final UserService userService = new UserService(userRepository,passwordEncoder);
+    private final NotesService notesService = mock(NotesService.class);
+    private final WalletService walletService = mock(WalletService.class);
+    private final MessageService messageService = mock(MessageService.class);
+    private final UserService userService =
+            new UserService(userRepository,passwordEncoder,notesService,walletService,messageService);
 
     @Test
     public void addUser() {

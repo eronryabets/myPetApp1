@@ -1,12 +1,18 @@
 package com.eronryabets.first_pet.entity;
 
 
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users_wallet")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Wallet {
 
     @Id
@@ -25,13 +31,7 @@ public class Wallet {
     @Enumerated(EnumType.STRING)
     private CurrencyWallet currency;
 
-    @ManyToOne(
-            cascade = {
-                    CascadeType.DETACH,
-                    CascadeType.REFRESH,
-                    CascadeType.MERGE,
-            },
-            fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private User user;
 
@@ -40,82 +40,8 @@ public class Wallet {
     @Enumerated(EnumType.STRING)
     private WalletType type;
 
-    public Wallet() {
-    }
-
-    public Wallet(String walletName, double balance, CurrencyWallet currency, WalletType type, User user) {
-        this.walletName = walletName;
-        this.balance = balance;
-        this.currency = currency;
-        this.type = type;
-        this.user = user;
-    }
-
-    public Wallet(String walletName, double balance, CurrencyWallet currency) {
-        this.walletName = walletName;
-        this.balance = balance;
-        this.currency = currency;
-    }
-
-    public Wallet(String walletName, double balance) {
-        this.walletName = walletName;
-        this.balance = balance;
-    }
-
     public boolean isDebit(){
         return type.equals(WalletType.DEBIT);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public CurrencyWallet getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(CurrencyWallet currency) {
-        this.currency = currency;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getWalletName() {
-        return walletName;
-    }
-
-    public void setWalletName(String walletName) {
-        this.walletName = walletName;
-    }
-
-    public WalletType getType() {
-        return type;
-    }
-
-    public void setType(WalletType type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "Wallet{" +
-                "id=" + id +
-                ", walletName='" + walletName + '\'' +
-                '}';
-    }
 }

@@ -40,6 +40,10 @@ public class NotesService {
         notesRepository.deleteById(notes.getId());
     }
 
+    public void deleteNotesByUser(User user){
+        notesRepository.findByAuthor(user).forEach(notesRepository::delete);
+    }
+
 
 
 
