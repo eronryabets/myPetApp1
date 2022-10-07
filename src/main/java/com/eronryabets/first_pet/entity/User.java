@@ -20,7 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"wallets"})
 public class User implements UserDetails {
 
     @Id

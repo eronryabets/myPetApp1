@@ -93,6 +93,7 @@
                 <#if type == "CREDIT">
                     <td><a href="/wallets/profile/${wallet.id}/walletCreditStat" class="btn btn-warning">Credit stat</a></td>
                 </#if>
+                <td><a href="/wallets/profile/${wallet.id}/cashTransfer" class="btn btn-primary">Cash transfer</a></td>
             </tr>
         <#else >
             No wallets
