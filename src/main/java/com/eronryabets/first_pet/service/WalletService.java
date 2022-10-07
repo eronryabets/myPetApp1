@@ -1,6 +1,7 @@
 package com.eronryabets.first_pet.service;
 
 import com.eronryabets.first_pet.entity.*;
+import com.eronryabets.first_pet.exceptions.UserNotFoundException;
 import com.eronryabets.first_pet.repository.FinanceRepository;
 import com.eronryabets.first_pet.repository.UserRepository;
 import com.eronryabets.first_pet.repository.WalletRepository;
@@ -89,9 +90,21 @@ public class WalletService {
         }else {
             financeRepository.save(new Finance(wallet,balance,WalletOperation.SPENDING,wallet.getBalance()));
         }
+
+
         wallet.setWalletName(walletName);
         wallet.setBalance(balance);
-        wallet.setUser(userRepository.findById(userId).get());
+
+        //wallet.setUser(userRepository.findById(userId).get());
+        Optional<User> userFromDB = userId == null
+                ? Optional.empty()
+                : userRepository.findById(userId);
+        User user = userFromDB.orElseThrow(()-> new UserNotFoundException("User not found"));
+
+        wallet.setWalletName(walletName);
+        wallet.setBalance(balance);
+        wallet.setUser(user);
+
         walletRepository.save(wallet);
     }
 

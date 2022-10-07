@@ -3,6 +3,7 @@ package com.eronryabets.first_pet.controller;
 import com.eronryabets.first_pet.entity.Finance;
 import com.eronryabets.first_pet.entity.User;
 import com.eronryabets.first_pet.entity.Wallet;
+import com.eronryabets.first_pet.exceptions.UserNotFoundException;
 import com.eronryabets.first_pet.service.WalletService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,29 +27,40 @@ public class WalletController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public String walletList(Model model) {
+    public String walletList(Model model,
+                             @RequestParam(required = false, value = "errorMessage") String errorMessage) {
         model.addAttribute("wallets", walletService.findAll());
+        model.addAttribute("errorMessage",errorMessage);
         return "walletsList";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{wallet}")
     public String walletEditForm(
             @PathVariable("wallet") Wallet wallet,
+            @RequestParam(required = false, value = "errorMessage") String errorMessage,
             Model model) {
         model.addAttribute("wallet", wallet);
+        model.addAttribute("errorMessage",errorMessage);
         return "walletEdit";
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
-    public String walletSave(
+    public String walletAdminSave(
             @RequestParam("walletId") Wallet wallet,
             @RequestParam("walletName") String walletName,
             @RequestParam("balance") double balance,
-            @RequestParam("user_id") Long userId
+            @RequestParam("user_id") Long userId,
+            RedirectAttributes redirectAttributes
     ) {
 
-        walletService.walletAdminSave(wallet, walletName, balance, userId);
+       try{ walletService.walletAdminSave(wallet, walletName, balance, userId);
+       }catch (UserNotFoundException e) {
+           redirectAttributes.addAttribute("errorMessage",
+                   "Owner id " + userId + " is not exists!");
+           return "redirect:/wallets";
+        }
         return "redirect:/wallets";
     }
 

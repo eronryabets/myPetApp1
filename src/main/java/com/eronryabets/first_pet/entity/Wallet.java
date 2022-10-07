@@ -31,7 +31,13 @@ public class Wallet {
     @Enumerated(EnumType.STRING)
     private CurrencyWallet currency;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.REFRESH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+    },
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private User user;
 

@@ -3,6 +3,7 @@
 
 <head>
     <h3>ADMIN ACCESS</h3>
+    <h5><p style="color:red">${errorMessage!}</p></h5>
     <h7>Wallet name ${wallet.walletName} ; id ${wallet.id};</h7>
     <br>
     Wallet's owner

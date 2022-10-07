@@ -2,6 +2,7 @@
 <@c.page>
     <head>
     <h5>Wallets list page</h5>
+        <h5><p style="color:red">${errorMessage!}</p></h5>
     </head>
     <table>
         <thead>
