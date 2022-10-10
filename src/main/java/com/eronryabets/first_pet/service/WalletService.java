@@ -129,22 +129,19 @@ public class WalletService {
 
     }
 
-    public boolean walletUserCashTransfer(Wallet wallet, double amount, int anotherWalletId) {
-        Optional<Wallet> anotherWalletOptional = walletRepository.findById((long) anotherWalletId);
-        if (!anotherWalletOptional.isPresent()) {
-            return false;
-        }
+    public void walletUserCashTransfer(Wallet wallet, double amount, Long anotherWalletId) {
+        Optional<Wallet> anotherWallet = anotherWalletId == null
+                ? Optional.empty()
+                : walletRepository.findById(anotherWalletId);
+        Wallet walletFromDB = anotherWallet.orElseThrow(() -> new WalletNotFoundException("Wallet not found"));
 
-        Wallet anotherWallet = anotherWalletOptional.get();
         wallet.setBalance(wallet.getBalance() - amount);
-        anotherWallet.setBalance(anotherWallet.getBalance() + amount);
+        walletFromDB.setBalance(walletFromDB.getBalance() + amount);
 
         walletRepository.save(wallet);
         financeRepository.save(new Finance(wallet, -amount, WalletOperation.SPENDING, wallet.getBalance()));
-        walletRepository.save(anotherWallet);
-        financeRepository.save(new Finance(anotherWallet, amount, WalletOperation.INCOME, anotherWallet.getBalance()));
-        return true;
-
+        walletRepository.save(walletFromDB);
+        financeRepository.save(new Finance(walletFromDB, amount, WalletOperation.INCOME, walletFromDB.getBalance()));
     }
 
     public void walletDelete(Wallet wallet) {

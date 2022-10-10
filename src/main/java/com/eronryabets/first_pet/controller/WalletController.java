@@ -138,14 +138,17 @@ public class WalletController {
     public String walletUserCashTransfer(
             @PathVariable("wallet") Wallet wallet,
             @RequestParam("amount") double amount,
-            @RequestParam("anotherWalletId") int anotherWalletId,
+            @RequestParam("anotherWalletId") Long anotherWalletId,
             RedirectAttributes redirectAttributes
     ) {
-        if (!walletService.walletUserCashTransfer(wallet, amount, anotherWalletId)) {
+
+        try{
+            walletService.walletUserCashTransfer(wallet, amount, anotherWalletId);
+        }catch (WalletNotFoundException e){
             redirectAttributes.addAttribute("message", "Wallet id "
-                    + anotherWalletId + " not exists!");
-            return "redirect:/wallets/profile/{wallet}";
+                   + anotherWalletId + " not exists!");
         }
+
 
         return "redirect:/wallets/profile/{wallet}";
     }
