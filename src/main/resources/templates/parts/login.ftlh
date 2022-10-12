@@ -68,8 +68,18 @@
 
                 </div>
             </div>
-        </#if>
 
+            <div class="col-sm-6">
+                <div class="g-recaptcha" data-sitekey="6LcGLXciAAAAAPfPMKIeBB_Pj9NjjwOX1nYwOyvc"></div>
+                <#if captchaError??>
+                    <div class="alert alert-danger" role="alert">
+                        ${captchaError}
+                    </div>
+                </#if>
+            </div>
+            <br/><br/>
+
+        </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <#if !isRegisterForm><a href="/registration" class="btn btn-light">Add new user</a></#if>
         <button class="btn btn-primary" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
