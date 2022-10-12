@@ -5,8 +5,16 @@
         <div class="form-group">
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-3">
-                <input type="text" name="username" class="form-control" placeholder="user name"
+                <input type="text" name="username"
+                       class="form-control ${(usernameError??)?string('is-invalid', '')}"
+                       placeholder="user name"
                 value="${username!}"/>
+
+                <#if usernameError??>
+                    <div class="invalid-feedback">
+                        ${usernameError}
+                    </div>
+                </#if>
 
             </div>
         </div>
@@ -14,7 +22,15 @@
         <div class="form-group">
             <label class="col-sm-2 col-form-label"> Password:</label>
             <div class="col-sm-3">
-                <input type="password" name="password" class="form-control" placeholder="password"/>
+                <input type="password" name="password"
+                       class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                       placeholder="password"/>
+
+                <#if passwordError??>
+                    <div class="invalid-feedback">
+                        ${passwordError}
+                    </div>
+                </#if>
 
             </div>
         </div>
@@ -22,8 +38,16 @@
             <div class="form-group">
                 <label class="col-sm-2 col-form-label"> Surname:</label>
                 <div class="col-sm-3">
-                    <input type="text" name="surname" class="form-control" placeholder="surname"
+                    <input type="text" name="surname"
+                           class="form-control ${(surnameError??)?string('is-invalid', '')}"
+                           placeholder="surname"
                            value="${surname!}"/>
+
+                    <#if surnameError??>
+                        <div class="invalid-feedback">
+                            ${surnameError}
+                        </div>
+                    </#if>
 
                 </div>
             </div>
@@ -31,8 +55,16 @@
             <div class="form-group">
                 <label class="col-sm-2 col-form-label"> Name:</label>
                 <div class="col-sm-3">
-                    <input type="text" name="name" class="form-control" placeholder="name"
+                    <input type="text" name="name"
+                           class="form-control ${(nameError??)?string('is-invalid', '')}"
+                           placeholder="name"
                            value="${name!}"/>
+
+                    <#if nameError??>
+                        <div class="invalid-feedback">
+                            ${nameError}
+                        </div>
+                    </#if>
 
                 </div>
             </div>

@@ -41,7 +41,7 @@ public class UserController {
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
-    //TODO
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "{userID}", method = RequestMethod.POST)
     public String userSave(
