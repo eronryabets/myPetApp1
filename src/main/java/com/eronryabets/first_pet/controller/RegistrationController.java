@@ -2,6 +2,7 @@ package com.eronryabets.first_pet.controller;
 
 
 import com.eronryabets.first_pet.entity.User;
+import com.eronryabets.first_pet.exceptions.UserExist;
 import com.eronryabets.first_pet.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +27,19 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(Model model, User user){
-        if (!userService.addUser(user)) {
-            model.addAttribute("message", "User exists!");
+    public String addUser(Model model, User user) {
+
+        try {
+            userService.addUser(user);
+        } catch (UserExist e){
+            model.addAttribute("errorMessage", "This username " + user.getUsername() +
+                    " already exist! Please input another username");
+            model.addAttribute("username", user.getUsername())
+                    .addAttribute("surname",user.getSurname())
+                    .addAttribute("name",user.getName());
             return "registration";
         }
+
         return "redirect:/login";
     }
 

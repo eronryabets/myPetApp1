@@ -2,6 +2,7 @@ package com.eronryabets.first_pet.entity;
 
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="pet_user")
@@ -30,18 +31,26 @@ public class User implements UserDetails {
 
     @Column(name = "username")
     @NonNull
+    @NotBlank(message = "Username must be not empty!")
+    @Length(min = 2, max = 15, message = "Min 2 symbols, Max 15!")
     private String username;
 
     @Column(name = "name")
     @NonNull
+    @NotBlank(message = "Name must be not empty!")
+    @Length(min = 2, max = 15, message = "Min 2 symbols, Max 15!")
     private String name;
 
     @Column(name = "surname")
     @NonNull
+    @NotBlank(message = "Surname must be not empty!")
+    @Length(min = 2, max = 15, message = "Min 2 symbols, Max 15!")
     private String surname;
 
     @Column(name = "password")
     @NonNull
+    @NotBlank(message = "Password must be not empty!")
+    @Length(min = 5, max = 15, message = "Min 5 symbols, Max 15!")
     private String password;
 
     @Column(name = "active")

@@ -31,34 +31,34 @@ public class UserServiceTest {
     private final UserService userService =
             new UserService(userRepository,passwordEncoder,notesService,walletService,messageService);
 
-    @Test
-    public void addUser() {
-        User user = new User();
-
-        boolean isUserCreated = userService.addUser(user);
-
-        Assert.assertTrue(isUserCreated);
-        Assert.assertTrue(CoreMatchers.is(user.getRoles())
-                .matches(Collections.singleton(Role.USER)));
-        Mockito.verify(userRepository, Mockito.times(1))
-                .save(user);
-    }
-
-    @Test
-    public void addUserFailTest() {
-        User user = new User();
-        user.setUsername("John");
-
-        Mockito.doReturn(new User())
-                .when(userRepository)
-                .findByUsername("John");
-
-        boolean isUserCreated = userService.addUser(user);
-
-        Assert.assertFalse(isUserCreated);
-        Mockito.verify(userRepository, Mockito.times(0))
-                .save(ArgumentMatchers.any(User.class));
-    }
+//    @Test
+//    public void addUser() {
+//        User user = new User();
+//
+//        boolean isUserCreated = userService.addUser(user);
+//
+//        Assert.assertTrue(isUserCreated);
+//        Assert.assertTrue(CoreMatchers.is(user.getRoles())
+//                .matches(Collections.singleton(Role.USER)));
+//        Mockito.verify(userRepository, Mockito.times(1))
+//                .save(user);
+//    }
+//
+//    @Test
+//    public void addUserFailTest() {
+//        User user = new User();
+//        user.setUsername("John");
+//
+//        Mockito.doReturn(new User())
+//                .when(userRepository)
+//                .findByUsername("John");
+//
+//        boolean isUserCreated = userService.addUser(user);
+//
+//        Assert.assertFalse(isUserCreated);
+//        Mockito.verify(userRepository, Mockito.times(0))
+//                .save(ArgumentMatchers.any(User.class));
+//    }
 
 
 

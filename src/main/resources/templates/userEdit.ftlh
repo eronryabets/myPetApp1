@@ -5,7 +5,7 @@
     <h5>User list page! User :  ${user.username}</h5>
 </head>
 
-    <form action="/user" method="post">
+    <form action="/user/${user.id}" method="post">
         <div class="container">
             <br>
             <div class="form-group row">
@@ -48,7 +48,7 @@
             </div>
         </#list>
 
-        <input type="hidden" name="userId" value="${user.id}">
+        <input type="hidden" name="userID" value="${user.id}">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit">Save</button>
         <br><br>
@@ -59,7 +59,7 @@
     </form>
     <br><br>
 
-    <form action="/user" method="post">
+<#--    <form action="/user" method="post">-->
 
     </form>
 

@@ -33,22 +33,25 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
-        model.addAttribute("user",user);
+    @GetMapping("{userID}")
+    public String userEditForm(@PathVariable User userID, Model model
+                               //@RequestParam("user") User user
+    ){
+        model.addAttribute("user",userID);
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
-
+    //TODO
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping
+    @RequestMapping(value = "{userID}", method = RequestMethod.POST)
     public String userSave(
+            @PathVariable("userID")User userID,
             @RequestParam("username") String username,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
             @RequestParam("password") String password,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
+            @RequestParam("userID") User user
     ){
         userService.userSave(user,username,name,surname,password,form);
         return "redirect:/user";

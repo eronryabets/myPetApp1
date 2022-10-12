@@ -2,6 +2,8 @@ package com.eronryabets.first_pet.service;
 
 import com.eronryabets.first_pet.entity.Role;
 import com.eronryabets.first_pet.entity.User;
+import com.eronryabets.first_pet.exceptions.IncorrectInput;
+import com.eronryabets.first_pet.exceptions.UserExist;
 import com.eronryabets.first_pet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,10 +52,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public boolean addUser(User user) {
+    public void addUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
         if (userFromDb != null) {
-            return false;
+            throw new UserExist("This username exist! Please input another username.");
         }
 
         user.setActive(true);
@@ -61,7 +63,6 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        return true;
     }
 
     public void userSave(User user, String username, String name, String surname,

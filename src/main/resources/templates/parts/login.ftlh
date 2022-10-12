@@ -6,15 +6,16 @@
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-3">
                 <input type="text" name="username" class="form-control" placeholder="user name"
-                       required minlength="2" maxlength="15"/>
+                value="${username!}"/>
+
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-2 col-form-label"> Password:</label>
             <div class="col-sm-3">
-                <input type="password" name="password" class="form-control" placeholder="password"
-                       required minlength="8" maxlength="20"/>
+                <input type="password" name="password" class="form-control" placeholder="password"/>
+
             </div>
         </div>
         <#if isRegisterForm>
@@ -22,7 +23,8 @@
                 <label class="col-sm-2 col-form-label"> Surname:</label>
                 <div class="col-sm-3">
                     <input type="text" name="surname" class="form-control" placeholder="surname"
-                           required minlength="2" maxlength="20"/>
+                           value="${surname!}"/>
+
                 </div>
             </div>
 
@@ -30,7 +32,8 @@
                 <label class="col-sm-2 col-form-label"> Name:</label>
                 <div class="col-sm-3">
                     <input type="text" name="name" class="form-control" placeholder="name"
-                           required minlength="2" maxlength="20"/>
+                           value="${name!}"/>
+
                 </div>
             </div>
         </#if>
